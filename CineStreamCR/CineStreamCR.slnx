@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="CineStreamCR.BILL/CineStreamCR.BILL.csproj" />
-  <Project Path="CineStreamCR.DAL/CineStreamCR.DAL.csproj" />
+  <Project Path="CineStreamCR.BLL/CineStreamCR.BLL.csproj" Id="288f7f21-cb46-414b-a4a6-5e1de5dffe3f" />
+  <Project Path="CineStreamCR.DAL/CineStreamCR.DAL.csproj" Id="e844e8e9-001c-4a86-a1b5-c82c875a5bfd" />
   <Project Path="CineStreamCR/CineStreamCR.csproj" />
 </Solution>

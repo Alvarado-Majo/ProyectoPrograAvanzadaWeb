@@ -8,23 +8,23 @@
     "net10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\maria\\.nuget\\packages\\": {},
+    "C:\\Users\\jabad\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maria\\OneDrive\\Documentos\\GitHub\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
+      "projectUniqueName": "C:\\Users\\jabad\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
       "projectName": "CineStreamCR",
-      "projectPath": "C:\\Users\\maria\\OneDrive\\Documentos\\GitHub\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
-      "packagesPath": "C:\\Users\\maria\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maria\\OneDrive\\Documentos\\GitHub\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\obj\\",
+      "projectPath": "C:\\Users\\jabad\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
+      "packagesPath": "C:\\Users\\jabad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jabad\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\maria\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jabad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -33,6 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -77,7 +78,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
