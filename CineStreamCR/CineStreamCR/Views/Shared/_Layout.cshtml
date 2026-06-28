@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,43 +8,410 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CineStreamCR.styles.css" asp-append-version="true" />
+    <style>
+        /* ── Reset base que Netflix necesita ── */
+        *, *::before, *::after {
+        box-sizing: border-box;
+        }
+
+        body {
+        margin: 0;
+        background: #141414;
+        color: #fff;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        /* ══════════════════════════════════════════
+        NAVBAR
+        ══════════════════════════════════════════ */
+        .sf-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* centra todo el contenido */
+        padding: 0 4%;
+        background: linear-gradient(180deg, rgba(0,0,0,.88) 0%, transparent 100%);
+        gap: 0;
+        }
+
+        /* Logo a la izquierda absoluto para no romper el centrado */
+        .sf-navbar__logo {
+        position: absolute;
+        left: 4%;
+        color: #e50914;
+        font-size: 1.85rem;
+        font-weight: 900;
+        letter-spacing: -1px;
+        text-decoration: none;
+        user-select: none;
+        }
+
+        /* Grupo de links centrado */
+        .sf-navbar__links {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        }
+
+        .sf-navbar__links a {
+        color: #b3b3b3;
+        text-decoration: none;
+        font-size: .875rem;
+        font-weight: 500;
+        padding: 6px 14px;
+        border-radius: 20px; /* base del óvalo */
+        border: 2px solid transparent;
+        transition: color .2s, border-color .2s, background .2s;
+        white-space: nowrap;
+        }
+
+        .sf-navbar__links a:hover {
+        color: #fff;
+        }
+
+        /* Ítem activo: óvalo visible */
+        .sf-navbar__links a.active {
+        color: #fff;
+        border-color: #fff;
+        background: rgba(255,255,255,.08);
+        }
+
+        /* Grupo derecho: búsqueda + perfil */
+        .sf-navbar__right {
+        position: absolute;
+        right: 4%;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        }
+
+        /* Icono búsqueda */
+        .sf-navbar__search {
+        cursor: pointer;
+        color: #fff;
+        opacity: .85;
+        transition: opacity .2s;
+        flex-shrink: 0;
+        }
+
+        .sf-navbar__search:hover {
+        opacity: 1;
+        }
+
+        /* ── PROFILE DROPDOWN ── */
+        .sf-profile {
+        position: relative;
+        }
+
+        .sf-profile__trigger {
+        width: 34px;
+        height: 34px;
+        background: #e50914;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .75rem;
+        font-weight: 700;
+        color: #fff;
+        user-select: none;
+        border: 2px solid transparent;
+        transition: border-color .2s;
+        flex-shrink: 0;
+        }
+
+        .sf-profile__trigger:hover,
+        .sf-profile.open .sf-profile__trigger {
+        border-color: #fff;
+        }
+
+        /* Flecha pequeña que indica dropdown */
+        .sf-profile__trigger::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        width: 6px;
+        height: 6px;
+        background: #1a1a1a;
+        border-top: 1.5px solid #555;
+        border-left: 1.5px solid #555;
+        opacity: 0;
+        transition: opacity .18s;
+        border-radius: 1px;
+        }
+
+        .sf-profile.open .sf-profile__trigger::after {
+        opacity: 1;
+        }
+
+        .sf-profile__menu {
+        position: absolute;
+        top: calc(100% + 14px);
+        right: 0;
+        min-width: 200px;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0,0,0,.7);
+        /* Oculto por defecto */
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-6px);
+        transition: opacity .2s, transform .2s;
+        }
+
+        .sf-profile.open .sf-profile__menu {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(0);
+        }
+
+        /* Pico decorativo arriba del menú */
+        .sf-profile__menu::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        right: 12px;
+        width: 11px;
+        height: 11px;
+        background: #1a1a1a;
+        border-top: 1px solid #333;
+        border-left: 1px solid #333;
+        transform: rotate(45deg);
+        }
+
+        .sf-profile__item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 16px;
+        font-size: .85rem;
+        color: #ccc;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background .15s, color .15s;
+        border: none;
+        background: transparent;
+        width: 100%;
+        text-align: left;
+        }
+
+        .sf-profile__item:hover {
+        background: #2a2a2a;
+        color: #fff;
+        }
+
+        .sf-profile__item svg {
+        flex-shrink: 0;
+        opacity: .7;
+        }
+
+        .sf-profile__item:hover svg {
+        opacity: 1;
+        }
+
+        .sf-profile__divider {
+        height: 1px;
+        background: #333;
+        margin: 4px 0;
+        }
+
+        .sf-profile__item--danger {
+        color: #e50914;
+        }
+
+        .sf-profile__item--danger:hover {
+        background: rgba(229,9,20,.1);
+        color: #ff3333;
+        }
+
+        /* ── MAIN CONTENT ── */
+        .sf-main {
+        padding-top: 68px; /* compensa el navbar fijo */
+        }
+
+        /* ── FOOTER ── */
+        .sf-footer {
+        padding: 28px 4%;
+        color: #6d6d6d;
+        font-size: .78rem;
+        border-top: 1px solid #222;
+        margin-top: 40px;
+        }
+
+        .sf-footer a {
+        color: #6d6d6d;
+        text-decoration: none;
+        }
+
+        .sf-footer a:hover {
+        color: #aaa;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CineStreamCR</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <!-- ════════════════  NAVBAR  ════════════════ -->
+    <nav class="sf-navbar">
+
+        <!-- Logo -->
+        <a class="sf-navbar__logo" asp-controller="Home" asp-action="Index">
+            CineStream<span style="color:#fff">CR</span>
+        </a>
+
+        <!-- Links centrados -->
+        <ul class="sf-navbar__links">
+            <li>
+                <a asp-controller="Home" asp-action="Index"
+                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Home" asp-action="Shows"
+                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Shows" ? "active" : "")">
+                    Shows
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Home" asp-action="Movies"
+                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Movies" ? "active" : "")">
+                    Movies
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Home" asp-action="Games"
+                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Games" ? "active" : "")">
+                    Games
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Home" asp-action="MyList"
+                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "MyList" ? "active" : "")">
+                    My List
+                </a>
+            </li>
+        </ul>
+
+        <!-- Derecha: búsqueda + perfil -->
+        <div class="sf-navbar__right">
+
+            <!-- Icono buscar -->
+            <svg class="sf-navbar__search" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+
+            <!-- Perfil con dropdown -->
+            <div class="sf-profile" id="sfProfile">
+
+                <div class="sf-profile__trigger" id="sfProfileTrigger" title="Mi perfil">
+                    <!-- Iniciales del usuario; reemplaza con @User.Identity?.Name?[0] si usas Auth -->
+                    U
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+                <div class="sf-profile__menu" id="sfProfileMenu">
+
+                    <!-- Info del usuario -->
+                    <a class="sf-profile__item" asp-controller="Account" asp-action="Profile">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        Mi Perfil
+                    </a>
+
+                    <a class="sf-profile__item" asp-controller="Account" asp-action="Settings">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                        Configuración
+                    </a>
+
+                    <a class="sf-profile__item" asp-controller="Account" asp-action="Watchlist">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                        </svg>
+                        Mi Lista
+                    </a>
+
+                    <div class="sf-profile__divider"></div>
+
+                    <a class="sf-profile__item sf-profile__item--danger"
+                       asp-controller="Account" asp-action="Logout">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        Cerrar Sesión
+                    </a>
+
+                </div>
+            </div><!-- /sf-profile -->
+
+        </div>
+    </nav>
+
+    <!-- ════════════════  CONTENIDO  ════════════════ -->
+    <div class="sf-main">
+        @RenderBody()
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - CineStreamCR - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- ════════════════  FOOTER  ════════════════ -->
+    <footer class="sf-footer">
+        <div>
+            &copy; 2026 CineStreamCR &nbsp;·&nbsp;
+            <a asp-controller="Home" asp-action="Privacy">Privacidad</a>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        // ── Toggle del dropdown de perfil ──
+        (function () {
+        const profile = document.getElementById('sfProfile');
+        const trigger = document.getElementById('sfProfileTrigger');
+
+        trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        profile.classList.toggle('open');
+        });
+
+        // Cierra si se hace click fuera
+        document.addEventListener('click', function () {
+        profile.classList.remove('open');
+        });
+
+        // Evita que clicks dentro del menú lo cierren
+        document.getElementById('sfProfileMenu').addEventListener('click', function (e) {
+        e.stopPropagation();
+        });
+        })();
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

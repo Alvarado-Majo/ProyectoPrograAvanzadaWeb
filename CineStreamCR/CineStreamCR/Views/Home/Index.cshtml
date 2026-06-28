@@ -1,8 +1,303 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model StreamingApp.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<style>
+    :root {
+        --red: #e50914;
+        --gray: #b3b3b3;
+        --bg: #141414;
+        --radius: 6px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 80vh;
+        min-height: 500px;
+        overflow: hidden;
+    }
+
+    .hero__backdrop {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center top;
+        filter: brightness(.6);
+    }
+
+    .hero__gradient-left {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(20,20,20,.92) 0%, rgba(20,20,20,.45) 55%, transparent 80%);
+    }
+
+    .hero__gradient-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 32%;
+        background: linear-gradient(0deg, var(--bg) 0%, transparent 100%);
+    }
+
+    .hero__content {
+        position: absolute;
+        bottom: 18%;
+        left: 4%;
+        max-width: 460px;
+        z-index: 2;
+    }
+
+    .hero__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: .68rem;
+        font-weight: 700;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 6px;
+    }
+
+    .hero__badge-n {
+        color: var(--red);
+        font-size: 1rem;
+        font-weight: 900;
+    }
+
+    .hero__title {
+        font-size: clamp(2rem, 5vw, 3.8rem);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -.5px;
+        margin: 0 0 10px;
+    }
+
+    .hero__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: .82rem;
+        color: var(--gray);
+        margin-bottom: 12px;
+        list-style: none;
+        padding: 0;
+    }
+
+        .hero__meta li + li::before {
+            content: '·';
+            margin-right: 10px;
+        }
+
+    .hero__desc {
+        font-size: .92rem;
+        line-height: 1.58;
+        color: #ddd;
+        margin-bottom: 22px;
+    }
+
+    .hero__actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-sf {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 22px;
+        border-radius: 24px;
+        border: none;
+        font-size: .88rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: opacity .2s, transform .15s;
+    }
+
+        .btn-sf:hover {
+            opacity: .85;
+            transform: scale(1.02);
+        }
+
+    .btn-sf--primary {
+        background: #fff;
+        color: #111;
+    }
+
+    .btn-sf--ghost {
+        background: transparent;
+        color: #fff;
+        padding: 10px 4px;
+    }
+
+    .hero__coming {
+        position: absolute;
+        bottom: 18%;
+        right: 4%;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: .78rem;
+        font-weight: 600;
+        background: rgba(255,255,255,.13);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255,255,255,.2);
+        border-radius: 20px;
+        padding: 7px 14px;
+    }
+
+    /* ── FILAS ── */
+    .sf-section {
+        padding: 0 4% 36px;
+    }
+
+    .sf-section__title {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+        color: #fff;
+    }
+
+    .sf-row {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding-bottom: 4px;
+    }
+
+        .sf-row::-webkit-scrollbar {
+            display: none;
+        }
+
+    .sf-card {
+        flex-shrink: 0;
+        width: 160px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        transition: transform .25s, box-shadow .25s;
+        position: relative;
+    }
+
+        .sf-card:hover {
+            transform: scale(1.07);
+            box-shadow: 0 8px 28px rgba(0,0,0,.65);
+            z-index: 5;
+        }
+
+    .sf-card__img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        display: block;
+        background: #2a2a2a;
+    }
+
+    .sf-card__label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 22px 8px 6px;
+        font-size: .72rem;
+        font-weight: 600;
+        background: linear-gradient(0deg, rgba(0,0,0,.85) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity .2s;
+    }
+
+    .sf-card:hover .sf-card__label {
+        opacity: 1;
+    }
+
+    @@media (max-width: 640px) {
+        .hero__content {
+            max-width: 90%;
+            bottom: 14%;
+        }
+
+        .hero__coming {
+            display: none;
+        }
+
+        .sf-card {
+            width: 130px;
+        }
+    }
+</style>
+
+@if (Model?.FeaturedContent != null)
+{
+    var f = Model.FeaturedContent;
+    <section class="hero">
+        <div class="hero__backdrop" style="background-image:url('@f.BackdropUrl')"></div>
+        <div class="hero__gradient-left"></div>
+        <div class="hero__gradient-bottom"></div>
+        <div class="hero__content">
+            <div class="hero__badge">
+                <span class="hero__badge-n">N</span>
+                <span>@f.ContentType</span>
+            </div>
+            <h1 class="hero__title">@f.Title</h1>
+            <ul class="hero__meta">
+                <li>@f.Genre</li>
+                <li>@f.Year</li>
+                <li>@f.Rating</li>
+            </ul>
+            <p class="hero__desc">@f.Description</p>
+            <div class="hero__actions">
+                @if (f.IsComingSoon)
+                {
+                    <button class="btn-sf btn-sf--primary">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                        </svg>
+                        Remind Me
+                    </button>
+                }
+                else
+                {
+                    <button class="btn-sf btn-sf--primary">&#9654; &nbsp;Play</button>
+                }
+                <a asp-action="Details" asp-route-id="@f.Id" class="btn-sf btn-sf--ghost">More Info</a>
+            </div>
+        </div>
+        @if (f.IsComingSoon && !string.IsNullOrEmpty(f.ComingSoonLabel))
+        {
+            <div class="hero__coming">🎬 @f.ComingSoonLabel</div>
+        }
+    </section>
+}
+
+@if (Model?.Rows != null)
+{
+    foreach (var row in Model.Rows)
+    {
+        <section class="sf-section">
+            <h2 class="sf-section__title">@row.Title</h2>
+            <div class="sf-row">
+                @foreach (var item in row.Items)
+                {
+                    <a asp-action="Details" asp-route-id="@item.Id" class="sf-card" title="@item.Title">
+                        <img class="sf-card__img" src="@item.ThumbnailUrl" alt="@item.Title" loading="lazy" />
+                        <span class="sf-card__label">@item.Title</span>
+                    </a>
+                }
+            </div>
+        </section>
+    }
+}

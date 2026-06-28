@@ -49,6 +49,7 @@ CREATE TABLE Movies (
     DurationMinutes INT NOT NULL CHECK (DurationMinutes > 0),
     PosterImg NVARCHAR(255),
     VideoURL NVARCHAR(255),
+    Nationality NVARCAHR(70),
     DirectorId INT NOT NULL,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(), -- Auditoría
     UpdatedAt DATETIME NULL,                       -- Auditoría
