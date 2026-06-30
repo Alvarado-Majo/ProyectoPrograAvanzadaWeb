@@ -16,5 +16,7 @@ namespace CineStreamCR.DAL.Entities
         public DateOnly BirthDate { get; set; }
         public string PictureImg { get; set; } = string.Empty;
         public byte IsActive { get; set; } = 1;
+
+        //public virtual ICollection<Movies> Movies { get; set; } = new List<Movies>();
     }
 }

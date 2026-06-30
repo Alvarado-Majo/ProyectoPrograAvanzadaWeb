@@ -15,7 +15,10 @@ namespace CineStreamCR.DAL.Entities
        public string Biography { get; set; } = string.Empty;
        public DateOnly BirthDate { get; set; } 
        public string PictureImg { get; set; } = string.Empty;
-       public byte IsActive { get; set; } = 1; 
+       public byte IsActive { get; set; } = 1;
 
+       public virtual ICollection<MovieActors> MovieActors { get; set; } = new List<MovieActors>();
     }
+
+
 }

@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\wwwroot\\js\\director.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\wwwroot\\js\\director.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\wwwroot\\js\\actor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\wwwroot\\js\\actor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,6 +63,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "director.js",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\js\\director.js",
+              "RelativeDocumentMoniker": "CineStreamCR\\wwwroot\\js\\director.js",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\js\\director.js",
+              "RelativeToolTip": "CineStreamCR\\wwwroot\\js\\director.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-30T02:50:33.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "actor.js",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\js\\actor.js",
+              "RelativeDocumentMoniker": "CineStreamCR\\wwwroot\\js\\actor.js",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\js\\actor.js",
+              "RelativeToolTip": "CineStreamCR\\wwwroot\\js\\actor.js",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-30T02:50:25.277Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -10,15 +10,16 @@ namespace CineStreamCR.BLL.Services.Director
     public interface IDirectorService
     {
         //crud methods
-        Task<List<Respuesta<DirectorDTO>>> GetAllDirectorsAsync();
-        Task<Respuesta<DirectorDTO>> GetDirectorByIdAsync(int id);
-        Task<Respuesta<DirectorDTO>> GetDirectorByNameAsync(string name);
-        Task<Respuesta<DirectorDTO>> GetCreateDirectorAsync(CreateDirectorDTO directorDTO);
-        Task<Respuesta<DirectorDTO>> GetUpdateDirectorAsync(CreateDirectorDTO directorDTO);
-        Task<Respuesta<DirectorDTO>> GetDeleteDirectorAsync(int id);
+        Task<Answer<List<DirectorDTO?>>> GetAllDirectorsAsync();
+        Task<Answer<DirectorDTO?>> GetDirectorByIdAsync(int id);
+        Task<Answer<DirectorDTO?>> GetDirectorByNameAsync(string firstName, string lastName);
+        Task<Answer<DirectorDTO>> GetCreateDirectorAsync(CreateDirectorDTO directorDTO);
+        Task<Answer<DirectorDTO>> GetUpdateDirectorAsync(int id, CreateDirectorDTO directorDTO);
+        Task<Answer<DirectorDTO>> GetDeleteDirectorAsync(int id);
 
         //Additional methods
-        Task<List<Respuesta<DirectorDTO>>> GetDirectorsByMovieIdAsync(int movieId);
-        Task<List<Respuesta<DirectorDTO>>> GetActiveDirectorsAsync(byte isActive);
+        Task<List<Answer<DirectorDTO?>>> GetDirectorsByMovieIdAsync(int movieId);
+        Task<Answer<DirectorDTO>> GetActiveDirectorsAsync(byte isActive);
+       
     }
 }

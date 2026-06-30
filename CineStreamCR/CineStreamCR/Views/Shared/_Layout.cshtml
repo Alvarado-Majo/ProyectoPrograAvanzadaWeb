@@ -291,12 +291,7 @@
                     Movies
                 </a>
             </li>
-            <li>
-                <a asp-controller="Home" asp-action="Games"
-                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Games" ? "active" : "")">
-                    Games
-                </a>
-            </li>
+            
             <li>
                 <a asp-controller="Home" asp-action="MyList"
                    class="@(ViewContext.RouteData.Values["action"]?.ToString() == "MyList" ? "active" : "")">

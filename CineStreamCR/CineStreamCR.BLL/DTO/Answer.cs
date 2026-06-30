@@ -4,14 +4,14 @@ using System.Text;
 
 namespace CineStreamCR.BLL.DTO
 {
-    public class Respuesta <T>
+    public class Answer <T>
     {
         public bool EsCorrecto { get; set; }
         public string mensaje { get; set; } = string.Empty;
         public T Dato { get; set; }
         public int codigo { get; set; }
 
-        public Respuesta()
+        public Answer()
         {
             EsCorrecto = true;
             mensaje = "Operación realizada correctamente.";

@@ -7,11 +7,10 @@ namespace CineStreamCR.DAL.Repositories.Actors
     public interface IMovieActorsRepository
     {
         //Crud methods
-        public Task<List<Entities.MovieActors>> ListMovieActors();
-        public Task<Entities.MovieActors> GetMovieActorById(int id);
-        public Task<bool> CreateMovieActor(Entities.MovieActors movieActors);
-        public Task<bool> UpdateMovieActor(Entities.MovieActors movieActors);
-        public Task<bool> DeleteMovieActor(int id);
+        Task<Entities.MovieActors?> GetByMovieAndActor(int movieId, int actorId);
+        Task<bool> AssignActorToMovie(Entities.MovieActors movieActor);
+        Task<bool> RemoveActorFromMovie(int movieId, int actorId);
+        Task<bool> UpdateCharacterName(int movieId, int actorId, string characterName);
 
         //additional methods
     }

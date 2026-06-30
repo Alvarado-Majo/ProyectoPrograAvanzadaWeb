@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.bll\\services\\director\\directorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|solutionrelative:cinestreamcr.bll\\services\\director\\directorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\wwwroot\\js\\director.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\wwwroot\\js\\director.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E844E8E9-001C-4A86-A1B5-C82C875A5BFD}|CineStreamCR.DAL\\CineStreamCR.DAL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.dal\\repositories\\directors\\idirectorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E844E8E9-001C-4A86-A1B5-C82C875A5BFD}|CineStreamCR.DAL\\CineStreamCR.DAL.csproj|solutionrelative:cinestreamcr.dal\\repositories\\directors\\idirectorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\controllers\\directorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\controllers\\directorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.bll\\dto\\respuesta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|solutionrelative:cinestreamcr.bll\\dto\\respuesta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\controllers\\actorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\controllers\\actorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,41 +74,54 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Director.js",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\js\\Director.js",
+              "RelativeDocumentMoniker": "CineStreamCR\\wwwroot\\js\\Director.js",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\js\\Director.js",
+              "RelativeToolTip": "CineStreamCR\\wwwroot\\js\\Director.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-29T18:50:14.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "IDirectorRepository.cs",
-              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\Repositories\\Directors\\IDirectorRepository.cs",
-              "RelativeDocumentMoniker": "CineStreamCR.DAL\\Repositories\\Directors\\IDirectorRepository.cs",
-              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\Repositories\\Directors\\IDirectorRepository.cs",
-              "RelativeToolTip": "CineStreamCR.DAL\\Repositories\\Directors\\IDirectorRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAcAAAAAAAAAA==",
+              "Title": "DirectorController.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\DirectorController.cs",
+              "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\DirectorController.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\DirectorController.cs",
+              "RelativeToolTip": "CineStreamCR\\Controllers\\DirectorController.cs",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAswHUAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-28T03:59:32.003Z",
+              "WhenOpened": "2026-06-29T17:45:35.211Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Respuesta.cs",
-              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\DTO\\Respuesta.cs",
-              "RelativeDocumentMoniker": "CineStreamCR.BLL\\DTO\\Respuesta.cs",
-              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\DTO\\Respuesta.cs",
-              "RelativeToolTip": "CineStreamCR.BLL\\DTO\\Respuesta.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAeAAAAAAAAAA==",
+              "Title": "ActorController.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\ActorController.cs",
+              "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\ActorController.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\ActorController.cs",
+              "RelativeToolTip": "CineStreamCR\\Controllers\\ActorController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-28T03:58:26.552Z",
+              "WhenOpened": "2026-06-29T17:45:01.607Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DirectorService.cs",
-              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Director\\DirectorService.cs",
-              "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\Director\\DirectorService.cs",
-              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Director\\DirectorService.cs",
-              "RelativeToolTip": "CineStreamCR.BLL\\Services\\Director\\DirectorService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAzAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "CineStreamCR\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-28T03:52:20.387Z",
+              "WhenOpened": "2026-06-29T17:44:26.338Z",
               "EditorCaption": ""
             }
           ]

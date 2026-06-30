@@ -1,50 +1,80 @@
-﻿using CineStreamCR.DAL.Repositories.Actores;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CineStreamCR.DAL.Data;
+using CineStreamCR.DAL.Repositories.Actores;
+using Microsoft.EntityFrameworkCore;
 
 namespace CineStreamCR.DAL.Repositories.Actors
 {
     public class ActorRepository : IActorRepository
     {
-        public Task<bool> CreateActorAsync(Entities.Actors actor)
+        private readonly ProyectoDBContext _context;
+
+        public ActorRepository(ProyectoDBContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<bool> DeleteActorAsync(int id)
+        public async Task<List<Entities.Actors>> GetActors()
         {
-            throw new NotImplementedException();
+            return await _context.Actors.ToListAsync();
         }
 
-        public Task<List<Entities.Actors>> GetActiveActorsAsync(byte isActive)
+        public async Task<Entities.Actors?> GetActorById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Actors.FirstOrDefaultAsync(a => a.ActorId == id);
         }
 
-        public Task<Entities.Actors> GetActorByIdAsync(int id)
+        public async Task<Entities.Actors?> GetActorByName(string firstName, string lastName)
         {
-            throw new NotImplementedException();
+            return await _context.Actors.FirstOrDefaultAsync(a =>
+                a.FirstName.ToLower() == firstName.ToLower().Trim() &&
+                a.LastName.ToLower() == lastName.ToLower().Trim());
         }
 
-        public Task<Entities.Actors> GetActorByNameAsync(string name)
+        public async Task<List<Entities.Actors>> GetActiveActors(byte isActive)
         {
-            throw new NotImplementedException();
+            return await _context.Actors.Where(a => a.IsActive == isActive).ToListAsync();
         }
 
-        public Task<List<Entities.Actors>> GetActorsByMovieIdAsync(int movieId)
+        public async Task<List<Entities.Actors?>> GetActorsByMovieId(int movieId)
         {
-            throw new NotImplementedException();
+            return await _context.MovieActors.Where(ma => ma.MovieId == movieId)
+                .Select(ma => ma.Actors)
+                .ToListAsync();
         }
 
-        public Task<List<Entities.Actors>> ListActorsAsync()
+        public async Task<bool> CreateActor(Entities.Actors actor)
         {
-            throw new NotImplementedException();
+            if (actor == null) return false;
+
+            await _context.Actors.AddAsync(actor);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> UpdateActorAsync(Entities.Actors actor)
+        public async Task<bool> UpdateActor(Entities.Actors actor)
         {
-            throw new NotImplementedException();
+            if (actor == null) return false;
+
+            var existing = await _context.Actors.FindAsync(actor.ActorId);
+            if (existing == null) return false;
+
+            existing.FirstName = actor.FirstName;
+            existing.LastName = actor.LastName;
+            existing.Nationality = actor.Nationality;
+            existing.Biography = actor.Biography;
+            existing.BirthDate = actor.BirthDate;
+            existing.PictureImg = actor.PictureImg;
+            existing.IsActive = actor.IsActive;
+
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> DeleteActor(int id)
+        {
+            var entity = await _context.Actors.FindAsync(id);
+            if (entity == null) return false;
+
+            _context.Actors.Remove(entity);
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
