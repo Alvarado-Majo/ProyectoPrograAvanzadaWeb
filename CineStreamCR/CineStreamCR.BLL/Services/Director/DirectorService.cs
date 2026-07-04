@@ -19,21 +19,13 @@ namespace CineStreamCR.BLL.Services.Director
             _directorRepository = directorRepository;
             _mapper = mapper;
         }
-        public async Task<Answer<DirectorDTO>> GetActiveDirectorsAsync(byte isActive)
+        public async Task<Answer<List<DirectorDTO?>>> GetActiveDirectorsAsync(byte isActive)
         {
-            var answer = new Answer<DirectorDTO>();
-            var director = await _directorRepository.GetActiveDirector(isActive);
-            if (director == null)
-            {
-                answer.EsCorrecto = false;
-                answer.mensaje = "Director no encontrado";
-                answer.codigo = 404;
-                return answer;
-            }
-
+            var answer = new Answer<List<DirectorDTO?>>();
+            var directors = await _directorRepository.GetActiveDirector(isActive);
+            answer.Dato = _mapper.Map<List<DirectorDTO?>>(directors);
             answer.EsCorrecto = true;
-            answer.Dato = _mapper.Map<DirectorDTO>(director);
-            return answer;       
+            return answer;
         }
 
         public async Task<Answer<List<DirectorDTO?>>> GetAllDirectorsAsync()
@@ -41,6 +33,7 @@ namespace CineStreamCR.BLL.Services.Director
             var answer = new Answer<List<DirectorDTO?>>();
             var list = await _directorRepository.GetDirectors();
             answer.Dato = _mapper.Map<List<DirectorDTO?>>(list);
+            answer.EsCorrecto = true;
             return answer;
         }
 
@@ -138,19 +131,13 @@ namespace CineStreamCR.BLL.Services.Director
             return answer;
         }
 
-        public async Task<List<Answer<DirectorDTO?>>> GetDirectorsByMovieIdAsync(int movieId)
+        public async Task<Answer<List<DirectorDTO?>>> GetDirectorsByMovieIdAsync(int movieId)
         {
+            var answer = new Answer<List<DirectorDTO?>>();
             var directors = await _directorRepository.GetDirectorsByMovieId(movieId);
-            var answers = new List<Answer<DirectorDTO?>>();
-            foreach (var director in directors)
-            {
-                answers.Add(new Answer<DirectorDTO?>
-                {
-                    EsCorrecto = true,
-                    Dato = _mapper.Map<DirectorDTO?>(director)
-                });
-            }
-            return answers;
+            answer.Dato = _mapper.Map<List<DirectorDTO?>>(directors);
+            answer.EsCorrecto = true;
+            return answer;
         }
 
         public async Task<Answer<DirectorDTO>> GetUpdateDirectorAsync(int id, CreateDirectorDTO directorDTO)

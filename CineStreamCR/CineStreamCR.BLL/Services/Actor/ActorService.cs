@@ -17,43 +17,31 @@ namespace CineStreamCR.BLL.Services.Actor
             _mapper = mapper;
         }
 
-        public async Task<List<Answer<ActorDTO>>> GetAllActorsAsync()
+        public async Task<Answer<List<ActorDTO?>>> GetAllActorsAsync()
         {
+            var answer = new Answer<List<ActorDTO?>>();
             var actors = await _actorRepository.GetActors();
-            var answers = new List<Answer<ActorDTO>>();
-            foreach (var actor in actors)
-            {
-                answers.Add(new Answer<ActorDTO>
-                {
-                    EsCorrecto = true,
-                    Dato = _mapper.Map<ActorDTO>(actor)
-                });
-            }
-            return answers;
-        }
-
-        public async Task<Answer<ActorDTO>> GetActiveActorsAsync(byte isActive)
-        {
-            var answer = new Answer<ActorDTO>();
-            var actor = await _actorRepository.GetActiveActors(isActive);
-            if (actor == null)
-            {
-                answer.EsCorrecto = false;
-                answer.mensaje = "Actor no encontrado";
-                answer.codigo = 404;
-                return answer;
-            }
-
+            answer.Dato = _mapper.Map<List<ActorDTO?>>(actors);
             answer.EsCorrecto = true;
-            answer.Dato = _mapper.Map<ActorDTO>(actor);
             return answer;
         }
+
+        public async Task<Answer<List<ActorDTO?>>> GetActiveActorsAsync(byte isActive)
+        {
+            var answer = new Answer<List<ActorDTO?>>();
+            var actors = await _actorRepository.GetActiveActors(isActive);
+            answer.Dato = _mapper.Map<List<ActorDTO?>>(actors);
+            answer.EsCorrecto = true;
+            return answer;
+        }
+              
+        
 
         public async Task<Answer<ActorDTO>> GetActorByIdAsync(int id)
         {
             var answer = new Answer<ActorDTO>();
-            var actor = await _actorRepository.GetActorById(id);
-            if (actor == null)
+            var actorEntity = await _actorRepository.GetActorById(id);
+            if (actorEntity == null)
             {
                 answer.EsCorrecto = false;
                 answer.mensaje = "Actor no encontrado.";
@@ -61,14 +49,13 @@ namespace CineStreamCR.BLL.Services.Actor
                 return answer;
             }
             answer.EsCorrecto = true;
-            answer.Dato = _mapper.Map<ActorDTO>(actor);
+            answer.Dato = _mapper.Map<ActorDTO?>(actorEntity);
             return answer;
         }
 
-        public async Task<Answer<ActorDTO>> GetActorByNameAsync(string firstName, string lastName)
+        public async Task<Answer<ActorDTO?>> GetActorByNameAsync(string firstName, string lastName)
         {
-     
-            var answer = new Answer<ActorDTO>();
+            var answer = new Answer<ActorDTO?>();
             var actor = await _actorRepository.GetActorByName(firstName, lastName);
             if (actor == null)
             {
@@ -78,23 +65,17 @@ namespace CineStreamCR.BLL.Services.Actor
                 return answer;
             }
             answer.EsCorrecto = true;
-            answer.Dato = _mapper.Map<ActorDTO>(actor);
+            answer.Dato = _mapper.Map<ActorDTO?>(actor);
             return answer;
         }
 
-        public async Task<List<Answer<ActorDTO>>> GetActorsByMovieIdAsync(int movieId)
+        public async Task<Answer<List<ActorDTO?>>> GetActorsByMovieIdAsync(int movieId)
         {
+            var answer = new Answer<List<ActorDTO?>>();
             var actors = await _actorRepository.GetActorsByMovieId(movieId);
-            var answers = new List<Answer<ActorDTO>>();
-            foreach (var actor in actors)
-            {
-                answers.Add(new Answer<ActorDTO>
-                {
-                    EsCorrecto = true,
-                    Dato = _mapper.Map<ActorDTO>(actor)
-                });
-            }
-            return answers;
+            answer.Dato = _mapper.Map<List<ActorDTO?>>(actors);
+            answer.EsCorrecto = true;
+            return answer;
         }
 
         public async Task<Answer<ActorDTO>> GetCreateActorAsync(CreateActorDTO actorDTO)

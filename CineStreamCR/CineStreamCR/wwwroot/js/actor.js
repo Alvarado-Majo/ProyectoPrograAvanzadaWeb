@@ -7,12 +7,18 @@
             this.registrarEventos();
         },
         inicializarTabla() {
+           
             this.tabla = $('#tblActor').DataTable({
 
                 ajax: {
                     url: '/Actor/GetActors',
                     type: 'GET',
-                    dataSrc: 'dato'
+                    dataSrc: function (json) {
+                       
+                        if (!json) return [];
+                        // Manejar distintos formatos de respuesta: dato, Dato o la propia lista
+                        return json.dato ?? json.Dato ?? json;
+                    }
                 },
                 columns: [
                     { data: 'actorId' },

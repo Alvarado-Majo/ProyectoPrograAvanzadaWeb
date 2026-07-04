@@ -12,7 +12,11 @@
                 ajax: {
                     url: '/Director/GetDirectors',
                     type: 'GET',
-                    dataSrc: 'dato'
+                    dataSrc: function (json) {
+                        console.log('GetDirectors response', json);
+                        if (!json) return [];
+                        return json.dato ?? json.Dato ?? json;
+                    }
                 },
                 columns: [
                     { data: 'directorId' },

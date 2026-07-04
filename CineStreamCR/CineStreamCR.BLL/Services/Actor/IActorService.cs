@@ -10,7 +10,7 @@ namespace CineStreamCR.BLL.Services.Actor
     {
         //Crud methods
 
-        Task<List<Answer<ActorDTO>>> GetAllActorsAsync();
+        Task<Answer<List<ActorDTO?>>> GetAllActorsAsync();
         Task<Answer<ActorDTO?>> GetActorByIdAsync(int id);
         Task<Answer<ActorDTO?>> GetActorByNameAsync(string firstName, string lastName);
         Task<Answer<ActorDTO>> GetCreateActorAsync(CreateActorDTO actorDTO);
@@ -18,7 +18,7 @@ namespace CineStreamCR.BLL.Services.Actor
         Task<Answer<ActorDTO>> GetDeleteActorAsync(int id);
 
         //Additional methods
-        Task<List<Answer<ActorDTO?>>> GetActorsByMovieIdAsync(int movieId);
-        Task<Answer<ActorDTO>> GetActiveActorsAsync(byte isActive);
+        Task<Answer<List<ActorDTO?>>> GetActorsByMovieIdAsync(int movieId);
+        Task<Answer<List<ActorDTO?>>> GetActiveActorsAsync(byte isActive);
     }
 }

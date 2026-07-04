@@ -18,8 +18,8 @@ namespace CineStreamCR.BLL.Services.Director
         Task<Answer<DirectorDTO>> GetDeleteDirectorAsync(int id);
 
         //Additional methods
-        Task<List<Answer<DirectorDTO?>>> GetDirectorsByMovieIdAsync(int movieId);
-        Task<Answer<DirectorDTO>> GetActiveDirectorsAsync(byte isActive);
+        Task<Answer<List<DirectorDTO?>>> GetDirectorsByMovieIdAsync(int movieId);
+        Task<Answer<List<DirectorDTO?>>> GetActiveDirectorsAsync(byte isActive);
        
     }
 }
