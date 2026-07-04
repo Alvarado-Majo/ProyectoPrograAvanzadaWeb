@@ -25,9 +25,11 @@
                     { data: 'biography' },
                     { data: 'nationality' },
                     { data: 'birthDate' },
+                    { data: 'pictureImg' },
+                    { data: 'isActive' },
                     {
                         data: null,
-                        title: 'Acciones',
+                        title: 'Actions',
                         orderable: false,
                         render: (data, type, row) => {
                             return `

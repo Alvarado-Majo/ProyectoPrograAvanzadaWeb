@@ -13,8 +13,8 @@ namespace CineStreamCR.BLL.DTO.Actor
         public string? Nationality { get; set; } = null!;
         public DateTime? BirthDate { get; set; }
         public string PictureImg { get; set; } = null!;
+        public byte IsActive { get; set; } 
 
-        
 
 
     }
