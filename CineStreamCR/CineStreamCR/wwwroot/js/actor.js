@@ -8,15 +8,21 @@
         },
         inicializarTabla() {
             this.tabla = $('#tblActor').DataTable({
+
                 ajax: {
-                    url: 'Actor/GetActors',
+                    url: '/Actor/GetActors',
                     type: 'GET',
                     dataSrc: 'dato'
                 },
                 columns: [
                     { data: 'actorId' },
-                    { data: 'firstName' },
-                    { data: 'lastName' },
+                    {
+                        data: null,
+                        render: function (data) {
+                            return `${data.firstName} ${data.lastName}`;
+                        }
+                    },
+                    { data: 'biography' },
                     { data: 'nationality' },
                     { data: 'birthDate' },
                     {
@@ -62,14 +68,20 @@
         guardarActor() {
             let form = $('#formCrearActor');
 
-            if (!form.valid()) { 
+            if (!form.valid()) {
                 return;
             }
+
+            // Usamos FormData para poder enviar el archivo (pictureFile)
+            // junto con los demás campos. form.serialize() NO envía archivos.
+            let formData = new FormData(form[0]);
 
             $.ajax({
                 url: form.attr('action'),
                 type: 'POST',
-                data: form.serialize(),
+                data: formData,
+                processData: false,   // evita que jQuery intente convertir FormData a string
+                contentType: false,   // deja que el navegador arme el boundary multipart correcto
                 success: function (respuesta) {
 
                     if (respuesta.esCorrecto) {
@@ -92,9 +104,26 @@
                         });
                     }
 
+                },
+                error: function (xhr) {
+                    // Antes no había manejo de error: si el servidor respondía
+                    // 400/500, no pasaba absolutamente nada en pantalla.
+                    let mensaje = 'Ocurrió un error al guardar el actor.';
+
+                    if (xhr.responseJSON && xhr.responseJSON.mensaje) {
+                        mensaje = xhr.responseJSON.mensaje;
+                    } else if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        // errores de ModelState (400 BadRequest)
+                        const errores = Object.values(xhr.responseJSON.errors).flat();
+                        mensaje = errores.join('\n');
+                    }
+
+                    Swal.fire({
+                        title: 'Error',
+                        text: mensaje,
+                        icon: 'error'
+                    });
                 }
-
-
             })
         },
 
@@ -102,14 +131,21 @@
         editarActor() {
             let form = $('#formEditarActor');
 
-            if (!form.valid()) { 
+            if (!form.valid()) {
                 return;
             }
+
+            // Mismo problema y misma solución que en guardarActor():
+            // el formulario tiene enctype multipart/form-data (foto opcional),
+            // así que hay que usar FormData en vez de serialize().
+            let formData = new FormData(form[0]);
 
             $.ajax({
                 url: form.attr('action'),
                 type: 'POST',
-                data: form.serialize(),
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function (respuesta) {
 
                     if (respuesta.esCorrecto) {
@@ -132,9 +168,23 @@
                         });
                     }
 
+                },
+                error: function (xhr) {
+                    let mensaje = 'Ocurrió un error al actualizar el actor.';
+
+                    if (xhr.responseJSON && xhr.responseJSON.mensaje) {
+                        mensaje = xhr.responseJSON.mensaje;
+                    } else if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        const errores = Object.values(xhr.responseJSON.errors).flat();
+                        mensaje = errores.join('\n');
+                    }
+
+                    Swal.fire({
+                        title: 'Error',
+                        text: mensaje,
+                        icon: 'error'
+                    });
                 }
-
-
             })
         },
 
@@ -191,15 +241,15 @@
             $.get(`/Actor/GetActorById?id=${id}`, function (resultado) {
                 //Espacios, para dividir el proceso
                 if (resultado.esCorrecto) {
-                    let data = resultado.dato;                 
+                    let data = resultado.dato;
 
-                    $('#ActorId').val(data.actorId);            
+                    $('#ActorId').val(data.actorId);
                     $('#FirstName').val(data.firstName);
                     $('#LastName').val(data.lastName);
                     $('#Nationality').val(data.nationality);
                     $('#BirthDate').val(data.birthDate);
                     $('#Biography').val(data.biography);
-             
+
 
                     $('#modalEditarActor').modal('show');
                 }

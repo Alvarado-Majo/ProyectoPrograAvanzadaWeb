@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using CineStreamCR.BLL.DTO;
 using CineStreamCR.BLL.DTO.Actor;
-using CineStreamCR.BLL.DTO.Actor;
+
 using CineStreamCR.DAL.Repositories.Actores;
-using CineStreamCR.DAL.Repositories.Actors;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CineStreamCR.BLL.Services.Actor
 {
@@ -171,8 +167,8 @@ namespace CineStreamCR.BLL.Services.Actor
             answer.FirstName = actorDTO.FirstName;
             answer.LastName = actorDTO.LastName;
             answer.Biography = actorDTO.Biography;
-            answer.BirthDate = actorDTO.BirthDate.HasValue ? DateOnly.FromDateTime(actorDTO.BirthDate.Value) : null;
-            answer.PictureImg = actorDTO.PinctureImg;
+            answer.BirthDate = (DateOnly)(actorDTO.BirthDate.HasValue? DateOnly.FromDateTime(actorDTO.BirthDate.Value): null as DateOnly?);
+            answer.PictureImg = actorDTO.PictureImg;
             answer.IsActive = actorDTO.IsActive;
 
             bool result = await _actorRepository.UpdateActor(answer);

@@ -1,0 +1,167 @@
+@{
+    ViewData["Title"] = "Directors";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Director Management</h2>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCrearDirector">
+            <i class="bi bi-plus-circle"></i> New Director
+        </button>
+    </div>
+
+    <table id="tblDirector" class="table table-striped table-bordered w-100">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Full Name</th>
+                <th>Biography</th>
+                <th>Nationality</th>
+                <th>Date of Birth</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+
+
+<div class="modal fade" id="modalCrearDirector" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="formCrearDirector" action="/Director/CreateDirector" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register Director</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="FirstName" id="CrearFirstName" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="LastName" id="CrearLastName" required />
+                        </div>
+
+                       
+                        <div class="col-md-6">
+                            <label class="form-label">Nationality</label>
+                            <input type="text" class="form-control" name="Nationality" id="CrearNationality" />
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" name="BirthDate" id="CrearBirthDate" required />
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Biography</label>
+                            <textarea class="form-control" name="Biography" id="CrearBiography" rows="3" required></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Photo</label>
+                            <input type="file" class="form-control" name="pictureFile" id="CrearPictureFile" accept="image/*" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" name="IsActive" id="CrearIsActive">
+                                <option value="1" selected>Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" id="btnGuardarDirector" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modalEditarDirector" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="formEditarDirector" action="/Director/EditDirector" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Director</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="DirectorId" />
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="FirstName" id="FirstName" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="LastName" id="LastName" required />
+                        </div>
+
+                        <!-- If you add Nationality to CreateDirectorDTO, uncomment this:
+                        <div class="col-md-6">
+                            <label class="form-label">Nationality</label>
+                            <input type="text" class="form-control" name="Nationality" id="Nationality" />
+                        </div>
+                        -->
+
+                        <div class="col-md-6">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" name="BirthDate" id="BirthDate" required />
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Biography</label>
+                            <textarea class="form-control" name="Biography" id="Biography" rows="3" required></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Photo (leave empty to keep the current one)</label>
+                            <input type="file" class="form-control" name="pictureFile" id="PictureFile" accept="image/*" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" name="IsActive" id="IsActive">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" id="btnEditarDirector" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Bootstrap Icons (optional, for the button icon) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+    <script src="~/js/director.js"></script>
+}

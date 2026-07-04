@@ -29,3 +29,21 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+/* Force readable (dark) text inside Bootstrap modals,
+   regardless of the site's global dark theme */
+.modal-content {
+    color: #212529;
+    background-color: #fff;
+}
+
+.modal-title,
+.form-label,
+.modal-body label {
+    color: #212529;
+}
+
+/* If your layout sets data-bs-theme="dark" on <html> or <body>,
+   scope the modal back to the light theme explicitly */
+.modal {
+    --bs-body-color: #212529;
+}

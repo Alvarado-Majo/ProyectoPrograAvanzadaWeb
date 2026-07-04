@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CineStreamCR.BLL.DTO;
+using CineStreamCR.BLL.DTO.Actor;
 using CineStreamCR.BLL.DTO.Director;
 using CineStreamCR.DAL.Repositories.Directors;
 using System;
@@ -74,7 +75,7 @@ namespace CineStreamCR.BLL.Services.Director
                     EsCorrecto = true,
                     mensaje = "Director creado exitosamente.",
                     Dato = _mapper.Map<DirectorDTO>(newDirector),
-                    codigo = 201
+                    codigo = 200
                 };
             }
             return new Answer<DirectorDTO>
@@ -177,8 +178,8 @@ namespace CineStreamCR.BLL.Services.Director
             answer.FirstName = directorDTO.FirstName;
             answer.LastName = directorDTO.LastName;
             answer.Biography = directorDTO.Biography;
-            answer.BirthDate = directorDTO.BirthDate.HasValue ? DateOnly.FromDateTime(directorDTO.BirthDate.Value) : null;
-            answer.PictureImg = directorDTO.PinctureImg;
+            answer.BirthDate = (DateOnly)(directorDTO.BirthDate.HasValue ? DateOnly.FromDateTime(directorDTO.BirthDate.Value) : null as DateOnly?);
+            answer.PictureImg = directorDTO.PictureImg;
             answer.IsActive = directorDTO.IsActive;
 
             bool result = await _directorRepository.UpdateDirector(answer);

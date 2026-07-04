@@ -10,8 +10,9 @@ namespace CineStreamCR.BLL.DTO.Director
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Biography { get; set; } = null!;
+        public string? Nationality { get; set; } = null!;
         public DateTime? BirthDate { get; set; }
-        public string PinctureImg { get; set; } = null!;
+        public string PictureImg { get; set; } = null!;
 
     }
 }

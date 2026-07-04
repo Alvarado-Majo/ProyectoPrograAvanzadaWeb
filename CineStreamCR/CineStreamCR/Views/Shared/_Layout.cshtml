@@ -298,6 +298,12 @@
                     My List
                 </a>
             </li>
+            <li>
+                <a asp-controller="Home" asp-action="AdminMenu"
+                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "AdminMenu" ? "active" : "")">
+                    Admin Menu
+                </a>
+            </li>
         </ul>
 
         <!-- Derecha: búsqueda + perfil -->

@@ -15,10 +15,15 @@ namespace CineStreamCR.BLL.DTO.Director
         public string LastName { get; set; } = null!;
         [Required(ErrorMessage = "Biography is required.")]
         public string Biography { get; set; } = null!;
+        [Required(ErrorMessage = "Nationality is required.")]
+        public string Nationality { get; set; } = string.Empty;
         [Required(ErrorMessage = "Birth date is required.")]
+
         public DateTime? BirthDate { get; set; }
+
         [Required(ErrorMessage = "Picture image is required.")]
-        public string PinctureImg { get; set; } = null!;
+        
+        public string PictureImg { get; set; } = null!;
         [Required(ErrorMessage = "The status is required.")]
         public byte IsActive { get; set; } = 1;
     }

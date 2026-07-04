@@ -13,7 +13,7 @@ CREATE TABLE Users (
     PasswordHash VARBINARY(256) NOT NULL, -- Manejo de hash para password
     PasswordSalt VARBINARY(128) NOT NULL, -- Manejo de hash para password
     SignUpDate DATETIME NOT NULL DEFAULT GETDATE(),
-    IsActive BIT NOT NULL DEFAULT 1       -- Para soft delete de auditoría. 
+    IsActive tinyint NOT NULL DEFAULT 1       -- Para soft delete de auditoría. 
 );
 
 
@@ -25,7 +25,7 @@ CREATE TABLE Directors (
     Biography NVARCHAR(MAX),
     BirthDate DATE,
     PictureImg NVARCHAR(255),
-    IsActive BIT NOT NULL DEFAULT 1       -- Para soft delete de auditoría. 
+    IsActive tinyint NOT NULL DEFAULT 1       -- Para soft delete de auditoría. 
 );
 
 
@@ -37,7 +37,7 @@ CREATE TABLE Actors (
     Biography NVARCHAR(MAX),
     BirthDate DATE,
     PictureImg NVARCHAR(255),
-    IsActive BIT NOT NULL DEFAULT 1        -- Para soft delete de auditoría. 
+    IsActive tinyint NOT NULL DEFAULT 1        -- Para soft delete de auditoría. 
 );
 
 
@@ -49,11 +49,11 @@ CREATE TABLE Movies (
     DurationMinutes INT NOT NULL CHECK (DurationMinutes > 0),
     PosterImg NVARCHAR(255),
     VideoURL NVARCHAR(255),
-    Nationality NVARCAHR(70),
+    Nationality varchar(70),
     DirectorId INT NOT NULL,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(), -- Auditoría
     UpdatedAt DATETIME NULL,                       -- Auditoría
-    IsActive BIT NOT NULL DEFAULT 1,       -- Para soft delete de auditoría. 
+    IsActive tinyint NOT NULL DEFAULT 1,       -- Para soft delete de auditoría. 
     CONSTRAINT FK_Movies_Directors
         FOREIGN KEY (DirectorId) REFERENCES Directors(DirectorId)
 );

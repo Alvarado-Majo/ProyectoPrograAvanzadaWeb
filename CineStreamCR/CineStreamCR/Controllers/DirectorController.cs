@@ -25,12 +25,7 @@ namespace CineStreamCR.Controllers
             return View("~/Views/Director/Directors.cshtml");
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public IActionResult RegisterDirector()
-        {
-            return View("~/Views/Director/RegisterDirector.cshtml");
-        }
+       
 
 
         //  READ (JSON)
@@ -52,7 +47,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetDirectorById(int id)
         {
@@ -63,7 +58,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetDirectorByName(string firstName, string lastName)
         {
@@ -86,7 +81,7 @@ namespace CineStreamCR.Controllers
         //  CREATE
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateDirector(CreateDirectorDTO directorDTO, IFormFile? pictureFile)
         {
@@ -105,7 +100,7 @@ namespace CineStreamCR.Controllers
 
                 using var stream = new FileStream(fullPath, FileMode.Create);
                 await pictureFile.CopyToAsync(stream);
-                directorDTO.PinctureImg = "/images/directors/" + fileName;
+                directorDTO.PictureImg = "/images/directors/" + fileName;
             }
 
             var result = await _directorService.GetCreateDirectorAsync(directorDTO);
@@ -123,7 +118,7 @@ namespace CineStreamCR.Controllers
         //  EDIT
 
 
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditDirector(int id)
         {
@@ -138,7 +133,7 @@ namespace CineStreamCR.Controllers
             return View("~/Views/Director/EditDirector.cshtml", result.Dato);
         }
 
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> EditDirector(int id, CreateDirectorDTO directorDTO, IFormFile? pictureFile)
         {
@@ -160,7 +155,7 @@ namespace CineStreamCR.Controllers
 
                 using var stream = new FileStream(fullPath, FileMode.Create);
                 await pictureFile.CopyToAsync(stream);
-                directorDTO.PinctureImg = "/images/directors/" + fileName;
+                directorDTO.PictureImg = "/images/directors/" + fileName;
             }
 
             var result = await _directorService.GetUpdateDirectorAsync(id, directorDTO);
@@ -176,7 +171,7 @@ namespace CineStreamCR.Controllers
         //  DELETE
         
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> DeleteDirector(int id)
         {

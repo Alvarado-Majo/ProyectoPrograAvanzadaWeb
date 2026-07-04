@@ -74,5 +74,6 @@ namespace StreamingApp.Controllers
         public IActionResult Movies() => View();
         public IActionResult Games() => View();
         public IActionResult MyList() => View();
+        public IActionResult AdminMenu() => View();
     }
 }

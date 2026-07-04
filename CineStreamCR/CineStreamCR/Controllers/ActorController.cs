@@ -25,12 +25,7 @@ namespace CineStreamCR.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public IActionResult RegisterActor()
-        {
-            return View();
-        }
+        
 
 
         //  READ (JSON)
@@ -52,7 +47,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-        [Authorize(Roles = "Administrator")]
+      //  [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetActorById(int id)
         {
@@ -63,7 +58,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-        [Authorize(Roles = "Administrator")]
+       // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetActorByName(string firstName, string lastName)
         {
@@ -86,7 +81,7 @@ namespace CineStreamCR.Controllers
         //  CREATE
 
 
-        [Authorize(Roles = "Administrator")]
+      //  [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateActor(CreateActorDTO actorDTO, IFormFile? pictureFile)
         {
@@ -105,7 +100,7 @@ namespace CineStreamCR.Controllers
 
                 using var stream = new FileStream(fullPath, FileMode.Create);
                 await pictureFile.CopyToAsync(stream);
-                actorDTO.PinctureImg = "/images/actors/" + fileName;
+                actorDTO.PictureImg = "/images/actors/" + fileName;
             }
 
             var result = await _actorService.GetCreateActorAsync(actorDTO);
@@ -123,7 +118,7 @@ namespace CineStreamCR.Controllers
         //  EDIT
 
 
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditActor(int id)
         {
@@ -138,7 +133,7 @@ namespace CineStreamCR.Controllers
             return View("~/Views/Actor/EditActor.cshtml", result.Dato);
         }
 
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> EditActor(int id, CreateActorDTO actorDTO, IFormFile? pictureFile)
         {
@@ -160,7 +155,7 @@ namespace CineStreamCR.Controllers
 
                 using var stream = new FileStream(fullPath, FileMode.Create);
                 await pictureFile.CopyToAsync(stream);
-                actorDTO.PinctureImg = "/images/actors/" + fileName;
+                actorDTO.PictureImg = "/images/actors/" + fileName;
             }
 
             var result = await _actorService.GetUpdateActorAsync(id, actorDTO);
@@ -176,7 +171,7 @@ namespace CineStreamCR.Controllers
         //  DELETE
 
 
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> DeleteActor(int id)
         {
