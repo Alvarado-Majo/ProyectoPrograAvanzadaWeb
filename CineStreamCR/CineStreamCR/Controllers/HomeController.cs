@@ -64,7 +64,7 @@ namespace StreamingApp.Controllers
             return View(vm);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Detalles(int id)
         {
             // TODO: cargar detalle del contenido por id
             return View();

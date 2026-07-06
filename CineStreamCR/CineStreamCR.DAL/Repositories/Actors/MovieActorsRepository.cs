@@ -29,8 +29,8 @@ namespace CineStreamCR.DAL.Repositories.Actors
             if (movieActor == null) return false;
 
             var exists = await GetByMovieAndActor(
-                movieActor.MovieId!.Value,
-                movieActor.ActorId!.Value);
+             movieActor.MovieId,
+             movieActor.ActorId);
 
             if (exists != null) return false;
 

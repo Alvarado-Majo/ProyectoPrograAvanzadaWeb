@@ -273,7 +273,12 @@
                 {
                     <button class="btn-sf btn-sf--primary">&#9654; &nbsp;Play</button>
                 }
-                <a asp-action="Details" asp-route-id="@f.Id" class="btn-sf btn-sf--ghost">More Info</a>
+                <a asp-controller="Movie"
+                   asp-action="Detalles"
+                   asp-route-id="@f.Id"
+                   class="btn-sf btn-sf--ghost">
+                    More Info
+                </a>
             </div>
         </div>
         @if (f.IsComingSoon && !string.IsNullOrEmpty(f.ComingSoonLabel))
