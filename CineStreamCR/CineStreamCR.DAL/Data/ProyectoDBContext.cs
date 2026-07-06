@@ -19,6 +19,7 @@ namespace CineStreamCR.DAL.Data
         public virtual DbSet<Actors> Actors { get; set; }
         public virtual DbSet<Directors> Directors { get; set; }
         public virtual DbSet<MovieActors> MovieActors { get; set; }
+        public virtual DbSet<Movies> Movies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
