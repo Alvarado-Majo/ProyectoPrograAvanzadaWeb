@@ -1,0 +1,94 @@
+﻿@model CineStreamCR.BLL.DTO.Auth.LoginDTO
+
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CineStreamCR</title>
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+
+<body style="background:#141414;">
+
+    <div class="container vh-100 d-flex justify-content-center align-items-center">
+
+        <div class="card shadow-lg border-0" style="width:420px;border-radius:15px;">
+
+            <div class="card-body p-5">
+
+                <h2 class="text-center text-danger fw-bold mb-4">
+                    CineStreamCR
+                </h2>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.Error
+                    </div>
+                }
+
+                <form asp-action="Login" method="post">
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Correo electrónico
+                        </label>
+
+                        <input asp-for="Email"
+                               class="form-control" />
+
+                        <span asp-validation-for="Email"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Contraseña
+                        </label>
+
+                        <input asp-for="Password"
+                               type="password"
+                               class="form-control" />
+
+                        <span asp-validation-for="Password"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+                    <button class="btn btn-danger w-100">
+
+                        Iniciar Sesión
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <partial name="_ValidationScriptsPartial" />
+
+</body>
+
+</html>
