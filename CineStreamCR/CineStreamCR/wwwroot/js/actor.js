@@ -147,9 +147,12 @@
             // el formulario tiene enctype multipart/form-data (foto opcional),
             // así que hay que usar FormData en vez de serialize().
             let formData = new FormData(form[0]);
+            const id = $('#ActorId').val();
 
             $.ajax({
-                url: form.attr('action'),
+                // Se agrega el id explícitamente en la query string para asegurar
+                // el model binding del parámetro "id" en el POST EditActor(int id, ...)
+                url: `/Actor/EditActor?id=${id}`,
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -255,9 +258,10 @@
                     $('#FirstName').val(data.firstName);
                     $('#LastName').val(data.lastName);
                     $('#Nationality').val(data.nationality);
-                    $('#BirthDate').val(data.birthDate);
+                    // El input date requiere formato yyyy-MM-dd; birthDate puede venir con hora incluida.
+                    $('#BirthDate').val(data.birthDate ? data.birthDate.substring(0, 10) : '');
                     $('#Biography').val(data.biography);
-
+                    $('#IsActive').val(data.isActive);
 
                     $('#modalEditarActor').modal('show');
                 }

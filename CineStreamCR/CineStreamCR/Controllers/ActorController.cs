@@ -25,8 +25,7 @@ namespace CineStreamCR.Controllers
             return View();
         }
 
-        
-
+       
 
         //  READ (JSON)
 
@@ -80,8 +79,6 @@ namespace CineStreamCR.Controllers
   
         //  CREATE
 
-
-      //  [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateActor(CreateActorDTO actorDTO, IFormFile? pictureFile)
         {
@@ -117,8 +114,6 @@ namespace CineStreamCR.Controllers
 
         //  EDIT
 
-
-       // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditActor(int id)
         {
@@ -138,10 +133,7 @@ namespace CineStreamCR.Controllers
         public async Task<IActionResult> EditActor(int id, CreateActorDTO actorDTO, IFormFile? pictureFile)
         {
             if (!ModelState.IsValid)
-            {
-                TempData["Error"] = "Please complete all required fields.";
-                return View(actorDTO);
-            }
+                return BadRequest(ModelState);
 
             if (pictureFile != null && pictureFile.Length > 0)
             {
@@ -163,15 +155,14 @@ namespace CineStreamCR.Controllers
             if (!result.EsCorrecto)
                 return BadRequest(result);
 
-            TempData["Success"] = result.mensaje;
-            return RedirectToAction(nameof(Actors));
+            // Antes: TempData + RedirectToAction devolvía HTML en vez de JSON
+            // y rompía el AJAX de actor.js (esperaba respuesta.esCorrecto).
+            return Json(result);
         }
 
      
         //  DELETE
 
-
-       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> DeleteActor(int id)
         {
