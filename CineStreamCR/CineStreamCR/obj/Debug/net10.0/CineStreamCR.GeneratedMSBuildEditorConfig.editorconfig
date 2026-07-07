@@ -27,6 +27,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0b3JcQWN0b3JzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/XSF/Documents/U/VII Cuatrimestre/Progra Avanzada/Proyecto/ProyectoPrograAvanzadaWeb/CineStreamCR/CineStreamCR/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/XSF/Documents/U/VII Cuatrimestre/Progra Avanzada/Proyecto/ProyectoPrograAvanzadaWeb/CineStreamCR/CineStreamCR/Views/Director/Directors.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlyZWN0b3JcRGlyZWN0b3JzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -41,6 +45,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/XSF/Documents/U/VII Cuatrimestre/Progra Avanzada/Proyecto/ProyectoPrograAvanzadaWeb/CineStreamCR/CineStreamCR/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/XSF/Documents/U/VII Cuatrimestre/Progra Avanzada/Proyecto/ProyectoPrograAvanzadaWeb/CineStreamCR/CineStreamCR/Views/Movie/Detalles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVcRGV0YWxsZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/XSF/Documents/U/VII Cuatrimestre/Progra Avanzada/Proyecto/ProyectoPrograAvanzadaWeb/CineStreamCR/CineStreamCR/Views/Shared/Error.cshtml]
