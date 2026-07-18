@@ -1,6 +1,5 @@
 ﻿
-
-namespace CineStreamCR.DAL.Repositories.Actores
+namespace CineStreamCR.DAL.Repositories.Actors
 {
     public interface IActorRepository
     {
@@ -14,7 +13,7 @@ namespace CineStreamCR.DAL.Repositories.Actores
 
 
         //additional methods
-        Task<List<Entities.Actors?>> GetActorsByMovieId(int movieId);
+        Task<List<Entities.Actors>> GetActorsByMovieId(int movieId);
         Task<List<Entities.Actors>> GetActiveActors(byte isActive);
     }
 }

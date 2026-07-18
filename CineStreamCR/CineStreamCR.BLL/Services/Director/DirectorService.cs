@@ -22,7 +22,7 @@ namespace CineStreamCR.BLL.Services.Director
         public async Task<Answer<List<DirectorDTO?>>> GetActiveDirectorsAsync(byte isActive)
         {
             var answer = new Answer<List<DirectorDTO?>>();
-            var directors = await _directorRepository.GetActiveDirector(isActive);
+            var directors = await _directorRepository.GetActiveDirectors(isActive);
             answer.Dato = _mapper.Map<List<DirectorDTO?>>(directors);
             answer.EsCorrecto = true;
             return answer;
@@ -142,8 +142,8 @@ namespace CineStreamCR.BLL.Services.Director
 
         public async Task<Answer<DirectorDTO>> GetUpdateDirectorAsync(int id, CreateDirectorDTO directorDTO)
         {
-            var answer = await _directorRepository.GetDirectorById(id);
-            if (answer == null)
+            var director = await _directorRepository.GetDirectorById(id);
+            if (director == null)
             {
                 return new Answer<DirectorDTO>
                 {
@@ -152,6 +152,7 @@ namespace CineStreamCR.BLL.Services.Director
                     codigo = 404
                 };
             }
+
             var directorName = await _directorRepository.GetDirectorByName(directorDTO.FirstName, directorDTO.LastName);
             if (directorName != null && directorName.DirectorId != id)
             {
@@ -162,14 +163,20 @@ namespace CineStreamCR.BLL.Services.Director
                     codigo = 400
                 };
             }
-            answer.FirstName = directorDTO.FirstName;
-            answer.LastName = directorDTO.LastName;
-            answer.Biography = directorDTO.Biography;
-            answer.BirthDate = (DateOnly)(directorDTO.BirthDate.HasValue ? DateOnly.FromDateTime(directorDTO.BirthDate.Value) : null as DateOnly?);
-            answer.PictureImg = directorDTO.PictureImg;
-            answer.IsActive = directorDTO.IsActive;
 
-            bool result = await _directorRepository.UpdateDirector(answer);
+            director.FirstName = directorDTO.FirstName;
+            director.LastName = directorDTO.LastName;
+            director.Biography = directorDTO.Biography;
+
+            if (directorDTO.BirthDate.HasValue)
+            {
+                director.BirthDate = directorDTO.BirthDate.Value;
+            }
+
+            director.PictureImg = directorDTO.PictureImg;
+            director.IsActive = directorDTO.IsActive;
+
+            bool result = await _directorRepository.UpdateDirector(director);
 
             if (result)
             {
@@ -177,7 +184,7 @@ namespace CineStreamCR.BLL.Services.Director
                 {
                     EsCorrecto = true,
                     mensaje = "Director updated successfully",
-                    Dato = _mapper.Map<DirectorDTO>(answer),
+                    Dato = _mapper.Map<DirectorDTO>(director),
                     codigo = 200
                 };
             }

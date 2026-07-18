@@ -16,6 +16,6 @@ namespace CineStreamCR.DAL.Repositories.Directors
 
         //additional methods
         Task<List<Entities.Directors>> GetDirectorsByMovieId(int movieId);
-        Task<List<Entities.Directors?>> GetActiveDirector(byte isActive);
+        Task<List<Entities.Directors>> GetActiveDirectors(byte isActive);
     }
 }

@@ -5,16 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CineStreamCR.DAL.Entities
 {
     [Table("MovieActors")]
-    public class MovieActors
+    public partial class MovieActors
     {
         public int MovieId { get; set; }
-
         public int ActorId { get; set; }
-
         public string CharacterName { get; set; } = string.Empty;
-
         public virtual Movies Movie { get; set; } = null!;
-
-        public virtual Actors Actors { get; set; } = null!;
+        public virtual Actors Actor { get; set; } = null!;
     }
 }

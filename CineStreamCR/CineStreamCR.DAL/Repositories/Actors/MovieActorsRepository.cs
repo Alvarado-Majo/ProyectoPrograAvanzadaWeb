@@ -1,9 +1,6 @@
 ﻿using CineStreamCR.DAL.Data;
 using CineStreamCR.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CineStreamCR.DAL.Repositories.Actors
 {
@@ -57,6 +54,22 @@ namespace CineStreamCR.DAL.Repositories.Actors
 
             entity.CharacterName = characterName.Trim();
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<List<MovieActors>> GetByMovieId(int movieId)
+        {
+            return await _context.MovieActors
+                .Include(ma => ma.Actor)
+                .Where(ma => ma.MovieId == movieId)
+                .ToListAsync();
+        }
+
+        public async Task<List<MovieActors>> GetByActorId(int actorId)
+        {
+            return await _context.MovieActors
+                .Include(ma => ma.Movie)
+                .Where(ma => ma.ActorId == actorId)
+                .ToListAsync();
         }
     }
 }

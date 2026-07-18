@@ -2,7 +2,7 @@
 using CineStreamCR.BLL.DTO;
 using CineStreamCR.BLL.DTO.Actor;
 
-using CineStreamCR.DAL.Repositories.Actores;
+using CineStreamCR.DAL.Repositories.Actors;
 
 namespace CineStreamCR.BLL.Services.Actor
 {
@@ -34,9 +34,6 @@ namespace CineStreamCR.BLL.Services.Actor
             answer.EsCorrecto = true;
             return answer;
         }
-              
-        
-
         public async Task<Answer<ActorDTO>> GetActorByIdAsync(int id)
         {
             var answer = new Answer<ActorDTO>();

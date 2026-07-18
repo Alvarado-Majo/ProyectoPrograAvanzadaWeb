@@ -16,6 +16,7 @@ namespace CineStreamCR.BLL
             // automáticamente a cualquier CreateMap<> de abajo que tenga
             // una propiedad DateOnly de un lado y DateTime del otro
             // (incluye las versiones nullable DateOnly? y DateTime?).
+
             CreateMap<DateOnly, DateTime>()
                 .ConvertUsing(d => d.ToDateTime(TimeOnly.MinValue));
 

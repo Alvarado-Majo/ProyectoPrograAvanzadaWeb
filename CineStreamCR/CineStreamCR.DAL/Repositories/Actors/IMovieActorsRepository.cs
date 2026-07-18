@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CineStreamCR.DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +13,7 @@ namespace CineStreamCR.DAL.Repositories.Actors
         Task<bool> RemoveActorFromMovie(int movieId, int actorId);
         Task<bool> UpdateCharacterName(int movieId, int actorId, string characterName);
 
-        //additional methods
+        Task<List<MovieActors>> GetByMovieId(int movieId);
+        Task<List<MovieActors>> GetByActorId(int actorId);
     }
 }

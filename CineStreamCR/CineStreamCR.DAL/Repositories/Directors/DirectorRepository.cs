@@ -1,10 +1,5 @@
 ﻿using CineStreamCR.DAL.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CineStreamCR.DAL.Repositories.Directors
 {
@@ -28,21 +23,29 @@ namespace CineStreamCR.DAL.Repositories.Directors
 
         public async Task<bool> DeleteDirector(int id)
         {
-            var entity = _context.Directors.Find(id);
-            if (entity == null) return false;
+            var entity = await _context.Directors.FindAsync(id);
 
-            _context.Directors.Remove(entity);
-            return await _context.SaveChangesAsync()>0;
+            if (entity == null)
+                return false;
+
+            entity.IsActive = 0;
+
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<List<Entities.Directors?>> GetActiveDirector(byte isActive)
+        public async Task<List<Entities.Directors>> GetActiveDirectors(byte isActive)
         {
-            return await _context.Directors.Where(d => d.IsActive == isActive).ToListAsync();
+            return await _context.Directors
+                .Where(d => d.IsActive == isActive)
+                .ToListAsync();
         }
 
         public async Task<Entities.Directors?> GetDirectorById(int id)
         {
-            return await _context.Directors.FirstOrDefaultAsync(d => d.DirectorId == id);
+            return await _context.Directors
+                .FirstOrDefaultAsync(d =>
+                    d.DirectorId == id &&
+                    d.IsActive == 1);
         }
 
         public async Task<Entities.Directors?> GetDirectorByName(string firstName, string lastName)
@@ -54,18 +57,20 @@ namespace CineStreamCR.DAL.Repositories.Directors
 
         public async Task<List<Entities.Directors>> GetDirectors()
         {
-            return await _context.Directors.ToListAsync();
+            return await _context.Directors
+                .Where(d => d.IsActive == 1)
+                .ToListAsync();
         }
 
         public async Task<List<Entities.Directors>> GetDirectorsByMovieId(int movieId)
         {
-            //return await _context.Directors
-            //.Where(d => d.Movies.Any(m => m.MovieId == movieId))
-            // .ToListAsync();
-            throw new NotImplementedException();
+            return await _context.MovieDirectors
+                .Where(md => md.MovieId == movieId)
+                .Select(md => md.Director)
+                .ToListAsync();
         }
 
-       
+
         public async Task<bool> UpdateDirector(Entities.Directors director)
         {
             if(director == null) return false;

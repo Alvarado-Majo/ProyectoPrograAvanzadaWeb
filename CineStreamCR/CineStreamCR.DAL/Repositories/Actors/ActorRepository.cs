@@ -1,5 +1,5 @@
 ﻿using CineStreamCR.DAL.Data;
-using CineStreamCR.DAL.Repositories.Actores;
+using CineStreamCR.DAL.Repositories.Actors;
 using Microsoft.EntityFrameworkCore;
 
 namespace CineStreamCR.DAL.Repositories.Actors
@@ -15,12 +15,14 @@ namespace CineStreamCR.DAL.Repositories.Actors
 
         public async Task<List<Entities.Actors>> GetActors()
         {
-            return await _context.Actors.ToListAsync();
+            return await _context.Actors
+                .Where(a => a.IsActive == 1)
+                .ToListAsync();
         }
 
         public async Task<Entities.Actors?> GetActorById(int id)
         {
-            return await _context.Actors.FirstOrDefaultAsync(a => a.ActorId == id);
+            return await _context.Actors.FirstOrDefaultAsync(a =>a.ActorId == id && a.IsActive == 1);
         }
 
         public async Task<Entities.Actors?> GetActorByName(string firstName, string lastName)
@@ -35,10 +37,10 @@ namespace CineStreamCR.DAL.Repositories.Actors
             return await _context.Actors.Where(a => a.IsActive == isActive).ToListAsync();
         }
 
-        public async Task<List<Entities.Actors?>> GetActorsByMovieId(int movieId)
+        public async Task<List<Entities.Actors>> GetActorsByMovieId(int movieId)
         {
             return await _context.MovieActors.Where(ma => ma.MovieId == movieId)
-                .Select(ma => ma.Actors)
+                .Select(ma => ma.Actor)
                 .ToListAsync();
         }
 
@@ -67,13 +69,15 @@ namespace CineStreamCR.DAL.Repositories.Actors
 
             return await _context.SaveChangesAsync() > 0;
         }
-
         public async Task<bool> DeleteActor(int id)
         {
             var entity = await _context.Actors.FindAsync(id);
-            if (entity == null) return false;
 
-            _context.Actors.Remove(entity);
+            if (entity == null)
+                return false;
+
+            entity.IsActive = 0;
+
             return await _context.SaveChangesAsync() > 0;
         }
     }
