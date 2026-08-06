@@ -10,7 +10,7 @@ namespace CineStreamCR.BLL.DTO.Movie
         MovieRating
     }
 
-    // Parámetros de entrada para la vista de Catálogo: buscador en tiempo real, filtro por género/año y ordenamiento.
+    // Parámetros de entrada para la vista de Catálogo: buscador en tiempo real, filtro por género y/o año y ordenamiento.
     public class MovieFilterDTO
     {
         public string? SearchTitle { get; set; }

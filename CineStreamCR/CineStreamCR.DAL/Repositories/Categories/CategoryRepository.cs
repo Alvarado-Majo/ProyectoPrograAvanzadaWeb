@@ -59,9 +59,16 @@ namespace CineStreamCR.DAL.Repositories.Categories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> DeleteCategory(int id)
+        public async Task<bool> DeleteCategory(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _context.Categories.FindAsync(id);
+
+            if (entity == null)
+                return false;
+
+            _context.Categories.Remove(entity);
+
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
