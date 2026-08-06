@@ -44,13 +44,13 @@ builder.Services.AddControllersWithViews();
 // Register EF Core DbContext (SQLServer). Update the connection string in appsettings.json
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider
-        .GetRequiredService<ProyectoDBContext>();
+//using (var scope = app.Services.CreateScope())
+//{
+//    var db = scope.ServiceProvider
+//        .GetRequiredService<ProyectoDBContext>();
 
-    db.Database.Migrate();
-}
+//    db.Database.Migrate();
+//}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
