@@ -17,6 +17,7 @@ namespace CineStreamCR.BLL.DTO.WatchList
     // Película dentro de un WatchList (por si usamos cards para presentarlos).
     public class WatchListMovieDTO
     {
+        public int WatchListId { get; set; }
         public int MovieId { get; set; }
         public string Title { get; set; } = string.Empty;
         public string PosterImg { get; set; } = string.Empty;

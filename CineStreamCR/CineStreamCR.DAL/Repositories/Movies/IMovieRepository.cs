@@ -9,6 +9,7 @@ namespace CineStreamCR.DAL.Repositories.Movies
         Task<List<Entities.Movies>> GetMovies();
 
         Task<Entities.Movies?> GetMovieById(int id);
+        Task<Entities.Movies?> GetMovieByTitle(string title);
 
         Task<bool> CreateMovie(Entities.Movies movie);
 

@@ -106,5 +106,11 @@ namespace CineStreamCR.DAL.Repositories.Movies
 
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<Entities.Movies?> GetMovieByTitle(string title)
+        {
+            return await _context.Movies
+                .FirstOrDefaultAsync(m => m.Title == title && m.IsActive == 1);
+        }
     }
 }
