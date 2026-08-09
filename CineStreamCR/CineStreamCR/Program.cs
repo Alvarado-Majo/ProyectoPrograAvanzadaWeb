@@ -1,6 +1,7 @@
 using CineStreamCR.BLL;
 using CineStreamCR.BLL.Services.Actor;
 using CineStreamCR.BLL.Services.Director;
+using CineStreamCR.BLL.Services.WatchList;
 using CineStreamCR.DAL.Data;
 using CineStreamCR.DAL.Repositories.Actors;
 using CineStreamCR.DAL.Repositories.Categories;
@@ -35,6 +36,8 @@ builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
 // Servicios
 builder.Services.AddScoped<IActorService, ActorService>();
 builder.Services.AddScoped<IDirectorService, DirectorService>();
+builder.Services.AddScoped<IWatchListService, WatchListService>();
+builder.Services.AddScoped<IWatchListMovieService, WatchListMovieService>();
 builder.Services.AddAutoMapper(cfg => { }, typeof(ClassMapping));
 
 // Add services to the container.

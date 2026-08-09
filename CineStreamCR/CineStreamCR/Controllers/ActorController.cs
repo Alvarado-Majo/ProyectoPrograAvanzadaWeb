@@ -38,7 +38,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-        [AllowAnonymous]
+
         [HttpGet]
         public async Task<IActionResult> GetActiveActors(byte isActive)
         {
@@ -46,7 +46,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-      //  [Authorize(Roles = "Admin")]
+
         [HttpGet]
         public async Task<IActionResult> GetActorById(int id)
         {
@@ -57,7 +57,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-       // [Authorize(Roles = "Admin")]
+
         [HttpGet]
         public async Task<IActionResult> GetActorByName(string firstName, string lastName)
         {
@@ -68,7 +68,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-        [AllowAnonymous]
+
         [HttpGet]
         public async Task<IActionResult> GetActorsByMovie(int movieId)
         {
@@ -128,7 +128,7 @@ namespace CineStreamCR.Controllers
             return View("~/Views/Actor/EditActor.cshtml", result.Dato);
         }
 
-       // [Authorize(Roles = "Admin")]
+
         [HttpPost]
         public async Task<IActionResult> EditActor(int id, CreateActorDTO actorDTO, IFormFile? pictureFile)
         {
@@ -155,8 +155,7 @@ namespace CineStreamCR.Controllers
             if (!result.EsCorrecto)
                 return BadRequest(result);
 
-            // Antes: TempData + RedirectToAction devolvía HTML en vez de JSON
-            // y rompía el AJAX de actor.js (esperaba respuesta.esCorrecto).
+        
             return Json(result);
         }
 

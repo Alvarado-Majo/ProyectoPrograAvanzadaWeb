@@ -57,19 +57,13 @@ namespace CineStreamCR.BLL.Services.WatchList
             answer.mensaje = "Película añadida a la lista de deseos.";
             return answer;
         }
-        public async Task<Answer<WatchListMovieDTO>> GetByMovieId(int movieId)
+        public async Task<Answer<List<WatchListMovieDTO>>> GetByMovieId(int movieId)
         {
-            var answer = new Answer<WatchListMovieDTO>();
-            var watchListMovie = await _watchListMovieRepository.GetByMovieId(movieId);
-            if (watchListMovie != null) 
-                {  answer.EsCorrecto = false; 
-                    answer.mensaje = "No se encontró la película en ninguna lista de deseos."; 
-                    return answer; 
-                }
+            var answer = new Answer<List<WatchListMovieDTO>>();
+            var watchListMovies = await _watchListMovieRepository.GetByMovieId(movieId);
             answer.EsCorrecto = true;
-            answer.mensaje = "Película encontrada en la lista de deseos.";
-            answer.Dato = _mapper.Map<WatchListMovieDTO>(watchListMovie);
-            
+            answer.mensaje = "Consulta realizada correctamente.";
+            answer.Dato = _mapper.Map<List<WatchListMovieDTO>>(watchListMovies);
             return answer;
         }
 
@@ -77,10 +71,11 @@ namespace CineStreamCR.BLL.Services.WatchList
         {
             var answer = new Answer<WatchListMovieDTO?>();
             var watchListMovie = await _watchListMovieRepository.GetByWatchListAndMovie(watchListId, movieId);
-            if (watchListMovie != null)
+            if (watchListMovie == null)
             {
                 answer.EsCorrecto = false;
                 answer.mensaje = "No se encontró la película en la lista.";
+                answer.codigo = 404;
                 return answer;
             }
             answer.EsCorrecto = true;
@@ -92,7 +87,7 @@ namespace CineStreamCR.BLL.Services.WatchList
         public async Task<Answer<List<WatchListMovieDTO>>> GetByWatchListId(int watchListId)
         {
             var answer = new Answer<List<WatchListMovieDTO>>();
-            var lista = _watchListMovieRepository.GetByWatchListId(watchListId);
+            var lista = await _watchListMovieRepository.GetByWatchListId(watchListId);
             answer.Dato = _mapper.Map<List<WatchListMovieDTO>>(lista);
             answer.EsCorrecto = true;
             return answer;
@@ -101,16 +96,28 @@ namespace CineStreamCR.BLL.Services.WatchList
         public async Task<Answer<bool>> RemoveMovieFromWatchList(int watchListId, int movieId)
         {
             var answer = new Answer<bool>();
-            var watchListMovie = _watchListMovieRepository.GetByWatchListAndMovie(watchListId, movieId);
-            if (watchListMovie != null) {
+            var watchListMovie = await _watchListMovieRepository.GetByWatchListAndMovie(watchListId, movieId);
+            if (watchListMovie == null)
+            {
                 answer.EsCorrecto = false;
                 answer.mensaje = "No se encontró la película en la lista de deseos.";
                 answer.codigo = 404;
                 return answer;
             }
+
+            var removed = await _watchListMovieRepository.RemoveMovieFromWatchList(watchListId, movieId);
+            if (!removed)
+            {
+                answer.EsCorrecto = false;
+                answer.mensaje = "Error al eliminar la película de la lista de deseos.";
+                answer.codigo = 500;
+                return answer;
+            }
+
             answer.EsCorrecto = true;
             answer.mensaje = "Película eliminada de la lista de deseos.";
-            answer.codigo = 200 ;
+            answer.codigo = 200;
+            answer.Dato = true;
             return answer;
         }
     }

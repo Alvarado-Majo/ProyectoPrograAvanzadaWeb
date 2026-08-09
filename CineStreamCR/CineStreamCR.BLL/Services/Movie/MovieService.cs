@@ -30,14 +30,14 @@ namespace CineStreamCR.BLL.Services.Movie
 
         public async Task<Answer<MovieDTO>> GetCreateMovie(CreateMovieDTO movie)
         {
-            var answer = new Answer<MovieDTO>();
             if (movie == null)
             {
-
-                answer.EsCorrecto = false;
-                answer.mensaje = "Movie inválido.";
-                answer.codigo = 400;
-                
+                return new Answer<MovieDTO>
+                {
+                    EsCorrecto = false,
+                    mensaje = "Movie inválido.",
+                    codigo = 400
+                };
             }
 
             var existing = await _movieRepository.GetMovieByTitle(movie.Title);
@@ -73,9 +73,9 @@ namespace CineStreamCR.BLL.Services.Movie
             };
         }
 
-        public async Task<Answer<bool?>> GetDeleteMovie(int id)
+        public async Task<Answer<bool>> GetDeleteMovie(int id)
         {
-            var answer = new Answer<bool?>();
+            var answer = new Answer<bool>();
             bool result = await _movieRepository.DeleteMovie(id);
             if (result)
             {
@@ -102,7 +102,7 @@ namespace CineStreamCR.BLL.Services.Movie
                 return answer;
             }
             answer.EsCorrecto = true;
-            answer.Dato = _mapper.Map<MovieDTO?>(movieEntity    );
+            answer.Dato = _mapper.Map<MovieDTO?>(movieEntity);
             return answer;
         }
 
@@ -117,13 +117,13 @@ namespace CineStreamCR.BLL.Services.Movie
                 answer.codigo = 404;
                 return answer;
 
-            } 
+            }
             answer.EsCorrecto = true;
             answer.Dato = _mapper.Map<MovieDTO?>(movieEntity);
             return answer;
         }
 
-        public async    Task<Answer<MovieDTO?>> GetMovieDetallesById(int id)
+        public async Task<Answer<MovieDTO?>> GetMovieDetallesById(int id)
         {
             throw new NotImplementedException();
         }
@@ -146,7 +146,7 @@ namespace CineStreamCR.BLL.Services.Movie
             return answer;
         }
 
-        public async Task<Answer<MovieDTO>> GetUpdateMovie(int id,CreateMovieDTO movie)
+        public async Task<Answer<MovieDTO>> GetUpdateMovie(int id, CreateMovieDTO movie)
         {
             var answer = await _movieRepository.GetMovieById(id);
             if (answer == null)
@@ -169,7 +169,7 @@ namespace CineStreamCR.BLL.Services.Movie
                 };
             }
             answer.Title = movie.Title;
-           answer.Synopsis = movie.Synopsis;
+            answer.Synopsis = movie.Synopsis;
             answer.ReleaseYear = movie.ReleaseYear;
             answer.DurationMinutes = movie.DurationMinutes;
             answer.PosterImg = movie.PosterImg;

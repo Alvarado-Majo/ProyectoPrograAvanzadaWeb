@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.bll\\services\\watchlist\\iwatchlistmovieservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|solutionrelative:cinestreamcr.bll\\services\\watchlist\\iwatchlistmovieservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E844E8E9-001C-4A86-A1B5-C82C875A5BFD}|CineStreamCR.DAL\\CineStreamCR.DAL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.dal\\repositories\\actors\\imovieactorsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E844E8E9-001C-4A86-A1B5-C82C875A5BFD}|CineStreamCR.DAL\\CineStreamCR.DAL.csproj|solutionrelative:cinestreamcr.dal\\repositories\\actors\\imovieactorsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.bll\\services\\watchlist\\watchlistmovieservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|solutionrelative:cinestreamcr.bll\\services\\watchlist\\watchlistmovieservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.bll\\services\\watchlist\\iwatchlistmovieservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|solutionrelative:cinestreamcr.bll\\services\\watchlist\\iwatchlistmovieservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.bll\\dto\\watchlist\\watchlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -71,6 +75,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "IMovieActorsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\Repositories\\Actors\\IMovieActorsRepository.cs",
+              "RelativeDocumentMoniker": "CineStreamCR.DAL\\Repositories\\Actors\\IMovieActorsRepository.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\Repositories\\Actors\\IMovieActorsRepository.cs",
+              "RelativeToolTip": "CineStreamCR.DAL\\Repositories\\Actors\\IMovieActorsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-09T02:30:45.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "IWatchListMovieService.cs",
               "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\WatchList\\IWatchListMovieService.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\WatchList\\IWatchListMovieService.cs",
@@ -78,12 +95,11 @@
               "RelativeToolTip": "CineStreamCR.BLL\\Services\\WatchList\\IWatchListMovieService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-08T05:21:43.332Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-08T05:21:43.332Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "WatchListDTO.cs",
               "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\DTO\\WatchList\\WatchListDTO.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\DTO\\WatchList\\WatchListDTO.cs",
@@ -91,8 +107,7 @@
               "RelativeToolTip": "CineStreamCR.BLL\\DTO\\WatchList\\WatchListDTO.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAswCQAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-08T05:15:51.965Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-08T05:15:51.965Z"
             },
             {
               "$type": "Document",
@@ -102,7 +117,7 @@
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\WatchList\\WatchListMovieService.cs",
               "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\WatchList\\WatchListMovieService.cs",
               "RelativeToolTip": "CineStreamCR.BLL\\Services\\WatchList\\WatchListMovieService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAkwBIAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-08T05:08:06.825Z",
               "EditorCaption": ""

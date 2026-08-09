@@ -30,10 +30,20 @@ namespace CineStreamCR.BLL.Services.WatchList
             if (!usuarioWishList.Any())
             {
                 var newWatchList = _mapper.Map<WatchLists>(watchList);
-                var createdWatchList = await _watchListRepository.CreateWatchList(newWatchList);
+                newWatchList.CreatedAt = DateTime.Now;
+                var created = await _watchListRepository.CreateWatchList(newWatchList);
+
+                if (!created)
+                {
+                    answer.EsCorrecto = false;
+                    answer.mensaje = "Error al crear la watchlist.";
+                    answer.codigo = 500;
+                    return answer;
+                }
+
                 answer.EsCorrecto = true;
                 answer.mensaje = "Watchlist created successfully.";
-                answer.Dato = _mapper.Map<WatchListDTO>(createdWatchList);
+                answer.Dato = _mapper.Map<WatchListDTO>(newWatchList);
             }
             else
             {
@@ -107,7 +117,7 @@ namespace CineStreamCR.BLL.Services.WatchList
 
         public async Task<Answer<WatchListDTO>> UpdateWatchList(WatchListDTO watchList)
         {
-           var answer = new Answer<WatchListDTO>();
+            var answer = new Answer<WatchListDTO>();
             var existingWatchList = await _watchListRepository.GetWatchListById(watchList.WatchListId);
             if (existingWatchList == null)
             {
@@ -117,11 +127,20 @@ namespace CineStreamCR.BLL.Services.WatchList
             }
             // Update the watchlist properties
             existingWatchList.Name = watchList.Name;
-            existingWatchList.UserId = watchList.UserId;
-            var updatedWatchList = await _watchListRepository.UpdateWatchList(existingWatchList);
+            existingWatchList.Description = watchList.Description;
+
+            var updated = await _watchListRepository.UpdateWatchList(existingWatchList);
+            if (!updated)
+            {
+                answer.EsCorrecto = false;
+                answer.mensaje = "Error al actualizar la watchlist.";
+                answer.codigo = 500;
+                return answer;
+            }
+
             answer.EsCorrecto = true;
             answer.mensaje = "Watchlist updated successfully.";
-            answer.Dato = _mapper.Map<WatchListDTO>(updatedWatchList);
+            answer.Dato = _mapper.Map<WatchListDTO>(existingWatchList);
             return answer;
         }
     }
