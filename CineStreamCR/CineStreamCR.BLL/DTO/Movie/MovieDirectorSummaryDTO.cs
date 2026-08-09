@@ -15,8 +15,9 @@
     {
         public int MovieId { get; set; }
         public int ActorId { get; set; }
-        public string FullName { get; set; } = string.Empty;
-        public string PictureImg { get; set; } = string.Empty;
+        public string ActorFullName { get; set; } = string.Empty;
+        public string ActorPictureImg { get; set; } = string.Empty;
+        public string MovieTitle { get; set; } = string.Empty;
         public string CharacterName { get; set; } = string.Empty;
     }
 

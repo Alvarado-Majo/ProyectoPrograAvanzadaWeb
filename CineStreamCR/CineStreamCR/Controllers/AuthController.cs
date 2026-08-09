@@ -1,6 +1,5 @@
 ﻿using CineStreamCR.BLL.DTO.Auth;
 using CineStreamCR.BLL.Services.Auth;
-using CineStreamCR.BLL.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StreamingApp.Controllers
