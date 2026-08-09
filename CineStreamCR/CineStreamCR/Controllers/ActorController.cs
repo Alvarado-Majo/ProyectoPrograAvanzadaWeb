@@ -1,4 +1,5 @@
 ﻿using CineStreamCR.BLL.DTO.Actor;
+using CineStreamCR.BLL.DTO.Movie;
 using CineStreamCR.BLL.Services.Actor;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,29 +9,28 @@ namespace CineStreamCR.Controllers
     public class ActorController : Controller
     {
         private readonly IActorService _actorService;
+        private readonly IMovieActorService _movieActorService;
 
-        public ActorController(IActorService actorService)
+        public ActorController(IActorService actorService, IMovieActorService movieActorService)
         {
             _actorService = actorService;
+            _movieActorService = movieActorService;
         }
 
 
         //  VIEWS
 
 
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult Actors()
         {
             return View();
         }
 
-       
+
 
         //  READ (JSON)
 
-
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetActors()
         {
@@ -38,14 +38,12 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetActiveActors(byte isActive)
         {
             var result = await _actorService.GetActiveActorsAsync(isActive);
             return Json(result);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> GetActorById(int id)
@@ -57,7 +55,6 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetActorByName(string firstName, string lastName)
         {
@@ -68,7 +65,6 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetActorsByMovie(int movieId)
         {
@@ -76,7 +72,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-  
+
         //  CREATE
 
         [HttpPost]
@@ -128,7 +124,6 @@ namespace CineStreamCR.Controllers
             return View("~/Views/Actor/EditActor.cshtml", result.Dato);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> EditActor(int id, CreateActorDTO actorDTO, IFormFile? pictureFile)
         {
@@ -155,11 +150,11 @@ namespace CineStreamCR.Controllers
             if (!result.EsCorrecto)
                 return BadRequest(result);
 
-        
+            
             return Json(result);
         }
 
-     
+
         //  DELETE
 
         [HttpPost]
@@ -169,6 +164,49 @@ namespace CineStreamCR.Controllers
                 return BadRequest(ModelState);
 
             var result = await _actorService.GetDeleteActorAsync(id);
+
+            if (!result.EsCorrecto)
+                return NotFound(result);
+
+            return Json(result);
+        }
+
+
+        //  ASIGNACIÓN A PELÍCULAS (Endpoints de movieActors)
+        [HttpGet]
+        public async Task<IActionResult> GetMoviesByActor(int actorId)
+        {
+            var result = await _movieActorService.GetMoviesByActorId(actorId);
+            return Json(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AssignActorToMovie(AssignActorToMovieDTO dto)
+        {
+            var result = await _movieActorService.AssignActorToMovie(dto);
+
+            if (!result.EsCorrecto)
+                return BadRequest(result);
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCharacterName(int movieId, int actorId, string characterName)
+        {
+            var result = await _movieActorService.UpdateCharacterName(movieId, actorId, characterName);
+
+            if (!result.EsCorrecto)
+                return BadRequest(result);
+
+            return Json(result);
+        }
+
+    
+        [HttpPost]
+        public async Task<IActionResult> RemoveActorFromMovie(int movieId, int actorId)
+        {
+            var result = await _movieActorService.RemoveActorFromMovie(movieId, actorId);
 
             if (!result.EsCorrecto)
                 return NotFound(result);

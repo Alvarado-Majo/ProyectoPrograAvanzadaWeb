@@ -8,30 +8,28 @@ namespace CineStreamCR.Controllers
     public class DirectorController : Controller
     {
         private readonly IDirectorService _directorService;
+        private readonly IMovieDirectorService _movieDirectorService;
 
-        public DirectorController(IDirectorService directorService)
+        public DirectorController(IDirectorService directorService, IMovieDirectorService movieDirectorService)
         {
             _directorService = directorService;
+            _movieDirectorService = movieDirectorService;
         }
 
 
         //  VIEWS
 
-
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult Directors()
         {
             return View("~/Views/Director/Directors.cshtml");
         }
 
-       
+
 
 
         //  READ (JSON)
-    
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetDirectors()
         {
@@ -39,7 +37,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-        [AllowAnonymous]
+
         [HttpGet]
         public async Task<IActionResult> GetActiveDirectors(byte isActive)
         {
@@ -47,7 +45,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-        //[Authorize(Roles = "Admin")]
+
         [HttpGet]
         public async Task<IActionResult> GetDirectorById(int id)
         {
@@ -58,7 +56,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-       // [Authorize(Roles = "Admin")]
+
         [HttpGet]
         public async Task<IActionResult> GetDirectorByName(string firstName, string lastName)
         {
@@ -69,7 +67,7 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
-        [AllowAnonymous]
+
         [HttpGet]
         public async Task<IActionResult> GetDirectorsByMovie(int movieId)
         {
@@ -79,9 +77,7 @@ namespace CineStreamCR.Controllers
 
 
         //  CREATE
-
-
-        //[Authorize(Roles = "Admin")]
+        //control de imagenes para el director, se guarda en la carpeta wwwroot/images/directors y se guarda la ruta en la base de datos
         [HttpPost]
         public async Task<IActionResult> CreateDirector(CreateDirectorDTO directorDTO, IFormFile? pictureFile)
         {
@@ -117,8 +113,6 @@ namespace CineStreamCR.Controllers
 
         //  EDIT
 
-
-       // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditDirector(int id)
         {
@@ -133,7 +127,7 @@ namespace CineStreamCR.Controllers
             return View("~/Views/Director/EditDirector.cshtml", result.Dato);
         }
 
-       // [Authorize(Roles = "Admin")]
+
         [HttpPost]
         public async Task<IActionResult> EditDirector(int id, CreateDirectorDTO directorDTO, IFormFile? pictureFile)
         {
@@ -167,11 +161,9 @@ namespace CineStreamCR.Controllers
             return RedirectToAction(nameof(Directors));
         }
 
-     
-        //  DELETE
-        
 
-        //[Authorize(Roles = "Admin")]
+        //  DELETE
+
         [HttpPost]
         public async Task<IActionResult> DeleteDirector(int id)
         {
@@ -179,6 +171,41 @@ namespace CineStreamCR.Controllers
                 return BadRequest(ModelState);
 
             var result = await _directorService.GetDeleteDirectorAsync(id);
+
+            if (!result.EsCorrecto)
+                return NotFound(result);
+
+            return Json(result);
+        }
+
+
+
+
+        //  ASIGNACIÓN A PELÍCULAS (endpoints de movieDirectors)
+
+        [HttpGet]
+        public async Task<IActionResult> GetMoviesByDirector(int directorId)
+        {
+            var result = await _movieDirectorService.GetMoviesByDirectorId(directorId);
+            return Json(result);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AssignDirectorToMovie(AssignDirectorToMovieDTO dto)
+        {
+            var result = await _movieDirectorService.AssignDirectorToMovie(dto);
+
+            if (!result.EsCorrecto)
+                return BadRequest(result);
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveDirectorFromMovie(int movieId, int directorId)
+        {
+            var result = await _movieDirectorService.RemoveDirectorFromMovie(movieId, directorId);
 
             if (!result.EsCorrecto)
                 return NotFound(result);
