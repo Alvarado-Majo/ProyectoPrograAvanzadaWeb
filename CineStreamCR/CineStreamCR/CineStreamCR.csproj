@@ -11,8 +11,4 @@
     <ProjectReference Include="..\CineStreamCR.BLL\CineStreamCR.BLL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\videos\" />
-  </ItemGroup>
-
 </Project>
