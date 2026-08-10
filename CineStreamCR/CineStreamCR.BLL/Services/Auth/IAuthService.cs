@@ -7,6 +7,6 @@ namespace CineStreamCR.BLL.Services.Auth
     {
         Task<Users?> LoginAsync(LoginDTO loginDTO);
 
-        Task<bool> RegisterAsync(Users user);
+        Task<bool> RegisterAsync(RegisterDTO registerDTO);
     }
 }

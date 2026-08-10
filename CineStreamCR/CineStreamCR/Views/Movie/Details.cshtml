@@ -1,0 +1,467 @@
+﻿@model CineStreamCR.BLL.DTO.Movie.MovieDetailDTO
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="movie-detail">
+    @if (TempData["Success"] != null)
+    {
+        <div class="movie-alert movie-alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="movie-alert movie-alert-error">
+            @TempData["Error"]
+        </div>
+    }
+    <div class="movie-hero"
+         style="background-image: url('@Model.PosterImg');">
+
+        <div class="movie-overlay">
+
+            <div class="movie-content">
+
+                <img src="@Model.PosterImg"
+                     class="movie-poster"
+                     alt="@Model.Title" />
+
+                <div class="movie-info">
+
+                    <h1>@Model.Title</h1>
+
+                    <div class="movie-meta">
+
+                        <span>@Model.ReleaseYear</span>
+
+                        <span>@Model.DurationMinutes min</span>
+
+                        @if (Model.MovieRating.HasValue)
+                        {
+                            <span>
+                                ⭐ @Model.MovieRating.Value.ToString("0.0")
+                            </span>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(Model.Nationality))
+                        {
+                            <span>@Model.Nationality</span>
+                        }
+
+                    </div>
+
+                    <div class="movie-buttons">
+
+                        <button type="button"
+                                class="btn-play">
+                            ▶ Play
+                        </button>
+
+                        <form asp-controller="WatchList"
+                              asp-action="AddMovie"
+                              method="post"
+                              class="add-list-form">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="movieId"
+                                   value="@Model.MovieId" />
+
+                            <button type="submit"
+                                    class="btn-list">
+                                + My List
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Synopsis))
+                    {
+                        <div class="movie-synopsis">
+                            <h3>Synopsis</h3>
+
+                            <p>
+                                @Model.Synopsis
+                            </p>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <section class="movie-bottom">
+
+        <div class="cast-section">
+
+            <h2>Cast</h2>
+
+            @if (Model.Cast != null && Model.Cast.Any())
+            {
+                <div class="cast-row">
+
+                    @foreach (var actor in Model.Cast.Take(4))
+                    {
+                        <div class="cast-card">
+
+                            @if (!string.IsNullOrWhiteSpace(actor.ActorPictureImg))
+                            {
+                                <img src="@actor.ActorPictureImg"
+                                     alt="@actor.ActorFullName" />
+                            }
+                            else
+                            {
+                                <div class="cast-placeholder"></div>
+                            }
+
+                            <div class="cast-name">
+                                @actor.ActorFullName
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(actor.CharacterName))
+                            {
+                                <div class="cast-character">
+                                    @actor.CharacterName
+                                </div>
+                            }
+
+                        </div>
+                    }
+
+                </div>
+
+                @if (Model.Cast.Count > 4)
+                {
+                    <button type="button"
+                            class="btn-more">
+                        View More
+                    </button>
+                }
+            }
+            else
+            {
+                <p class="empty-info">
+                    No cast information available.
+                </p>
+            }
+
+        </div>
+
+
+        <div class="movie-extra">
+
+            @if (Model.Categories != null && Model.Categories.Any())
+            {
+                <div class="extra-line">
+                    <span class="extra-label">
+                        Genres:
+                    </span>
+
+                    <span>
+                        @string.Join(", ",
+                            Model.Categories.Select(x => x.Name))
+                    </span>
+                </div>
+            }
+
+            @if (Model.Directors != null && Model.Directors.Any())
+            {
+                <div class="extra-line">
+                    <span class="extra-label">
+                        Directors:
+                    </span>
+
+                    <span>
+                        @string.Join(", ",
+                            Model.Directors.Select(x => x.FullName))
+                    </span>
+                </div>
+            }
+
+        </div>
+
+    </section>
+
+</section>
+
+
+<style>
+    :root {
+        --red: #e50914;
+        --black: #141414;
+        --black-soft: #181818;
+        --white: #ffffff;
+        --gray: #b3b3b3;
+        --gray-dark: #777;
+    }
+
+    .movie-detail {
+        background: var(--black);
+        color: var(--white);
+        min-height: 100vh;
+    }
+
+    /* HERO */
+    .movie-hero {
+        min-height: calc(100vh - 68px);
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+    .movie-overlay {
+        min-height: calc(100vh - 68px);
+        background: linear-gradient( 90deg, rgba(20,20,20,.98) 0%, rgba(20,20,20,.92) 35%, rgba(20,20,20,.62) 68%, rgba(20,20,20,.25) 100% );
+        padding: 70px 5%;
+        display: flex;
+        align-items: center;
+    }
+
+    .movie-content {
+        display: flex;
+        gap: 35px;
+        align-items: flex-start;
+        max-width: 1100px;
+        width: 100%;
+    }
+
+    .movie-poster {
+        width: 260px;
+        min-width: 260px;
+        border-radius: 10px;
+        object-fit: cover;
+        box-shadow: 0 20px 50px rgba(0,0,0,.8);
+        border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .movie-info {
+        padding-top: 15px;
+        max-width: 580px;
+    }
+
+        .movie-info h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin: 0 0 15px;
+            line-height: 1.05;
+            color: var(--white);
+        }
+
+    .movie-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        color: var(--gray);
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    /* BUTTONS */
+    .movie-buttons {
+        display: flex;
+        gap: 15px;
+        margin: 25px 0;
+    }
+
+    .btn-play,
+    .btn-list {
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: transform .15s, opacity .2s, background .2s;
+    }
+
+    .btn-play {
+        background: var(--white);
+        color: #000;
+    }
+
+    .btn-list {
+        background: var(--red);
+        color: var(--white);
+    }
+
+        .btn-play:hover,
+        .btn-list:hover {
+            transform: scale(1.03);
+            opacity: .88;
+        }
+
+    /* SYNOPSIS */
+    .movie-synopsis {
+        max-width: 520px;
+        margin-top: 30px;
+        padding-left: 16px;
+        border-left: 4px solid var(--red);
+    }
+
+        .movie-synopsis h3 {
+            margin: 0 0 8px;
+            font-size: 1.1rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .movie-synopsis p {
+            margin: 0;
+            color: #ddd;
+            font-size: .95rem;
+            line-height: 1.6;
+        }
+
+    /* LOWER SECTION */
+    .movie-bottom {
+        background: var(--black-soft);
+        color: var(--white);
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 50px;
+        padding: 32px 5% 48px;
+        border-top: 2px solid var(--red);
+    }
+
+    /* CAST */
+    .cast-section h2 {
+        font-size: 1.35rem;
+        margin: 0 0 18px;
+        color: var(--white);
+        font-weight: 700;
+    }
+
+    .cast-row {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .cast-card {
+        width: 125px;
+        transition: transform .2s;
+    }
+
+        .cast-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .cast-card img,
+        .cast-placeholder {
+            width: 125px;
+            height: 155px;
+            display: block;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #222;
+            border: 1px solid rgba(255,255,255,.12);
+        }
+
+    .cast-name {
+        margin-top: 8px;
+        color: var(--white);
+        font-size: .88rem;
+        font-weight: 700;
+    }
+
+    .cast-character {
+        margin-top: 2px;
+        color: var(--gray);
+        font-size: .78rem;
+    }
+
+    /* VIEW MORE */
+    .btn-more {
+        margin-top: 20px;
+        padding: 7px 18px;
+        border: 1px solid var(--red);
+        border-radius: 20px;
+        background: transparent;
+        color: var(--white);
+        font-size: .85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background .2s, color .2s;
+    }
+
+        .btn-more:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+
+    /* EXTRA INFO */
+    .movie-extra {
+        padding-top: 5px;
+        font-size: .93rem;
+        line-height: 1.6;
+    }
+
+    .extra-line {
+        margin-bottom: 14px;
+    }
+
+    .extra-label {
+        color: var(--red);
+        margin-right: 5px;
+        font-weight: 700;
+    }
+
+    .extra-line span:not(.extra-label) {
+        color: var(--white);
+    }
+
+    .empty-info {
+        color: var(--gray);
+    }
+
+    /* MOBILE */
+    @@media (max-width: 768px) {
+
+        .movie-overlay {
+            padding: 50px 6%;
+        }
+
+        .movie-content {
+            flex-direction: column;
+        }
+
+        .movie-poster {
+            width: 180px;
+            min-width: 180px;
+        }
+
+        .movie-info h1 {
+            font-size: 2.5rem;
+        }
+
+        .movie-bottom {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .movie-synopsis {
+            max-width: 100%;
+        }
+
+        .cast-card {
+            width: 105px;
+        }
+
+            .cast-card img,
+            .cast-placeholder {
+                width: 105px;
+                height: 135px;
+            }
+    }
+</style>

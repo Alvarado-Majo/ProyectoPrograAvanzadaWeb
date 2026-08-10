@@ -110,6 +110,63 @@ namespace CineStreamCR.BLL
             CreateMap<DAL.Entities.MovieCategories, MovieCategoryDTO>()
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : null))
                 .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie != null ? src.Movie.Title : null));
+
+
+            // MovieDirectorSummaryDTO
+            CreateMap<DAL.Entities.MovieDirectors, MovieDirectorSummaryDTO>()
+                .ForMember(dest => dest.FullName,
+                    opt => opt.MapFrom(src =>
+                        src.Director != null
+                            ? $"{src.Director.FirstName} {src.Director.LastName}"
+                            : string.Empty))
+                .ForMember(dest => dest.PictureImg,
+                    opt => opt.MapFrom(src =>
+                        src.Director != null
+                            ? src.Director.PictureImg ?? string.Empty
+                            : string.Empty))
+                .ForMember(dest => dest.MovieTitle,
+                    opt => opt.MapFrom(src =>
+                        src.Movie != null
+                            ? src.Movie.Title
+                            : string.Empty));
+
+
+            // MovieCastMemberDTO
+            CreateMap<DAL.Entities.MovieActors, MovieCastMemberDTO>()
+                .ForMember(dest => dest.ActorFullName,
+                    opt => opt.MapFrom(src =>
+                        src.Actor != null
+                            ? $"{src.Actor.FirstName} {src.Actor.LastName}"
+                            : string.Empty))
+                .ForMember(dest => dest.ActorPictureImg,
+                    opt => opt.MapFrom(src =>
+                        src.Actor != null
+                            ? src.Actor.PictureImg ?? string.Empty
+                            : string.Empty))
+                .ForMember(dest => dest.MovieTitle,
+                    opt => opt.MapFrom(src =>
+                        src.Movie != null
+                            ? src.Movie.Title
+                            : string.Empty));
+
+
+            // MovieCategorySummaryDTO
+            CreateMap<DAL.Entities.MovieCategories, MovieCategorySummaryDTO>()
+                .ForMember(dest => dest.Name,
+                    opt => opt.MapFrom(src =>
+                        src.Category != null
+                            ? src.Category.Name
+                            : string.Empty));
+
+
+            // Movie Detail
+            CreateMap<DAL.Entities.Movies, MovieDetailDTO>()
+                .ForMember(dest => dest.Directors,
+                    opt => opt.MapFrom(src => src.MovieDirectors))
+                .ForMember(dest => dest.Cast,
+                    opt => opt.MapFrom(src => src.MovieActors))
+                .ForMember(dest => dest.Categories,
+                    opt => opt.MapFrom(src => src.MovieCategories));
         }
 
     }

@@ -1,4 +1,5 @@
 using CineStreamCR.BLL;
+using CineStreamCR.BLL.Services.Movie;
 using CineStreamCR.BLL.Services.Actor;
 using CineStreamCR.BLL.Services.Auth;
 using CineStreamCR.BLL.Services.Category;
@@ -47,13 +48,22 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IMovieActorService, MovieActorService>();
 builder.Services.AddScoped<IMovieDirectorService, MovieDirectorService>();
 builder.Services.AddScoped<IMovieCategoryService, MovieCategoryService>();
+
 builder.Services.AddAutoMapper(cfg => { }, typeof(ClassMapping));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(2);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 
 // Register EF Core DbContext (SQLServer). Update the connection string in appsettings.json
@@ -77,7 +87,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapStaticAssets();

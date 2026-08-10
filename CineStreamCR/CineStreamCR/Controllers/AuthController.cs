@@ -19,6 +19,34 @@ namespace StreamingApp.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterDTO registerDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(registerDTO);
+            }
+
+            var registered = await _authService.RegisterAsync(registerDTO);
+
+            if (!registered)
+            {
+                ViewBag.Error = "An account with this email already exists.";
+                return View(registerDTO);
+            }
+
+            TempData["Success"] = "Account created successfully. You can now sign in.";
+
+            return RedirectToAction("Login");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {

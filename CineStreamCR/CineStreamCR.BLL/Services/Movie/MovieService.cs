@@ -123,9 +123,26 @@ namespace CineStreamCR.BLL.Services.Movie
             return answer;
         }
 
-        public async Task<Answer<MovieDTO?>> GetMovieDetallesById(int id)
+        public async Task<Answer<MovieDetailDTO?>> GetMovieDetailsById(int id)
         {
-            throw new NotImplementedException();
+            var answer = new Answer<MovieDetailDTO?>();
+
+            var movieEntity =
+                await _movieRepository.GetMovieDetailsById(id);
+
+            if (movieEntity == null)
+            {
+                answer.EsCorrecto = false;
+                answer.mensaje = "Movie not found.";
+                answer.codigo = 404;
+                return answer;
+            }
+
+            answer.EsCorrecto = true;
+            answer.Dato = _mapper.Map<MovieDetailDTO>(movieEntity);
+            answer.codigo = 200;
+
+            return answer;
         }
 
         public async Task<Answer<List<MovieDTO>>> GetMoviesByDirectorId(int directorId)

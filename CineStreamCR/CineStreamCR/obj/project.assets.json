@@ -1187,23 +1187,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\XSF\\.nuget\\packages\\": {},
+    "C:\\Users\\maria\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
+      "projectUniqueName": "C:\\Users\\maria\\OneDrive\\Documentos\\GitHub\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
       "projectName": "CineStreamCR",
-      "projectPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
-      "packagesPath": "C:\\Users\\XSF\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\obj\\",
+      "projectPath": "C:\\Users\\maria\\OneDrive\\Documentos\\GitHub\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
+      "packagesPath": "C:\\Users\\maria\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\maria\\OneDrive\\Documentos\\GitHub\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\XSF\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\maria\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1212,7 +1212,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1220,8 +1219,8 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj": {
-              "projectPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj"
+            "C:\\Users\\maria\\OneDrive\\Documentos\\GitHub\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj": {
+              "projectPath": "C:\\Users\\maria\\OneDrive\\Documentos\\GitHub\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj"
             }
           }
         }
@@ -1261,7 +1260,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

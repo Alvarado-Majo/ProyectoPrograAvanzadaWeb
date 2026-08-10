@@ -19,7 +19,7 @@ namespace CineStreamCR.DAL.Repositories.Movies
 
         // Consultas específicas del negocio para usar después.
 
-        Task<Entities.Movies?> GetMovieDetallesById(int id);
+        Task<Entities.Movies?> GetMovieDetailsById(int id);
 
         Task<List<Entities.Movies>> GetMoviesByDirectorId(int directorId);
 

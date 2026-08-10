@@ -22,7 +22,7 @@ namespace CineStreamCR.BLL.Services.Movie
 
         // Consultas específicas del negocio para usar después.
 
-        Task<Answer<MovieDTO?>> GetMovieDetallesById(int id);
+        Task<Answer<MovieDetailDTO?>> GetMovieDetailsById(int id);
 
         Task<Answer<List<MovieDTO>>> GetMoviesByDirectorId(int directorId);
 

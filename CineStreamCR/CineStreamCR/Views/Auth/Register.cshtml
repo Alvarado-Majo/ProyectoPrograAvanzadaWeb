@@ -1,0 +1,280 @@
+﻿@model CineStreamCR.BLL.DTO.Auth.RegisterDTO
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="auth-brand">
+            CineStream<span>CR</span>
+        </div>
+
+        <h1>Create Account</h1>
+
+        <p class="auth-subtitle">
+            Join CineStreamCR and start watching.
+        </p>
+
+        <form asp-controller="Auth"
+              asp-action="Register"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary"></div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label asp-for="FirstName">First Name</label>
+
+                    <input asp-for="FirstName"
+                           class="auth-input"
+                           placeholder="Enter your first name" />
+
+                    <span asp-validation-for="FirstName"
+                          class="field-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LastName">Last Name</label>
+
+                    <input asp-for="LastName"
+                           class="auth-input"
+                           placeholder="Enter your last name" />
+
+                    <span asp-validation-for="LastName"
+                          class="field-error"></span>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+
+                <input asp-for="Email"
+                       class="auth-input"
+                       placeholder="Enter your email" />
+
+                <span asp-validation-for="Email"
+                      class="field-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+
+                <input asp-for="Password"
+                       class="auth-input"
+                       placeholder="Create a password" />
+
+                <span asp-validation-for="Password"
+                      class="field-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword">
+                    Confirm Password
+                </label>
+
+                <input asp-for="ConfirmPassword"
+                       class="auth-input"
+                       placeholder="Confirm your password" />
+
+                <span asp-validation-for="ConfirmPassword"
+                      class="field-error"></span>
+            </div>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="auth-error">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <button type="submit"
+                    class="btn-register">
+                Create Account
+            </button>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+
+            <a asp-controller="Auth"
+               asp-action="Login">
+                Sign In
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+    :root {
+        --red: #e50914;
+        --black: #141414;
+        --black-soft: #1f1f1f;
+        --white: #ffffff;
+        --gray: #b3b3b3;
+    }
+
+    .auth-page {
+        min-height: 100vh;
+        background: radial-gradient( circle at top, #2b0003 0%, #141414 45%, #000 100% );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 110px 20px 50px;
+    }
+
+    .auth-card {
+        width: 100%;
+        max-width: 520px;
+        background: rgba(0,0,0,.82);
+        padding: 42px;
+        border-radius: 12px;
+        box-shadow: 0 25px 60px rgba(0,0,0,.65);
+        border: 1px solid rgba(255,255,255,.08);
+        color: var(--white);
+    }
+
+    .auth-brand {
+        font-size: 1.6rem;
+        font-weight: 900;
+        margin-bottom: 22px;
+        color: var(--white);
+    }
+
+        .auth-brand span {
+            color: var(--red);
+        }
+
+    .auth-card h1 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 800;
+    }
+
+    .auth-subtitle {
+        margin: 8px 0 28px;
+        color: var(--gray);
+        font-size: .95rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 18px;
+    }
+
+        .form-group label {
+            font-size: .88rem;
+            color: #ddd;
+            font-weight: 600;
+        }
+
+    .auth-input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 14px;
+        border-radius: 6px;
+        border: 1px solid #444;
+        background: var(--black-soft);
+        color: var(--white);
+        outline: none;
+        font-size: .95rem;
+        transition: border-color .2s, box-shadow .2s;
+    }
+
+        .auth-input:focus {
+            border-color: var(--red);
+            box-shadow: 0 0 0 2px rgba(229,9,20,.18);
+        }
+
+    .field-error {
+        color: #ff5b63;
+        font-size: .78rem;
+    }
+
+    .validation-summary {
+        color: #ff5b63;
+        margin-bottom: 16px;
+        font-size: .85rem;
+    }
+
+    .auth-error {
+        background: rgba(229,9,20,.12);
+        border: 1px solid rgba(229,9,20,.45);
+        color: #ff6b72;
+        padding: 10px 12px;
+        border-radius: 6px;
+        margin-bottom: 16px;
+        font-size: .88rem;
+    }
+
+    .btn-register {
+        width: 100%;
+        border: none;
+        padding: 13px;
+        border-radius: 6px;
+        background: var(--red);
+        color: var(--white);
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform .15s, opacity .2s;
+    }
+
+        .btn-register:hover {
+            opacity: .9;
+            transform: translateY(-1px);
+        }
+
+    .login-link {
+        margin-top: 24px;
+        text-align: center;
+        color: var(--gray);
+        font-size: .9rem;
+    }
+
+        .login-link a {
+            color: var(--white);
+            font-weight: 700;
+            text-decoration: none;
+            margin-left: 4px;
+        }
+
+            .login-link a:hover {
+                color: var(--red);
+            }
+
+    @@media (max-width: 600px) {
+
+        .auth-card {
+            padding: 30px 22px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+    }
+
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

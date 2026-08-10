@@ -1,37 +1,101 @@
 ﻿using CineStreamCR.BLL.DTO.Movie;
+using CineStreamCR.BLL.Services.Category;
 using CineStreamCR.BLL.Services.Movie;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StreamingApp.Models;
 
 namespace CineStreamCR.Controllers
 {
     public class MovieController : Controller
     {
         private readonly IMovieService _movieService;
+        private readonly ICategoryService _categoryService;
+        private readonly IMovieCategoryService _movieCategoryService;
 
-        public MovieController(IMovieService movieService)
+        public MovieController(IMovieService movieService,ICategoryService categoryService,IMovieCategoryService movieCategoryService)
         {
             _movieService = movieService;
+            _categoryService = categoryService;
+            _movieCategoryService = movieCategoryService;
         }
-
 
         //  VIEWS
 
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Movies()
+        public async Task<IActionResult> Movies(
+         int? categoryId = null,
+         string? search = null)
         {
-            return View();
+            var moviesResult = await _movieService.GetAllMovies();
+            var categoriesResult = await _categoryService.GetAllCategoriesAsync();
+
+            var movies = moviesResult.Dato?
+                .Where(m => m != null)
+                .ToList()
+                ?? new List<MovieDTO>();
+
+            // Filter by category
+            if (categoryId.HasValue)
+            {
+                var movieCategoriesResult =
+                    await _movieCategoryService.GetMoviesByCategoryId(categoryId.Value);
+
+                if (movieCategoriesResult.EsCorrecto &&
+                    movieCategoriesResult.Dato != null)
+                {
+                    var movieIds = movieCategoriesResult.Dato
+                        .Select(mc => mc.MovieId)
+                        .ToHashSet();
+
+                    movies = movies
+                        .Where(m => movieIds.Contains(m.MovieId))
+                        .ToList();
+                }
+                else
+                {
+                    movies.Clear();
+                }
+            }
+
+            // Search by title
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                movies = movies
+                    .Where(m =>
+                        !string.IsNullOrWhiteSpace(m.Title) &&
+                        m.Title.Contains(
+                            search,
+                            StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            var viewModel = new MovieCatalogViewModel
+            {
+                Movies = movies,
+
+                Categories = categoriesResult.Dato?
+                    .Where(c => c != null)
+                    .Select(c => c!)
+                    .ToList()
+                    ?? new(),
+
+                SelectedCategoryId = categoryId,
+                Search = search ?? string.Empty
+            };
+
+            return View(viewModel);
         }
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Detalles(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var result = await _movieService.GetMovieById(id);
+            var result = await _movieService.GetMovieDetailsById(id);
 
-            if (!result.EsCorrecto)
+            if (!result.EsCorrecto || result.Dato == null)
             {
                 TempData["Error"] = result.mensaje ?? "Movie not found.";
                 return RedirectToAction(nameof(Movies));

@@ -1,9 +1,8 @@
 ﻿using CineStreamCR.BLL.DTO.WatchList;
 using CineStreamCR.BLL.Services.WatchList;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CineStreamCR.Controllers
+namespace StreamingApp.Controllers
 {
     public class WatchListController : Controller
     {
@@ -18,162 +17,183 @@ namespace CineStreamCR.Controllers
             _watchListMovieService = watchListMovieService;
         }
 
-
-        //  VIEWS
-
-
         [HttpGet]
-        public IActionResult MyWatchList()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
-
-        //  READ (JSON) - WatchList
-
-
-        [HttpGet]
-        public async Task<IActionResult> GetWatchListById(int id)
-        {
-            var result = await _watchListService.GetWatchListById(id);
-            if (!result.EsCorrecto)
-                return NotFound(result);
-
-            return Json(result);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetWatchListsByUser(int userId)
-        {
-            var result = await _watchListService.GetWatchListsByUserId(userId);
-            return Json(result);
-        }
-
-
-        //  CREATE - WatchList
-
-
-        [HttpPost]
-        public async Task<IActionResult> CreateWatchList(CreateWatchListDTO watchListDTO)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var result = await _watchListService.CreateWatchList(watchListDTO);
-
-            if (!result.EsCorrecto)
+            if (userId == null)
             {
-                ModelState.AddModelError(string.Empty, result.mensaje ?? "Could not create the watchlist.");
-                return BadRequest(result);
+                return RedirectToAction("Login", "Auth");
             }
 
-            return Json(result);
-        }
+            var watchListsResult =
+                await _watchListService.GetWatchListsByUserId(userId.Value);
 
+            var watchList =
+                watchListsResult.Dato?.FirstOrDefault();
 
-        //  EDIT - WatchList
-
-
-        [HttpPost]
-        public async Task<IActionResult> EditWatchList(WatchListDTO watchListDTO)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var result = await _watchListService.UpdateWatchList(watchListDTO);
-
-            if (!result.EsCorrecto)
-                return BadRequest(result);
-
-            return Json(result);
-        }
-
-
-        //  DELETE - WatchList
-
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteWatchList(int id)
-        {
-            var result = await _watchListService.DeleteWatchList(id);
-
-            if (!result.EsCorrecto)
-                return BadRequest(result);
-
-            return Json(result);
-        }
-
-
-        //  MOVIES DENTRO DE LA WATCHLIST
-
-
-        [HttpGet]
-        public async Task<IActionResult> GetMoviesInWatchList(int watchListId)
-        {
-            var result = await _watchListMovieService.GetByWatchListId(watchListId);
-            return Json(result);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetWatchListsContainingMovie(int movieId)
-        {
-            var result = await _watchListMovieService.GetByMovieId(movieId);
-            return Json(result);
-        }
-
-       
-        [HttpPost]
-        public async Task<IActionResult> AddMovieToWatchList(int watchListId, int movieId)
-        {
-            var dto = new WatchListMovieDTO
+            // If the user does not have a list yet, create one
+            if (watchList == null)
             {
-                WatchListId = watchListId,
-                MovieId = movieId
-            };
+                var createResult =
+                    await _watchListService.CreateWatchList(
+                        new CreateWatchListDTO
+                        {
+                            UserId = userId.Value,
+                            Name = "My List",
+                            Description = "My favorite movies"
+                        });
 
-            var result = await _watchListMovieService.AddMovieToWatchList(dto);
+                if (!createResult.EsCorrecto || createResult.Dato == null)
+                {
+                    TempData["Error"] =
+                        createResult.mensaje ??
+                        "Could not create My List.";
 
-            if (!result.EsCorrecto)
-                return BadRequest(result);
+                    return View(
+                        "MyList",
+                        new WatchListDetailDTO
+                        {
+                            UserId = userId.Value,
+                            Name = "My List"
+                        });
+                }
 
-            return Json(result);
+                watchList = createResult.Dato;
+            }
+
+            var moviesResult =
+                await _watchListMovieService
+                    .GetByWatchListId(watchList.WatchListId);
+
+            var viewModel =
+                new WatchListDetailDTO
+                {
+                    WatchListId = watchList.WatchListId,
+                    UserId = watchList.UserId,
+                    Name = watchList.Name,
+                    Description = watchList.Description,
+                    CreatedAt = watchList.CreatedAt,
+                    Movies = moviesResult.Dato?
+                        .ToList()
+                        ?? new List<WatchListMovieDTO>()
+                };
+
+            return View("MyList", viewModel);
         }
 
-        // Pasa el ID del usuario de una vez, no se ocupa poner en la vista
         [HttpPost]
-        public async Task<IActionResult> AddMovieToMyWatchList(int userId, int movieId)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddMovie(int movieId)
         {
-            var watchLists = await _watchListService.GetWatchListsByUserId(userId);
-            var watchList = watchLists.Dato?.FirstOrDefault();
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            var watchListsResult =
+                await _watchListService.GetWatchListsByUserId(userId.Value);
+
+            var watchList =
+                watchListsResult.Dato?.FirstOrDefault();
 
             if (watchList == null)
             {
-                return NotFound(new { EsCorrecto = false, mensaje = "El usuario no tiene una lista de deseos." });
+                var createResult =
+                    await _watchListService.CreateWatchList(
+                        new CreateWatchListDTO
+                        {
+                            UserId = userId.Value,
+                            Name = "My List",
+                            Description = "My favorite movies"
+                        });
+
+                if (!createResult.EsCorrecto ||
+                    createResult.Dato == null)
+                {
+                    TempData["Error"] =
+                        createResult.mensaje ??
+                        "Could not create My List.";
+
+                    return RedirectToAction(
+                        "Details",
+                        "Movie",
+                        new { id = movieId });
+                }
+
+                watchList = createResult.Dato;
             }
 
-            var dto = new WatchListMovieDTO
+            var result =
+                await _watchListMovieService.AddMovieToWatchList(
+                    new WatchListMovieDTO
+                    {
+                        WatchListId = watchList.WatchListId,
+                        MovieId = movieId
+                    });
+
+            if (result.EsCorrecto)
             {
-                WatchListId = watchList.WatchListId,
-                MovieId = movieId
-            };
+                TempData["Success"] =
+                    "Movie added to My List.";
+            }
+            else
+            {
+                TempData["Error"] =
+                    result.mensaje ??
+                    "Could not add the movie.";
+            }
 
-            var result = await _watchListMovieService.AddMovieToWatchList(dto);
-
-            if (!result.EsCorrecto)
-                return BadRequest(result);
-
-            return Json(result);
+            return RedirectToAction(
+                "Details",
+                "Movie",
+                new { id = movieId });
         }
 
         [HttpPost]
-        public async Task<IActionResult> RemoveMovieFromWatchList(int watchListId, int movieId)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveMovie(int movieId)
         {
-            var result = await _watchListMovieService.RemoveMovieFromWatchList(watchListId, movieId);
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
-            if (!result.EsCorrecto)
-                return NotFound(result);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
 
-            return Json(result);
+            var watchListsResult =
+                await _watchListService.GetWatchListsByUserId(userId.Value);
+
+            var watchList =
+                watchListsResult.Dato?.FirstOrDefault();
+
+            if (watchList == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var result =
+                await _watchListMovieService
+                    .RemoveMovieFromWatchList(
+                        watchList.WatchListId,
+                        movieId);
+
+            if (result.EsCorrecto)
+            {
+                TempData["Success"] =
+                    "Movie removed from My List.";
+            }
+            else
+            {
+                TempData["Error"] =
+                    result.mensaje ??
+                    "Could not remove the movie.";
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

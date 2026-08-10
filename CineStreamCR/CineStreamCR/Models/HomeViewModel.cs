@@ -4,36 +4,71 @@ namespace StreamingApp.Models
     public class HomeViewModel
     {
         public FeaturedContent? FeaturedContent { get; set; }
+
+        // Filas por categoría
         public List<ContentRow> Rows { get; set; } = new();
+
+        // Lista de películas favoritas del usuario
+        public List<ContentItem> MyList { get; set; } = new();
+
+        // Nombre del usuario logueado
+        public string UserName { get; set; } = string.Empty;
     }
 
-    // Contenido destacado (hero banner)
+    // Contenido destacado del Home
     public class FeaturedContent
     {
-        public int    Id            { get; set; }
-        public string Title         { get; set; } = string.Empty;
-        public string BackdropUrl   { get; set; } = string.Empty;   // imagen de fondo del hero
-        public string ContentType   { get; set; } = "SERIES";       // "SERIES" | "PELÍCULA" | "DOCUMENTAL"
-        public string Genre         { get; set; } = string.Empty;
-        public string Year          { get; set; } = string.Empty;
-        public string Rating        { get; set; } = string.Empty;   // ej. "TV-14"
-        public string Description   { get; set; } = string.Empty;
-        public bool   IsComingSoon  { get; set; }
-        public string ComingSoonLabel { get; set; } = string.Empty; // ej. "Season 2 Coming Soon"
+        public int Id { get; set; }
+
+        public string Title { get; set; } = string.Empty;
+
+        public string BackdropUrl { get; set; } = string.Empty;
+
+        public string Description { get; set; } = string.Empty;
+
+        public int Year { get; set; }
+
+        public int DurationMinutes { get; set; }
+
+        public decimal? Rating { get; set; }
+
+        public string Genre { get; set; } = string.Empty;
+
+        public bool IsInMyList { get; set; }
+
+        // Se mantienen temporalmente porque Index.cshtml todavía las utiliza
+        public string ContentType { get; set; } = "PELÍCULA";
+
+        public bool IsComingSoon { get; set; } = false;
+
+        public string ComingSoonLabel { get; set; } = string.Empty;
     }
 
-    // Fila de tarjetas (ej. "Your Next Watch", "Trending Now", …)
+    // Fila de películas por categoría
     public class ContentRow
     {
+        public int CategoryId { get; set; }
+
         public string Title { get; set; } = string.Empty;
+
         public List<ContentItem> Items { get; set; } = new();
     }
 
-    // Tarjeta individual dentro de una fila
+    // Tarjeta individual
     public class ContentItem
     {
-        public int    Id           { get; set; }
-        public string Title        { get; set; } = string.Empty;
-        public string ThumbnailUrl { get; set; } = string.Empty;    // miniatura 16:9
+        public int Id { get; set; }
+
+        public string Title { get; set; } = string.Empty;
+
+        public string ThumbnailUrl { get; set; } = string.Empty;
+
+        public int Year { get; set; }
+
+        public int DurationMinutes { get; set; }
+
+        public decimal? Rating { get; set; }
+
+        public bool IsInMyList { get; set; }
     }
 }

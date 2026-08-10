@@ -28,19 +28,23 @@ namespace CineStreamCR.DAL.Repositories.Movies
                 .FirstOrDefaultAsync(m => m.MovieId == id);
         }
 
-        public async Task<Entities.Movies?> GetMovieDetallesById(int id)
+        public async Task<Entities.Movies?> GetMovieDetailsById(int id)
         {
             return await _context.Movies
 
                 .Include(m => m.MovieDirectors)
                     .ThenInclude(md => md.Director)
+
                 .Include(m => m.MovieActors)
                     .ThenInclude(ma => ma.Actor)
+
+                .Include(m => m.MovieCategories)
+                    .ThenInclude(mc => mc.Category)
+
                 .FirstOrDefaultAsync(m =>
                     m.MovieId == id &&
                     m.IsActive == 1);
         }
-
         public async Task<List<Entities.Movies>> GetMoviesByDirectorId(int directorId)
         {
             return await _context.MovieDirectors

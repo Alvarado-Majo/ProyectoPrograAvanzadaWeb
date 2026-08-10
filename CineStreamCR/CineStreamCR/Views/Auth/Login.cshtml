@@ -1,91 +1,125 @@
 ﻿@model CineStreamCR.BLL.DTO.Auth.LoginDTO
 
 @{
-    ViewData["Title"] = "Iniciar Sesión";
+    ViewData["Title"] = "Sign In";
     Layout = null;
 }
 
 <!DOCTYPE html>
-
-<html lang="es">
+<html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1" />
 
-    <title>CineStreamCR</title>
+    <title>CineStreamCR - Sign In</title>
 
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
 
+    <link rel="stylesheet"
+          href="~/css/site.css" />
 </head>
 
-<body style="background:#141414;">
+<body>
 
-    <div class="container vh-100 d-flex justify-content-center align-items-center">
+    <main class="login-page">
 
-        <div class="card shadow-lg border-0" style="width:420px;border-radius:15px;">
+        <section class="login-card">
 
-            <div class="card-body p-5">
-
-                <h2 class="text-center text-danger fw-bold mb-4">
-                    CineStreamCR
-                </h2>
-
-                @if (ViewBag.Error != null)
-                {
-                    <div class="alert alert-danger">
-                        @ViewBag.Error
-                    </div>
-                }
-
-                <form asp-action="Login" method="post">
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Correo electrónico
-                        </label>
-
-                        <input asp-for="Email"
-                               class="form-control" />
-
-                        <span asp-validation-for="Email"
-                              class="text-danger">
-                        </span>
-
-                    </div>
-
-                    <div class="mb-4">
-
-                        <label class="form-label">
-                            Contraseña
-                        </label>
-
-                        <input asp-for="Password"
-                               type="password"
-                               class="form-control" />
-
-                        <span asp-validation-for="Password"
-                              class="text-danger">
-                        </span>
-
-                    </div>
-
-                    <button class="btn btn-danger w-100">
-
-                        Iniciar Sesión
-
-                    </button>
-
-                </form>
-
+            <div class="auth-brand">
+                CineStream<span>CR</span>
             </div>
 
-        </div>
+            <h1 class="login-title">
+                Sign In
+            </h1>
 
-    </div>
+            <p class="login-subtitle">
+                Welcome back. Continue watching your favorites.
+            </p>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="auth-success">
+                    @TempData["Success"]
+                </div>
+            }
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="auth-error">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form asp-controller="Auth"
+                  asp-action="Login"
+                  method="post">
+
+                <div class="auth-form-group">
+
+                    <label asp-for="Email">
+                        Email
+                    </label>
+
+                    <input asp-for="Email"
+                           class="auth-input"
+                           placeholder="Enter your email" />
+
+                    <span asp-validation-for="Email"
+                          class="auth-validation">
+                    </span>
+
+                </div>
+
+                <div class="auth-form-group">
+
+                    <label asp-for="Password">
+                        Password
+                    </label>
+
+                    <input asp-for="Password"
+                           type="password"
+                           class="auth-input"
+                           placeholder="Enter your password" />
+
+                    <span asp-validation-for="Password"
+                          class="auth-validation">
+                    </span>
+
+                </div>
+
+                <button type="submit"
+                        class="btn-login">
+                    Sign In
+                </button>
+
+            </form>
+
+            <div class="auth-separator">
+                <span>OR</span>
+            </div>
+
+            <p class="register-question">
+                New to CineStreamCR?
+            </p>
+
+            <a asp-controller="Auth"
+               asp-action="Register"
+               class="btn-create-account">
+                Create Account
+            </a>
+
+            <div class="auth-footer">
+                CineStreamCR
+            </div>
+
+        </section>
+
+    </main>
 
     <partial name="_ValidationScriptsPartial" />
 

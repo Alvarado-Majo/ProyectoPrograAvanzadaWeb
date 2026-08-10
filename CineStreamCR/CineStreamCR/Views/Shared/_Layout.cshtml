@@ -275,7 +275,7 @@
         <ul class="sf-navbar__links">
             <li>
                 <a asp-controller="Home" asp-action="Index"
-                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")">
+                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Inicio" ? "active" : "")">
                     Home
                 </a>
             </li>
@@ -287,24 +287,20 @@
                 </a>
             </li>
             <li>
-                <a asp-controller="Home" asp-action="Movies"
+                <a asp-controller="Movie" asp-action="Movies"
                    class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Movies" ? "active" : "")">
                     Movies
                 </a>
             </li>
             
-            <li>
-                <a asp-controller="Home" asp-action="MyList"
-                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "MyList" ? "active" : "")">
+           <li>
+                <a asp-controller="WatchList"
+                   asp-action="Index"
+                   class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "WatchList" ? "active" : "")">
                     My List
                 </a>
             </li>
-            <li>
-                <a asp-controller="Home" asp-action="AdminMenu"
-                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "AdminMenu" ? "active" : "")">
-                    Admin Menu
-                </a>
-            </li>
+            
         </ul>
 
         <!-- Derecha: búsqueda + perfil -->

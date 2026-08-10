@@ -1,0 +1,157 @@
+﻿@model CineStreamCR.BLL.DTO.WatchList.WatchListDetailDTO
+
+@{
+    ViewData["Title"] = "My List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="my-list-page">
+
+    <div class="my-list-header">
+
+        <div>
+            <h1>My List</h1>
+
+            <p>
+                Your saved movies, all in one place.
+            </p>
+        </div>
+
+        @if (Model.Movies != null && Model.Movies.Any())
+        {
+            <div class="my-list-count">
+                @Model.Movies.Count movie@(Model.Movies.Count == 1 ? "" : "s")
+            </div>
+        }
+
+    </div>
+
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="my-list-message success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="my-list-message error">
+            @TempData["Error"]
+        </div>
+    }
+
+
+    @if (Model.Movies != null && Model.Movies.Any())
+    {
+        <div class="my-list-grid">
+
+            @foreach (var movie in Model.Movies)
+            {
+                <div class="my-list-card">
+
+                    <a asp-controller="Movie"
+                       asp-action="Details"
+                       asp-route-id="@movie.MovieId"
+                       class="my-list-poster">
+
+                        <img src="@movie.PosterImg"
+                             alt="@movie.Title" />
+
+                        <div class="my-list-overlay">
+
+                            <div class="my-list-play">
+                                ▶
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <div class="my-list-info">
+
+                        <a asp-controller="Movie"
+                           asp-action="Details"
+                           asp-route-id="@movie.MovieId"
+                           class="my-list-title">
+
+                            @movie.Title
+
+                        </a>
+
+
+                        <div class="my-list-meta">
+
+                            <span>
+                                @movie.ReleaseYear
+                            </span>
+
+                            <span>
+                                @movie.DurationMinutes min
+                            </span>
+
+                            @if (movie.MovieRating.HasValue)
+                            {
+                                <span>
+                                    ⭐ @movie.MovieRating.Value.ToString("0.0")
+                                </span>
+                            }
+
+                        </div>
+
+
+                        <form asp-controller="WatchList"
+                              asp-action="RemoveMovie"
+                              method="post"
+                              class="remove-form">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="movieId"
+                                   value="@movie.MovieId" />
+
+                            <button type="submit"
+                                    class="btn-remove-movie">
+
+                                <span>−</span>
+                                Remove
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="empty-my-list">
+
+            <div class="empty-icon">
+                +
+            </div>
+
+            <h2>Your list is empty</h2>
+
+            <p>
+                Add movies to your list and they will appear here.
+            </p>
+
+            <a asp-controller="Movie"
+               asp-action="Movies"
+               class="btn-browse-movies">
+
+                Browse Movies
+
+            </a>
+
+        </div>
+    }
+
+</section>

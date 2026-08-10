@@ -1,0 +1,317 @@
+﻿@model StreamingApp.Models.MovieCatalogViewModel
+
+@{
+    ViewData["Title"] = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="movies-page">
+
+    <div class="movies-header">
+
+        <div>
+            <h1>Movies</h1>
+            <p>Browse all available movies</p>
+        </div>
+
+        <div class="movies-controls">
+
+            <input type="text"
+                   id="movieSearch"
+                   class="movie-search"
+                   placeholder="Search movies..." />
+
+            <form method="get"
+                  asp-controller="Movie"
+                  asp-action="Movies"
+                  class="category-form">
+
+                <select name="categoryId"
+                        class="category-filter"
+                        onchange="this.form.submit()">
+
+                    <option value="">All</option>
+
+                    @foreach (var category in Model.Categories)
+                    {
+                        if (Model.SelectedCategoryId == category.CategoryId)
+                        {
+                            <option value="@category.CategoryId" selected>
+                                @category.Name
+                            </option>
+                        }
+                        else
+                        {
+                            <option value="@category.CategoryId">
+                                @category.Name
+                            </option>
+                        }
+                    }
+
+                </select>
+
+                <input type="hidden"
+                       name="search"
+                       value="@Model.Search" />
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    @if (Model.Movies != null && Model.Movies.Any())
+    {
+        <div class="movies-grid" id="moviesGrid">
+
+            @foreach (var movie in Model.Movies)
+            {
+                <a asp-controller="Movie"
+                   asp-action="Details"
+                   asp-route-id="@movie.MovieId"
+                   class="movie-card"
+                   data-title="@movie.Title.ToLower()">
+
+                    <div class="movie-card-image">
+                        <img src="@movie.PosterImg"
+                             alt="@movie.Title" />
+
+                        <div class="movie-card-overlay">
+                            <span class="play-icon">▶</span>
+                        </div>
+                    </div>
+
+                    <div class="movie-card-info">
+                        <h3>@movie.Title</h3>
+
+                        <div class="movie-card-meta">
+                            <span>@movie.ReleaseYear</span>
+                            <span>@movie.DurationMinutes min</span>
+
+                            @if (movie.MovieRating.HasValue)
+                            {
+                                <span>
+                                    ⭐ @movie.MovieRating.Value.ToString("0.0")
+                                </span>
+                            }
+                        </div>
+                    </div>
+
+                </a>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="empty-movies">
+            No movies available.
+        </div>
+    }
+</section>
+
+
+<style>
+
+    :root {
+        --red: #e50914;
+        --black: #141414;
+        --black-soft: #181818;
+        --white: #ffffff;
+        --gray: #b3b3b3;
+    }
+
+    .movies-page {
+        min-height: 100vh;
+        background: var(--black);
+        color: var(--white);
+        padding: 95px 5% 50px;
+    }
+
+    .movies-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 25px;
+        margin-bottom: 35px;
+        flex-wrap: wrap;
+    }
+
+        .movies-header h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            font-weight: 900;
+        }
+
+        .movies-header p {
+            color: var(--gray);
+            margin: 6px 0 0;
+        }
+
+    .movies-controls {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .movie-search,
+    .category-filter {
+        background: #1f1f1f;
+        color: var(--white);
+        border: 1px solid #444;
+        border-radius: 6px;
+        padding: 10px 14px;
+        outline: none;
+        font-size: .95rem;
+    }
+
+    .movie-search {
+        width: 240px;
+    }
+
+        .movie-search:focus,
+        .category-filter:focus {
+            border-color: var(--red);
+        }
+
+    .movies-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 24px;
+    }
+
+    .movie-card {
+        text-decoration: none;
+        color: var(--white);
+        transition: transform .2s, box-shadow .2s;
+        border-radius: 8px;
+        overflow: hidden;
+        background: var(--black-soft);
+    }
+
+        .movie-card:hover {
+            transform: scale(1.04);
+            box-shadow: 0 14px 35px rgba(0,0,0,.65);
+        }
+
+    .movie-card-image {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .movie-card-image img {
+            width: 100%;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            display: block;
+        }
+
+    .movie-card-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity .2s;
+    }
+
+    .movie-card:hover .movie-card-overlay {
+        opacity: 1;
+    }
+
+    .play-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--red);
+        color: var(--white);
+        font-size: 1.2rem;
+        padding-left: 3px;
+    }
+
+    .movie-card-info {
+        padding: 12px;
+    }
+
+        .movie-card-info h3 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+    .movie-card-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        color: var(--gray);
+        font-size: .78rem;
+    }
+
+    .empty-movies {
+        color: var(--gray);
+        text-align: center;
+        padding: 80px 20px;
+    }
+
+    @@media (max-width: 700px) {
+
+        .movies-page {
+            padding-top: 85px;
+        }
+
+        .movies-controls {
+            width: 100%;
+        }
+
+        .movie-search,
+        .category-filter {
+            width: 100%;
+        }
+
+        .movies-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+    }
+
+</style>
+
+
+<script>
+
+    const searchInput =
+        document.getElementById("movieSearch");
+
+    const cards =
+        document.querySelectorAll(".movie-card");
+
+    searchInput?.addEventListener(
+        "input",
+        function () {
+
+            const search =
+                this.value.toLowerCase().trim();
+
+            cards.forEach(card => {
+
+                const title =
+                    card.dataset.title ?? "";
+
+                card.style.display =
+                    title.includes(search)
+                        ? ""
+                        : "none";
+            });
+        }
+    );
+
+</script>

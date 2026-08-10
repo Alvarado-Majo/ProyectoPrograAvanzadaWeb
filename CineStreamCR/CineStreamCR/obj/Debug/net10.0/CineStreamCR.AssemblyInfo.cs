@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("3c832082-74d5-4fd2-ac2c-3befe4975d75")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("CineStreamCR")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8069632dd76845db70450247c5f14fa9d89c414a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2eb953ac5bd493185e45a1f89be716834d6a3bcc")]
 [assembly: System.Reflection.AssemblyProductAttribute("CineStreamCR")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CineStreamCR")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

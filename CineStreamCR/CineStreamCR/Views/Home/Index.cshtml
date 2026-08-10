@@ -253,9 +253,19 @@
             </div>
             <h1 class="hero__title">@f.Title</h1>
             <ul class="hero__meta">
-                <li>@f.Genre</li>
+                @if (!string.IsNullOrWhiteSpace(f.Genre))
+                {
+                    <li>@f.Genre</li>
+                }
+
                 <li>@f.Year</li>
-                <li>@f.Rating</li>
+
+                <li>@f.DurationMinutes min</li>
+
+                @if (f.Rating.HasValue)
+                {
+                    <li>⭐ @f.Rating.Value.ToString("0.0")</li>
+                }
             </ul>
             <p class="hero__desc">@f.Description</p>
             <div class="hero__actions">
@@ -274,7 +284,7 @@
                     <button class="btn-sf btn-sf--primary">&#9654; &nbsp;Play</button>
                 }
                 <a asp-controller="Movie"
-                   asp-action="Detalles"
+                   asp-action="Details"
                    asp-route-id="@f.Id"
                    class="btn-sf btn-sf--ghost">
                     More Info
@@ -287,7 +297,31 @@
         }
     </section>
 }
+@if (Model?.MyList != null && Model.MyList.Any())
+{
+    <section class="sf-section">
+        <h2 class="sf-section__title">My List</h2>
 
+        <div class="sf-row">
+            @foreach (var item in Model.MyList)
+            {
+                <a asp-controller="Movie"
+                   asp-action="Details"
+                   asp-route-id="@item.Id"
+                   class="sf-card"
+                   title="@item.Title">
+
+                    <img class="sf-card__img"
+                         src="@item.ThumbnailUrl"
+                         alt="@item.Title"
+                         loading="lazy" />
+
+                    <span class="sf-card__label">@item.Title</span>
+                </a>
+            }
+        </div>
+    </section>
+}
 @if (Model?.Rows != null)
 {
     foreach (var row in Model.Rows)
@@ -297,7 +331,11 @@
             <div class="sf-row">
                 @foreach (var item in row.Items)
                 {
-                    <a asp-action="Details" asp-route-id="@item.Id" class="sf-card" title="@item.Title">
+                    <a asp-controller="Movie"
+                       asp-action="Details"
+                       asp-route-id="@item.Id"
+                       class="sf-card"
+                       title="@item.Title">
                         <img class="sf-card__img" src="@item.ThumbnailUrl" alt="@item.Title" loading="lazy" />
                         <span class="sf-card__label">@item.Title</span>
                     </a>
