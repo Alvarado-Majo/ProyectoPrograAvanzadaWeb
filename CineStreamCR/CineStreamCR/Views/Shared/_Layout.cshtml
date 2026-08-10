@@ -3,413 +3,1258 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>@ViewData["Title"] - CineStreamCR</title>
+
     <script type="importmap"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CineStreamCR.styles.css" asp-append-version="true" />
+
     <style>
-        /* ── Reset base que Netflix necesita ── */
-        *, *::before, *::after {
-        box-sizing: border-box;
-        }
 
-        body {
-        margin: 0;
-        background: #141414;
-        color: #fff;
-        font-family: 'Inter', 'Segoe UI', sans-serif;
-        }
+            /* RESET BASE */
 
-        /* ══════════════════════════════════════════
-        NAVBAR
-        ══════════════════════════════════════════ */
-        .sf-navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 200;
-        height: 68px;
-        display: flex;
-        align-items: center;
-        justify-content: center; /* centra todo el contenido */
-        padding: 0 4%;
-        background: linear-gradient(180deg, rgba(0,0,0,.88) 0%, transparent 100%);
-        gap: 0;
-        }
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
 
-        /* Logo a la izquierda absoluto para no romper el centrado */
-        .sf-navbar__logo {
-        position: absolute;
-        left: 4%;
-        color: #e50914;
-        font-size: 1.85rem;
-        font-weight: 900;
-        letter-spacing: -1px;
-        text-decoration: none;
-        user-select: none;
-        }
+            body {
+                margin: 0;
+                background: #141414;
+                color: #fff;
+                font-family: 'Inter', 'Segoe UI', sans-serif;
+            }
 
-        /* Grupo de links centrado */
-        .sf-navbar__links {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        }
 
-        .sf-navbar__links a {
-        color: #b3b3b3;
-        text-decoration: none;
-        font-size: .875rem;
-        font-weight: 500;
-        padding: 6px 14px;
-        border-radius: 20px; /* base del óvalo */
-        border: 2px solid transparent;
-        transition: color .2s, border-color .2s, background .2s;
-        white-space: nowrap;
-        }
+            /* ══════════════════════════════════════════
+                               NAVBAR
+                       ══════════════════════════════════════════ */
 
-        .sf-navbar__links a:hover {
-        color: #fff;
-        }
+            .sf-navbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 200;
+                height: 68px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 4%;
+                background: linear-gradient( 180deg, rgba(0,0,0,.88) 0%, transparent 100% );
+                gap: 0;
+            }
 
-        /* Ítem activo: óvalo visible */
-        .sf-navbar__links a.active {
-        color: #fff;
-        border-color: #fff;
-        background: rgba(255,255,255,.08);
-        }
 
-        /* Grupo derecho: búsqueda + perfil */
-        .sf-navbar__right {
-        position: absolute;
-        right: 4%;
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        }
+            /* Logo */
 
-        /* Icono búsqueda */
-        .sf-navbar__search {
-        cursor: pointer;
-        color: #fff;
-        opacity: .85;
-        transition: opacity .2s;
-        flex-shrink: 0;
-        }
+            .sf-navbar__logo {
+                position: absolute;
+                left: 4%;
+                color: #e50914;
+                font-size: 1.85rem;
+                font-weight: 900;
+                letter-spacing: -1px;
+                text-decoration: none;
+                user-select: none;
+            }
 
-        .sf-navbar__search:hover {
-        opacity: 1;
-        }
 
-        /* ── PROFILE DROPDOWN ── */
-        .sf-profile {
-        position: relative;
-        }
+            /* Links centrados */
 
-        .sf-profile__trigger {
-        width: 34px;
-        height: 34px;
-        background: #e50914;
-        border-radius: 6px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: .75rem;
-        font-weight: 700;
-        color: #fff;
-        user-select: none;
-        border: 2px solid transparent;
-        transition: border-color .2s;
-        flex-shrink: 0;
-        }
+            .sf-navbar__links {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
 
-        .sf-profile__trigger:hover,
-        .sf-profile.open .sf-profile__trigger {
-        border-color: #fff;
-        }
+                .sf-navbar__links a {
+                    color: #b3b3b3;
+                    text-decoration: none;
+                    font-size: .875rem;
+                    font-weight: 500;
+                    padding: 6px 14px;
+                    border-radius: 20px;
+                    border: 2px solid transparent;
+                    transition: color .2s, border-color .2s, background .2s;
+                    white-space: nowrap;
+                }
 
-        /* Flecha pequeña que indica dropdown */
-        .sf-profile__trigger::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%) rotate(45deg);
-        width: 6px;
-        height: 6px;
-        background: #1a1a1a;
-        border-top: 1.5px solid #555;
-        border-left: 1.5px solid #555;
-        opacity: 0;
-        transition: opacity .18s;
-        border-radius: 1px;
-        }
+                    .sf-navbar__links a:hover {
+                        color: #fff;
+                    }
 
-        .sf-profile.open .sf-profile__trigger::after {
-        opacity: 1;
-        }
+                    .sf-navbar__links a.active {
+                        color: #fff;
+                        border-color: #fff;
+                        background: rgba(255,255,255,.08);
+                    }
 
-        .sf-profile__menu {
-        position: absolute;
-        top: calc(100% + 14px);
-        right: 0;
-        min-width: 200px;
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 6px;
-        overflow: hidden;
-        box-shadow: 0 8px 30px rgba(0,0,0,.7);
-        /* Oculto por defecto */
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-6px);
-        transition: opacity .2s, transform .2s;
-        }
 
-        .sf-profile.open .sf-profile__menu {
-        opacity: 1;
-        pointer-events: all;
-        transform: translateY(0);
-        }
+            /* Grupo derecho */
 
-        /* Pico decorativo arriba del menú */
-        .sf-profile__menu::before {
-        content: '';
-        position: absolute;
-        top: -6px;
-        right: 12px;
-        width: 11px;
-        height: 11px;
-        background: #1a1a1a;
-        border-top: 1px solid #333;
-        border-left: 1px solid #333;
-        transform: rotate(45deg);
-        }
+            .sf-navbar__right {
+                position: absolute;
+                right: 4%;
+                display: flex;
+                align-items: center;
+                gap: 18px;
+            }
 
-        .sf-profile__item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 11px 16px;
-        font-size: .85rem;
-        color: #ccc;
-        text-decoration: none;
-        cursor: pointer;
-        transition: background .15s, color .15s;
-        border: none;
-        background: transparent;
-        width: 100%;
-        text-align: left;
-        }
 
-        .sf-profile__item:hover {
-        background: #2a2a2a;
-        color: #fff;
-        }
+            /* Búsqueda */
 
-        .sf-profile__item svg {
-        flex-shrink: 0;
-        opacity: .7;
-        }
+            .sf-navbar__search {
+                cursor: pointer;
+                color: #fff;
+                opacity: .85;
+                transition: opacity .2s;
+                flex-shrink: 0;
+            }
 
-        .sf-profile__item:hover svg {
-        opacity: 1;
-        }
+                .sf-navbar__search:hover {
+                    opacity: 1;
+                }
 
-        .sf-profile__divider {
-        height: 1px;
-        background: #333;
-        margin: 4px 0;
-        }
 
-        .sf-profile__item--danger {
-        color: #e50914;
-        }
+            /* ══════════════════════════════════════════
+                               PROFILE DROPDOWN
+                       ══════════════════════════════════════════ */
 
-        .sf-profile__item--danger:hover {
-        background: rgba(229,9,20,.1);
-        color: #ff3333;
-        }
+            .sf-profile {
+                position: relative;
+            }
 
-        /* ── MAIN CONTENT ── */
-        .sf-main {
-        padding-top: 68px; /* compensa el navbar fijo */
-        }
+            .sf-profile__trigger {
+                width: 34px;
+                height: 34px;
+                background: #e50914;
+                border-radius: 6px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .75rem;
+                font-weight: 700;
+                color: #fff;
+                user-select: none;
+                border: 2px solid transparent;
+                transition: border-color .2s;
+                flex-shrink: 0;
+            }
 
-        /* ── FOOTER ── */
-        .sf-footer {
-        padding: 28px 4%;
-        color: #6d6d6d;
-        font-size: .78rem;
-        border-top: 1px solid #222;
-        margin-top: 40px;
-        }
+                .sf-profile__trigger:hover,
+                .sf-profile.open .sf-profile__trigger {
+                    border-color: #fff;
+                }
 
-        .sf-footer a {
-        color: #6d6d6d;
-        text-decoration: none;
-        }
+                .sf-profile__trigger::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -8px;
+                    left: 50%;
+                    transform: translateX(-50%) rotate(45deg);
+                    width: 6px;
+                    height: 6px;
+                    background: #1a1a1a;
+                    border-top: 1.5px solid #555;
+                    border-left: 1.5px solid #555;
+                    opacity: 0;
+                    transition: opacity .18s;
+                    border-radius: 1px;
+                }
 
-        .sf-footer a:hover {
-        color: #aaa;
-        }
+            .sf-profile.open .sf-profile__trigger::after {
+                opacity: 1;
+            }
+
+
+            .sf-profile__menu {
+                position: absolute;
+                top: calc(100% + 14px);
+                right: 0;
+                min-width: 200px;
+                background: #1a1a1a;
+                border: 1px solid #333;
+                border-radius: 6px;
+                overflow: hidden;
+                box-shadow: 0 8px 30px rgba(0,0,0,.7);
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-6px);
+                transition: opacity .2s, transform .2s;
+            }
+
+            .sf-profile.open .sf-profile__menu {
+                opacity: 1;
+                pointer-events: all;
+                transform: translateY(0);
+            }
+
+
+            .sf-profile__menu::before {
+                content: '';
+                position: absolute;
+                top: -6px;
+                right: 12px;
+                width: 11px;
+                height: 11px;
+                background: #1a1a1a;
+                border-top: 1px solid #333;
+                border-left: 1px solid #333;
+                transform: rotate(45deg);
+            }
+
+
+            .sf-profile__item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 11px 16px;
+                font-size: .85rem;
+                color: #ccc;
+                text-decoration: none;
+                cursor: pointer;
+                transition: background .15s, color .15s;
+                border: none;
+                background: transparent;
+                width: 100%;
+                text-align: left;
+            }
+
+                .sf-profile__item:hover {
+                    background: #2a2a2a;
+                    color: #fff;
+                }
+
+                .sf-profile__item svg {
+                    flex-shrink: 0;
+                    opacity: .7;
+                }
+
+                .sf-profile__item:hover svg {
+                    opacity: 1;
+                }
+
+
+            .sf-profile__divider {
+                height: 1px;
+                background: #333;
+                margin: 4px 0;
+            }
+
+
+            .sf-profile__item--danger {
+                color: #e50914;
+            }
+
+                .sf-profile__item--danger:hover {
+                    background: rgba(229,9,20,.1);
+                    color: #ff3333;
+                }
+
+
+            /* ══════════════════════════════════════════
+                               MAIN CONTENT
+                       ══════════════════════════════════════════ */
+
+            .sf-main {
+                padding-top: 68px;
+            }
+
+
+            /* ══════════════════════════════════════════
+                               MINI PLAYER
+                       ══════════════════════════════════════════ */
+
+            .sf-mini-player {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 300;
+                min-height: 82px;
+                display: none;
+                align-items: center;
+                gap: 15px;
+                padding: 8px 4%;
+                background: #181818;
+                border-top: 2px solid #e50914;
+                box-shadow: 0 -5px 20px rgba(0,0,0,.7);
+            }
+
+                .sf-mini-player.active {
+                    display: flex;
+                }
+
+
+            .sf-mini-player__poster {
+                width: 48px;
+                height: 65px;
+                object-fit: cover;
+                border-radius: 5px;
+                background: #292929;
+                flex-shrink: 0;
+            }
+
+
+            .sf-mini-player__info {
+                flex: 1;
+                min-width: 120px;
+            }
+
+
+            .sf-mini-player__title {
+                color: #fff;
+                font-size: .9rem;
+                font-weight: 700;
+                margin-bottom: 8px;
+            }
+
+
+            .sf-mini-player__progress {
+                width: 100%;
+                cursor: pointer;
+                accent-color: #e50914;
+            }
+
+
+            .sf-mini-player__controls {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+
+            .sf-mini-player__button {
+                border: none;
+                background: #292929;
+                color: #fff;
+                padding: 7px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: .85rem;
+                transition: background .2s, transform .15s;
+            }
+
+                .sf-mini-player__button:hover {
+                    background: #e50914;
+                    transform: scale(1.03);
+                }
+
+
+            .sf-mini-player__volume {
+                width: 85px;
+                cursor: pointer;
+                accent-color: #e50914;
+            }
+
+
+            body.sf-mini-player-visible {
+                padding-bottom: 82px;
+            }
+
+
+            /* ══════════════════════════════════════════
+                               FOOTER
+                       ══════════════════════════════════════════ */
+
+            .sf-footer {
+                padding: 28px 4%;
+                color: #6d6d6d;
+                font-size: .78rem;
+                border-top: 1px solid #222;
+                margin-top: 40px;
+            }
+
+                .sf-footer a {
+                    color: #6d6d6d;
+                    text-decoration: none;
+                }
+
+                    .sf-footer a:hover {
+                        color: #aaa;
+                    }
+
+
+            /* ══════════════════════════════════════════
+                               RESPONSIVE
+                       ══════════════════════════════════════════ */
+
+            @@media (max-width: 768px) {
+
+                .sf-navbar__links {
+                    gap: 2px;
+                }
+
+                    .sf-navbar__links a {
+                        padding: 5px 8px;
+                        font-size: .75rem;
+                    }
+
+                .sf-navbar__search {
+                    display: none;
+                }
+
+                .sf-mini-player {
+                    min-height: 100px;
+                    flex-wrap: wrap;
+                    padding: 8px 12px;
+                }
+
+                .sf-mini-player__info {
+                    flex: 1;
+                }
+
+                .sf-mini-player__controls {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .sf-mini-player__volume {
+                    width: 65px;
+                }
+
+                body.sf-mini-player-visible {
+                    padding-bottom: 120px;
+                }
+            }
+
     </style>
 </head>
+
+
 <body>
 
-    <!-- ════════════════  NAVBAR  ════════════════ -->
+    <!-- ════════════════ NAVBAR ════════════════ -->
+
     <nav class="sf-navbar">
 
         <!-- Logo -->
-        <a class="sf-navbar__logo" asp-controller="Home" asp-action="Index">
+
+        <a class="sf-navbar__logo"
+               asp-controller="Home"
+               asp-action="Index">
+
             CineStream<span style="color:#fff">CR</span>
+
         </a>
 
+
         <!-- Links centrados -->
+
         <ul class="sf-navbar__links">
+
             <li>
-                <a asp-controller="Home" asp-action="Index"
-                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Inicio" ? "active" : "")">
+                <a asp-controller="Home"
+                       asp-action="Index"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" &&
+                                                                   ViewContext.RouteData.Values["action"]?.ToString() == "Index"
+                                                                   ? "active" : "")">
+
                     Home
+
                 </a>
             </li>
 
+
             <li>
-                <a asp-controller="Home" asp-action="Shows"
-                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Shows" ? "active" : "")">
-                    Shows
-                </a>
-            </li>
-            <li>
-                <a asp-controller="Movie" asp-action="Movies"
-                   class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Movies" ? "active" : "")">
+                <a asp-controller="Movie"
+                       asp-action="Movies"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Movie"
+                                                                   ? "active" : "")">
+
                     Movies
+
                 </a>
             </li>
-            
-           <li>
+
+
+            <li>
                 <a asp-controller="WatchList"
-                   asp-action="Index"
-                   class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "WatchList" ? "active" : "")">
+                       asp-action="Index"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "WatchList"
+                                                                   ? "active" : "")">
+
                     My List
+
                 </a>
             </li>
-            
+
         </ul>
 
+
         <!-- Derecha: búsqueda + perfil -->
+
         <div class="sf-navbar__right">
 
             <!-- Icono buscar -->
-            <svg class="sf-navbar__search" width="20" height="20" viewBox="0 0 24 24"
-                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+
+            <svg class="sf-navbar__search"
+                 width="20"
+                 height="20"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round">
+
+                <circle cx="11"
+                        cy="11"
+                        r="8" />
+
+                <line x1="21"
+                      y1="21"
+                      x2="16.65"
+                      y2="16.65" />
+
             </svg>
 
-            <!-- Perfil con dropdown -->
-            <div class="sf-profile" id="sfProfile">
 
-                <div class="sf-profile__trigger" id="sfProfileTrigger" title="Mi perfil">
-                    <!-- Iniciales del usuario; reemplaza con @User.Identity?.Name?[0] si usas Auth -->
+            <!-- Perfil con dropdown -->
+
+            <div class="sf-profile"
+                 id="sfProfile">
+
+
+                <div class="sf-profile__trigger"
+                     id="sfProfileTrigger"
+                     title="Mi perfil">
+
                     U
+
                 </div>
 
-                <div class="sf-profile__menu" id="sfProfileMenu">
+
+                <div class="sf-profile__menu"
+                     id="sfProfileMenu">
+
 
                     <!-- Info del usuario -->
-                    <a class="sf-profile__item" asp-controller="Account" asp-action="Profile">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2">
+
+                    <a class="sf-profile__item"
+                           asp-controller="Account"
+                           asp-action="Profile">
+
+                        <svg width="16"
+                             height="16"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2">
+
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                            <circle cx="12" cy="7" r="4" />
+
+                            <circle cx="12"
+                                    cy="7"
+                                    r="4" />
+
                         </svg>
+
                         Mi Perfil
+
                     </a>
 
-                    <a class="sf-profile__item" asp-controller="Account" asp-action="Settings">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3" />
+
+                    <a class="sf-profile__item"
+                           asp-controller="Account"
+                           asp-action="Settings">
+
+                        <svg width="16"
+                             height="16"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2">
+
+                            <circle cx="12"
+                                    cy="12"
+                                    r="3" />
+
                             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+
                         </svg>
+
                         Configuración
+
                     </a>
 
-                    <a class="sf-profile__item" asp-controller="Account" asp-action="Watchlist">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2">
+
+                    <a class="sf-profile__item"
+                           asp-controller="WatchList"
+                           asp-action="Index">
+
+                        <svg width="16"
+                             height="16"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2">
+
                             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+
                         </svg>
+
                         Mi Lista
+
                     </a>
+
 
                     <div class="sf-profile__divider"></div>
 
+
                     <a class="sf-profile__item sf-profile__item--danger"
-                       asp-controller="Account" asp-action="Logout">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2">
+                           asp-controller="Auth"
+                           asp-action="Logout">
+
+                        <svg width="16"
+                             height="16"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2">
+
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+
                             <polyline points="16 17 21 12 16 7" />
-                            <line x1="21" y1="12" x2="9" y2="12" />
+
+                            <line x1="21"
+                                  y1="12"
+                                  x2="9"
+                                  y2="12" />
+
                         </svg>
+
                         Cerrar Sesión
+
                     </a>
 
                 </div>
-            </div><!-- /sf-profile -->
+
+            </div>
 
         </div>
+
     </nav>
 
-    <!-- ════════════════  CONTENIDO  ════════════════ -->
+
+
+    <!-- ════════════════ CONTENIDO ════════════════ -->
+
     <div class="sf-main">
+
         @RenderBody()
+
     </div>
 
-    <!-- ════════════════  FOOTER  ════════════════ -->
-    <footer class="sf-footer">
-        <div>
-            &copy; 2026 CineStreamCR &nbsp;·&nbsp;
-            <a asp-controller="Home" asp-action="Privacy">Privacidad</a>
+
+
+    <!-- ════════════════ MINI PLAYER ════════════════ -->
+
+    <div id="sfMiniPlayer"
+         class="sf-mini-player">
+
+
+        <img id="sfMiniPlayerPoster"
+             class="sf-mini-player__poster"
+             src=""
+             alt="Movie poster" />
+
+
+        <div class="sf-mini-player__info">
+
+            <div id="sfMiniPlayerTitle"
+                 class="sf-mini-player__title">
+
+                No movie playing
+
+            </div>
+
+
+            <input type="range"
+                   id="sfMiniProgress"
+                   class="sf-mini-player__progress"
+                   min="0"
+                   value="0"
+                   step="0.1" />
+
         </div>
+
+
+        <div class="sf-mini-player__controls">
+
+
+            <button type="button"
+                    id="sfMiniBack"
+                    class="sf-mini-player__button">
+
+                ↶ 10s
+
+            </button>
+
+
+            <button type="button"
+                    id="sfMiniPlayPause"
+                    class="sf-mini-player__button">
+
+                ▶
+
+            </button>
+
+
+            <button type="button"
+                    id="sfMiniForward"
+                    class="sf-mini-player__button">
+
+                10s ↷
+
+            </button>
+
+
+            <span>🔊</span>
+
+
+            <input type="range"
+                   id="sfMiniVolume"
+                   class="sf-mini-player__volume"
+                   min="0"
+                   max="1"
+                   step="0.1"
+                   value="1" />
+
+
+            <button type="button"
+                    id="sfMiniClose"
+                    class="sf-mini-player__button">
+
+                ✕
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ════════════════ FOOTER ════════════════ -->
+
+    <footer class="sf-footer">
+
+        <div>
+
+            &copy; 2026 CineStreamCR
+            &nbsp;·&nbsp;
+
+            <a asp-controller="Home"
+                   asp-action="Privacy">
+
+                Privacidad
+
+            </a>
+
+        </div>
+
     </footer>
 
-    <!-- Scripts -->
+
+
+    <!-- ════════════════ SCRIPTS ════════════════ -->
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+
+
+    <!-- DROPDOWN DE PERFIL -->
 
     <script>
-        // ── Toggle del dropdown de perfil ──
-        (function () {
-        const profile = document.getElementById('sfProfile');
-        const trigger = document.getElementById('sfProfileTrigger');
 
-        trigger.addEventListener('click', function (e) {
-        e.stopPropagation();
-        profile.classList.toggle('open');
-        });
+            (function () {
 
-        // Cierra si se hace click fuera
-        document.addEventListener('click', function () {
-        profile.classList.remove('open');
-        });
+                const profile =
+                    document.getElementById('sfProfile');
 
-        // Evita que clicks dentro del menú lo cierren
-        document.getElementById('sfProfileMenu').addEventListener('click', function (e) {
-        e.stopPropagation();
-        });
-        })();
+                const trigger =
+                    document.getElementById('sfProfileTrigger');
+
+                const menu =
+                    document.getElementById('sfProfileMenu');
+
+
+                if (!profile ||
+                    !trigger ||
+                    !menu) {
+
+                    return;
+                }
+
+
+                trigger.addEventListener(
+                    'click',
+                    function (e) {
+
+                        e.stopPropagation();
+
+                        profile.classList.toggle(
+                            'open'
+                        );
+
+                    });
+
+
+                document.addEventListener(
+                    'click',
+                    function () {
+
+                        profile.classList.remove(
+                            'open'
+                        );
+
+                    });
+
+
+                menu.addEventListener(
+                    'click',
+                    function (e) {
+
+                        e.stopPropagation();
+
+                    });
+
+            })();
+
     </script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+
+
+    <!-- MINI REPRODUCTOR PERSISTENTE -->
+
+    <script>
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                function () {
+
+
+                    const miniPlayer =
+                        document.getElementById(
+                            "sfMiniPlayer"
+                        );
+
+
+                    const miniPoster =
+                        document.getElementById(
+                            "sfMiniPlayerPoster"
+                        );
+
+
+                    const miniTitle =
+                        document.getElementById(
+                            "sfMiniPlayerTitle"
+                        );
+
+
+                    const miniProgress =
+                        document.getElementById(
+                            "sfMiniProgress"
+                        );
+
+
+                    const miniPlayPause =
+                        document.getElementById(
+                            "sfMiniPlayPause"
+                        );
+
+
+                    const miniBack =
+                        document.getElementById(
+                            "sfMiniBack"
+                        );
+
+
+                    const miniForward =
+                        document.getElementById(
+                            "sfMiniForward"
+                        );
+
+
+                    const miniVolume =
+                        document.getElementById(
+                            "sfMiniVolume"
+                        );
+
+
+                    const miniClose =
+                        document.getElementById(
+                            "sfMiniClose"
+                        );
+
+
+
+                    // Datos guardados del reproductor
+
+                    const savedUrl =
+                        localStorage.getItem(
+                            "cineVideoUrl"
+                        );
+
+
+                    if (!savedUrl) {
+                        return;
+                    }
+
+
+                    const savedTitle =
+                        localStorage.getItem(
+                            "cineVideoTitle"
+                        ) || "Movie";
+
+
+                    const savedPoster =
+                        localStorage.getItem(
+                            "cineVideoPoster"
+                        ) || "";
+
+
+                    const savedTime =
+                        parseFloat(
+                            localStorage.getItem(
+                                "cineVideoTime"
+                            ) || "0"
+                        );
+
+
+                    const savedVolume =
+                        parseFloat(
+                            localStorage.getItem(
+                                "cineVideoVolume"
+                            ) || "1"
+                        );
+
+
+                    const savedPlaying =
+                        localStorage.getItem(
+                            "cineVideoPlaying"
+                        ) === "true";
+
+
+
+                    // Crear elemento de reproducción
+
+                    const player =
+                        document.createElement(
+                            "video"
+                        );
+
+
+                    player.src =
+                        savedUrl;
+
+
+                    player.preload =
+                        "metadata";
+
+
+                    player.style.display =
+                        "none";
+
+
+                    document.body.appendChild(
+                        player
+                    );
+
+
+
+                    // Mostrar mini player
+
+                    miniPlayer.classList.add(
+                        "active"
+                    );
+
+
+                    document.body.classList.add(
+                        "sf-mini-player-visible"
+                    );
+
+
+                    miniTitle.textContent =
+                        savedTitle;
+
+
+                    miniPoster.src =
+                        savedPoster;
+
+
+                    player.volume =
+                        savedVolume;
+
+
+                    miniVolume.value =
+                        savedVolume;
+
+
+
+                    // Cargar información del video
+
+                    player.addEventListener(
+                        "loadedmetadata",
+                        function () {
+
+
+                            miniProgress.max =
+                                player.duration;
+
+
+                            if (
+                                savedTime > 0 &&
+                                savedTime < player.duration
+                            ) {
+
+                                player.currentTime =
+                                    savedTime;
+
+                            }
+
+
+                            if (savedPlaying) {
+
+                                player.play()
+                                    .catch(
+                                        function () {
+
+                                            // Algunos navegadores
+                                            // bloquean autoplay
+
+                                        }
+                                    );
+
+                            }
+
+                        });
+
+
+
+                    // Play
+
+                    player.addEventListener(
+                        "play",
+                        function () {
+
+                            miniPlayPause.textContent =
+                                "⏸";
+
+
+                            localStorage.setItem(
+                                "cineVideoPlaying",
+                                "true"
+                            );
+
+                        });
+
+
+
+                    // Pause
+
+                    player.addEventListener(
+                        "pause",
+                        function () {
+
+                            miniPlayPause.textContent =
+                                "▶";
+
+
+                            localStorage.setItem(
+                                "cineVideoPlaying",
+                                "false"
+                            );
+
+                        });
+
+
+
+                    // Progreso
+
+                    player.addEventListener(
+                        "timeupdate",
+                        function () {
+
+                            miniProgress.value =
+                                player.currentTime;
+
+
+                            localStorage.setItem(
+                                "cineVideoTime",
+                                player.currentTime.toString()
+                            );
+
+                        });
+
+
+
+                    // Play / Pause
+
+                    miniPlayPause.addEventListener(
+                        "click",
+                        function () {
+
+                            if (player.paused) {
+
+                                player.play();
+
+                            }
+                            else {
+
+                                player.pause();
+
+                            }
+
+                        });
+
+
+
+                    // Retroceder
+
+                    miniBack.addEventListener(
+                        "click",
+                        function () {
+
+                            player.currentTime =
+                                Math.max(
+                                    0,
+                                    player.currentTime - 10
+                                );
+
+                        });
+
+
+
+                    // Avanzar
+
+                    miniForward.addEventListener(
+                        "click",
+                        function () {
+
+                            if (!isNaN(player.duration)) {
+
+                                player.currentTime =
+                                    Math.min(
+                                        player.duration,
+                                        player.currentTime + 10
+                                    );
+
+                            }
+
+                        });
+
+
+
+                    // Mover progreso
+
+                    miniProgress.addEventListener(
+                        "input",
+                        function () {
+
+                            player.currentTime =
+                                parseFloat(
+                                    miniProgress.value
+                                );
+
+                        });
+
+
+
+                    // Volumen
+
+                    miniVolume.addEventListener(
+                        "input",
+                        function () {
+
+                            player.volume =
+                                parseFloat(
+                                    miniVolume.value
+                                );
+
+
+                            localStorage.setItem(
+                                "cineVideoVolume",
+                                player.volume.toString()
+                            );
+
+                        });
+
+
+
+                    // Cerrar reproductor
+
+                    miniClose.addEventListener(
+                        "click",
+                        function () {
+
+                            player.pause();
+
+                            player.remove();
+
+
+                            miniPlayer.classList.remove(
+                                "active"
+                            );
+
+
+                            document.body.classList.remove(
+                                "sf-mini-player-visible"
+                            );
+
+
+                            localStorage.removeItem(
+                                "cineVideoUrl"
+                            );
+
+
+                            localStorage.removeItem(
+                                "cineVideoTitle"
+                            );
+
+
+                            localStorage.removeItem(
+                                "cineVideoPoster"
+                            );
+
+
+                            localStorage.removeItem(
+                                "cineVideoTime"
+                            );
+
+
+                            localStorage.removeItem(
+                                "cineVideoVolume"
+                            );
+
+
+                            localStorage.removeItem(
+                                "cineVideoPlaying"
+                            );
+
+                        });
+
+                });
+
+    </script>
+
+
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false
+    )
+
 </body>
 </html>

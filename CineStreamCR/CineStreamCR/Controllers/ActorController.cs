@@ -3,6 +3,7 @@ using CineStreamCR.BLL.DTO.Movie;
 using CineStreamCR.BLL.Services.Actor;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StreamingApp.Models;
 
 namespace CineStreamCR.Controllers
 {
@@ -26,6 +27,33 @@ namespace CineStreamCR.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var actorResult = await _actorService.GetActorByIdAsync(id);
+
+            if (!actorResult.EsCorrecto || actorResult.Dato == null)
+            {
+                TempData["Error"] = actorResult.mensaje ?? "Actor not found.";
+                return RedirectToAction(nameof(Actors));
+            }
+
+            var moviesResult = await _movieActorService.GetMoviesByActorId(id);
+
+            var viewModel = new ActorDetailViewModel
+            {
+                Actor = actorResult.Dato,
+
+                Movies = moviesResult.EsCorrecto && moviesResult.Dato != null
+                    ? moviesResult.Dato
+                    : new List<MovieCastMemberDTO>()
+            };
+
+            return View(viewModel);
+        }
+
 
 
 

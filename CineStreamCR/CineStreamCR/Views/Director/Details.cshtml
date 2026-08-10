@@ -1,0 +1,316 @@
+﻿@model StreamingApp.Models.DirectorDetailViewModel
+
+@{
+    ViewData["Title"] = $"{Model.Director.FirstName} {Model.Director.LastName}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="director-detail">
+
+    <div class="director-header">
+
+        <div class="director-photo">
+
+            @if (!string.IsNullOrWhiteSpace(Model.Director.PictureImg))
+            {
+                <img src="@Model.Director.PictureImg"
+                     alt="@Model.Director.FirstName @Model.Director.LastName" />
+            }
+            else
+            {
+                <div class="director-placeholder">
+                    No image
+                </div>
+            }
+
+        </div>
+
+
+        <div class="director-info">
+
+            <h1>
+                @Model.Director.FirstName @Model.Director.LastName
+            </h1>
+
+
+            @if (!string.IsNullOrWhiteSpace(Model.Director.Nationality))
+            {
+                <div class="director-data">
+                    <strong>Nationality:</strong>
+                    <span>@Model.Director.Nationality</span>
+                </div>
+            }
+
+
+            @if (Model.Director.BirthDate.HasValue)
+            {
+                <div class="director-data">
+                    <strong>Date of Birth:</strong>
+
+                    <span>
+                        @Model.Director.BirthDate.Value.ToString("MMMM dd, yyyy")
+                    </span>
+                </div>
+            }
+
+
+            @if (!string.IsNullOrWhiteSpace(Model.Director.Biography))
+            {
+                <div class="biography">
+
+                    <h3>Biography</h3>
+
+                    <p>
+                        @Model.Director.Biography
+                    </p>
+
+                </div>
+            }
+
+
+            <a asp-controller="Movie"
+                   asp-action="Movies"
+                   class="btn-back">
+                ← Back to movies
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PELÍCULAS DEL DIRECTOR -->
+
+    <div class="director-movies">
+
+        <h2>Directed Movies</h2>
+
+        @if (Model.Movies != null && Model.Movies.Any())
+        {
+            <div class="movie-row">
+
+                @foreach (var movie in Model.Movies)
+                {
+                    <a asp-controller="Movie"
+                           asp-action="Details"
+                           asp-route-id="@movie.MovieId"
+                           class="movie-card">
+
+                        @if (!string.IsNullOrWhiteSpace(movie.PosterImg))
+                        {
+                            <img src="@movie.PosterImg"
+                                 alt="@movie.Title" />
+                        }
+                        else
+                        {
+                            <div class="movie-placeholder">
+                                🎬
+                            </div>
+                        }
+
+                        <div class="movie-title">
+                            @movie.Title
+                        </div>
+
+                        <div class="movie-year">
+                            @movie.ReleaseYear
+                        </div>
+
+                    </a>
+                }
+
+            </div>
+        }
+        else
+        {
+            <p class="empty-info">
+                No movie information available.
+            </p>
+        }
+
+    </div>
+
+</section>
+
+
+<style>
+
+    :root {
+        --red: #e50914;
+        --black: #141414;
+        --white: #ffffff;
+        --gray: #b3b3b3;
+    }
+
+    .director-detail {
+        min-height: 100vh;
+        background: var(--black);
+        color: var(--white);
+        padding: 70px 6%;
+    }
+
+    .director-header {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        gap: 50px;
+        align-items: flex-start;
+    }
+
+    .director-photo img {
+        width: 300px;
+        height: 420px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 20px 50px rgba(0,0,0,.7);
+    }
+
+    .director-placeholder {
+        width: 300px;
+        height: 420px;
+        background: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        color: var(--gray);
+    }
+
+    .director-info {
+        flex: 1;
+        padding-top: 20px;
+    }
+
+        .director-info h1 {
+            font-size: 3rem;
+            margin: 0 0 30px;
+        }
+
+    .director-data {
+        margin-bottom: 10px;
+        color: var(--gray);
+    }
+
+        .director-data strong {
+            color: var(--red);
+            margin-right: 5px;
+        }
+
+    .biography {
+        margin-top: 30px;
+        max-width: 650px;
+    }
+
+        .biography h3 {
+            margin-bottom: 10px;
+        }
+
+        .biography p {
+            color: #ddd;
+            line-height: 1.7;
+        }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 10px 20px;
+        background: var(--red);
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+        .btn-back:hover {
+            opacity: .85;
+            color: white;
+        }
+
+    .director-movies {
+        max-width: 1100px;
+        margin: 60px auto 0;
+        padding-top: 30px;
+        border-top: 1px solid #333;
+    }
+
+        .director-movies h2 {
+            margin-bottom: 25px;
+        }
+
+    .movie-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+
+    .movie-card {
+        width: 170px;
+        text-decoration: none;
+        color: white;
+        transition: transform .2s;
+    }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        .movie-card img,
+        .movie-placeholder {
+            width: 170px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #333;
+        }
+
+    .movie-placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+    }
+
+    .movie-title {
+        margin-top: 10px;
+        font-weight: 700;
+    }
+
+    .movie-year {
+        margin-top: 3px;
+        color: var(--gray);
+        font-size: .85rem;
+    }
+
+    .empty-info {
+        color: var(--gray);
+    }
+
+    @@media (max-width: 768px) {
+
+        .director-header {
+            flex-direction: column;
+        }
+
+        .director-photo img,
+        .director-placeholder {
+            width: 220px;
+            height: 310px;
+        }
+
+        .director-info h1 {
+            font-size: 2.2rem;
+        }
+
+        .movie-card {
+            width: 135px;
+        }
+
+            .movie-card img,
+            .movie-placeholder {
+                width: 135px;
+                height: 200px;
+            }
+    }
+
+</style>

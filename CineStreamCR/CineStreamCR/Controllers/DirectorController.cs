@@ -1,7 +1,10 @@
 ﻿using CineStreamCR.BLL.DTO.Director;
+using CineStreamCR.BLL.DTO.Movie;
 using CineStreamCR.BLL.Services.Director;
+using CineStreamCR.BLL.Services.Movie;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StreamingApp.Models;
 
 namespace CineStreamCR.Controllers
 {
@@ -9,15 +12,21 @@ namespace CineStreamCR.Controllers
     {
         private readonly IDirectorService _directorService;
         private readonly IMovieDirectorService _movieDirectorService;
+        private readonly IMovieService _movieService;
 
-        public DirectorController(IDirectorService directorService, IMovieDirectorService movieDirectorService)
+
+        public DirectorController(
+            IDirectorService directorService,
+            IMovieDirectorService movieDirectorService,
+            IMovieService movieService)
         {
             _directorService = directorService;
             _movieDirectorService = movieDirectorService;
+            _movieService = movieService;
         }
 
 
-        //  VIEWS
+        // VIEWS
 
         [HttpGet]
         public IActionResult Directors()
@@ -26,14 +35,52 @@ namespace CineStreamCR.Controllers
         }
 
 
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var directorResult =
+                await _directorService.GetDirectorByIdAsync(id);
+
+            if (!directorResult.EsCorrecto ||
+                directorResult.Dato == null)
+            {
+                TempData["Error"] =
+                    directorResult.mensaje ?? "Director not found.";
+
+                return RedirectToAction(nameof(Directors));
+            }
 
 
-        //  READ (JSON)
+            var moviesResult =
+                await _movieService.GetMoviesByDirectorId(id);
+
+
+            var viewModel = new DirectorDetailViewModel
+            {
+                Director = directorResult.Dato,
+
+                Movies =
+                    moviesResult.EsCorrecto &&
+                    moviesResult.Dato != null
+                        ? moviesResult.Dato
+                        : new List<MovieDTO>()
+            };
+
+
+            return View(viewModel);
+        }
+
+
+
+        // READ (JSON)
 
         [HttpGet]
         public async Task<IActionResult> GetDirectors()
         {
-            var result = await _directorService.GetAllDirectorsAsync();
+            var result =
+                await _directorService.GetAllDirectorsAsync();
+
             return Json(result);
         }
 
@@ -41,7 +88,9 @@ namespace CineStreamCR.Controllers
         [HttpGet]
         public async Task<IActionResult> GetActiveDirectors(byte isActive)
         {
-            var result = await _directorService.GetActiveDirectorsAsync(isActive);
+            var result =
+                await _directorService.GetActiveDirectorsAsync(isActive);
+
             return Json(result);
         }
 
@@ -49,7 +98,9 @@ namespace CineStreamCR.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDirectorById(int id)
         {
-            var result = await _directorService.GetDirectorByIdAsync(id);
+            var result =
+                await _directorService.GetDirectorByIdAsync(id);
+
             if (!result.EsCorrecto)
                 return NotFound(result);
 
@@ -58,9 +109,15 @@ namespace CineStreamCR.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetDirectorByName(string firstName, string lastName)
+        public async Task<IActionResult> GetDirectorByName(
+            string firstName,
+            string lastName)
         {
-            var result = await _directorService.GetDirectorByNameAsync(firstName, lastName);
+            var result =
+                await _directorService.GetDirectorByNameAsync(
+                    firstName,
+                    lastName);
+
             if (!result.EsCorrecto)
                 return NotFound(result);
 
@@ -71,98 +128,187 @@ namespace CineStreamCR.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDirectorsByMovie(int movieId)
         {
-            var result = await _directorService.GetDirectorsByMovieIdAsync(movieId);
+            var result =
+                await _directorService
+                    .GetDirectorsByMovieIdAsync(movieId);
+
             return Json(result);
         }
 
 
-        //  CREATE
-        //control de imagenes para el director, se guarda en la carpeta wwwroot/images/directors y se guarda la ruta en la base de datos
+
+        // CREATE
+
+        // Control de imágenes para el director.
+        // Se guarda en wwwroot/images/directors
+        // y la ruta se guarda en la base de datos.
+
         [HttpPost]
-        public async Task<IActionResult> CreateDirector(CreateDirectorDTO directorDTO, IFormFile? pictureFile)
+        public async Task<IActionResult> CreateDirector(
+            CreateDirectorDTO directorDTO,
+            IFormFile? pictureFile)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (pictureFile != null && pictureFile.Length > 0)
+
+            if (pictureFile != null &&
+                pictureFile.Length > 0)
             {
-                var folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "directors");
+                var folder = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "wwwroot",
+                    "images",
+                    "directors");
+
 
                 if (!Directory.Exists(folder))
                     Directory.CreateDirectory(folder);
 
-                var fileName = Guid.NewGuid() + Path.GetExtension(pictureFile.FileName);
-                var fullPath = Path.Combine(folder, fileName);
 
-                using var stream = new FileStream(fullPath, FileMode.Create);
+                var fileName =
+                    Guid.NewGuid() +
+                    Path.GetExtension(pictureFile.FileName);
+
+
+                var fullPath =
+                    Path.Combine(folder, fileName);
+
+
+                using var stream =
+                    new FileStream(
+                        fullPath,
+                        FileMode.Create);
+
+
                 await pictureFile.CopyToAsync(stream);
-                directorDTO.PictureImg = "/images/directors/" + fileName;
+
+
+                directorDTO.PictureImg =
+                    "/images/directors/" + fileName;
             }
 
-            var result = await _directorService.GetCreateDirectorAsync(directorDTO);
+
+            var result =
+                await _directorService
+                    .GetCreateDirectorAsync(directorDTO);
+
 
             if (!result.EsCorrecto)
             {
-                ModelState.AddModelError(string.Empty, result.mensaje ?? "Could not create the director.");
+                ModelState.AddModelError(
+                    string.Empty,
+                    result.mensaje ??
+                    "Could not create the director.");
+
                 return BadRequest(result);
             }
+
 
             return Json(result);
         }
 
 
-        //  EDIT
+
+        // EDIT
 
         [HttpGet]
         public async Task<IActionResult> EditDirector(int id)
         {
-            var result = await _directorService.GetDirectorByIdAsync(id);
+            var result =
+                await _directorService
+                    .GetDirectorByIdAsync(id);
+
 
             if (!result.EsCorrecto)
             {
-                TempData["Error"] = result.mensaje ?? "Director not found.";
+                TempData["Error"] =
+                    result.mensaje ??
+                    "Director not found.";
+
                 return RedirectToAction(nameof(Directors));
             }
 
-            return View("~/Views/Director/EditDirector.cshtml", result.Dato);
+
+            return View(
+                "~/Views/Director/EditDirector.cshtml",
+                result.Dato);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> EditDirector(int id, CreateDirectorDTO directorDTO, IFormFile? pictureFile)
+        public async Task<IActionResult> EditDirector(
+            int id,
+            CreateDirectorDTO directorDTO,
+            IFormFile? pictureFile)
         {
             if (!ModelState.IsValid)
             {
-                TempData["Error"] = "Please complete all required fields.";
+                TempData["Error"] =
+                    "Please complete all required fields.";
+
                 return View(directorDTO);
             }
 
-            if (pictureFile != null && pictureFile.Length > 0)
+
+            if (pictureFile != null &&
+                pictureFile.Length > 0)
             {
-                var folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "directors");
+                var folder = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "wwwroot",
+                    "images",
+                    "directors");
+
 
                 if (!Directory.Exists(folder))
                     Directory.CreateDirectory(folder);
 
-                var fileName = Guid.NewGuid() + Path.GetExtension(pictureFile.FileName);
-                var fullPath = Path.Combine(folder, fileName);
 
-                using var stream = new FileStream(fullPath, FileMode.Create);
+                var fileName =
+                    Guid.NewGuid() +
+                    Path.GetExtension(pictureFile.FileName);
+
+
+                var fullPath =
+                    Path.Combine(folder, fileName);
+
+
+                using var stream =
+                    new FileStream(
+                        fullPath,
+                        FileMode.Create);
+
+
                 await pictureFile.CopyToAsync(stream);
-                directorDTO.PictureImg = "/images/directors/" + fileName;
+
+
+                directorDTO.PictureImg =
+                    "/images/directors/" + fileName;
             }
 
-            var result = await _directorService.GetUpdateDirectorAsync(id, directorDTO);
+
+            var result =
+                await _directorService
+                    .GetUpdateDirectorAsync(
+                        id,
+                        directorDTO);
+
 
             if (!result.EsCorrecto)
                 return BadRequest(result);
 
-            TempData["Success"] = result.mensaje;
+
+            TempData["Success"] =
+                result.mensaje;
+
+
             return RedirectToAction(nameof(Directors));
         }
 
 
-        //  DELETE
+
+        // DELETE
 
         [HttpPost]
         public async Task<IActionResult> DeleteDirector(int id)
@@ -170,31 +316,43 @@ namespace CineStreamCR.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _directorService.GetDeleteDirectorAsync(id);
+
+            var result =
+                await _directorService
+                    .GetDeleteDirectorAsync(id);
+
 
             if (!result.EsCorrecto)
                 return NotFound(result);
+
 
             return Json(result);
         }
 
 
 
-
-        //  ASIGNACIÓN A PELÍCULAS (endpoints de movieDirectors)
+        // ASIGNACIÓN A PELÍCULAS
+        // Endpoints de MovieDirectors
 
         [HttpGet]
-        public async Task<IActionResult> GetMoviesByDirector(int directorId)
+        public async Task<IActionResult> GetMoviesByDirector(
+            int directorId)
         {
-            var result = await _movieDirectorService.GetMoviesByDirectorId(directorId);
+            var result =
+                await _movieDirectorService
+                    .GetMoviesByDirectorId(directorId);
+
             return Json(result);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> AssignDirectorToMovie(AssignDirectorToMovieDTO dto)
+        public async Task<IActionResult> AssignDirectorToMovie(
+     CineStreamCR.BLL.DTO.Director.AssignDirectorToMovieDTO dto)
         {
-            var result = await _movieDirectorService.AssignDirectorToMovie(dto);
+            var result =
+                await _movieDirectorService
+                    .AssignDirectorToMovie(dto);
 
             if (!result.EsCorrecto)
                 return BadRequest(result);
@@ -202,13 +360,22 @@ namespace CineStreamCR.Controllers
             return Json(result);
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> RemoveDirectorFromMovie(int movieId, int directorId)
+        public async Task<IActionResult> RemoveDirectorFromMovie(
+            int movieId,
+            int directorId)
         {
-            var result = await _movieDirectorService.RemoveDirectorFromMovie(movieId, directorId);
+            var result =
+                await _movieDirectorService
+                    .RemoveDirectorFromMovie(
+                        movieId,
+                        directorId);
+
 
             if (!result.EsCorrecto)
                 return NotFound(result);
+
 
             return Json(result);
         }

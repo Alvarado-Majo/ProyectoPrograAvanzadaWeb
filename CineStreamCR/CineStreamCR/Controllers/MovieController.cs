@@ -93,15 +93,65 @@ namespace CineStreamCR.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var result = await _movieService.GetMovieDetailsById(id);
+            var movieResult =
+                await _movieService.GetMovieDetailsById(id);
 
-            if (!result.EsCorrecto || result.Dato == null)
+            if (!movieResult.EsCorrecto ||
+                movieResult.Dato == null)
             {
-                TempData["Error"] = result.mensaje ?? "Movie not found.";
+                TempData["Error"] =
+                    movieResult.mensaje ?? "Movie not found.";
+
                 return RedirectToAction(nameof(Movies));
             }
 
-            return View(result.Dato);
+
+            var moviesResult =
+                await _movieService.GetAllMovies();
+
+
+            var movies =
+                moviesResult.Dato?
+                    .Where(m => m != null)
+                    .OrderBy(m => m.MovieId)
+                    .ToList()
+                ?? new List<MovieDTO>();
+
+
+            int? previousMovieId = null;
+            int? nextMovieId = null;
+
+
+            var currentIndex =
+                movies.FindIndex(m =>
+                    m.MovieId == id);
+
+
+            if (currentIndex > 0)
+            {
+                previousMovieId =
+                    movies[currentIndex - 1].MovieId;
+            }
+
+
+            if (currentIndex >= 0 &&
+                currentIndex < movies.Count - 1)
+            {
+                nextMovieId =
+                    movies[currentIndex + 1].MovieId;
+            }
+
+
+            var viewModel =
+                new MovieDetailViewModel
+                {
+                    Movie = movieResult.Dato,
+                    PreviousMovieId = previousMovieId,
+                    NextMovieId = nextMovieId
+                };
+
+
+            return View(viewModel);
         }
 
 

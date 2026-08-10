@@ -1,76 +1,100 @@
-﻿@model CineStreamCR.BLL.DTO.Movie.MovieDetailDTO
+﻿@model StreamingApp.Models.MovieDetailViewModel
 
 @{
-    ViewData["Title"] = Model.Title;
+    var movie = Model.Movie;
+
+    ViewData["Title"] = movie.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="movie-detail">
+
     @if (TempData["Success"] != null)
     {
-        <div class="movie-alert movie-alert-success">
+        <div class="movie-alert">
             @TempData["Success"]
         </div>
     }
 
     @if (TempData["Error"] != null)
     {
-        <div class="movie-alert movie-alert-error">
+        <div class="movie-alert">
             @TempData["Error"]
         </div>
     }
+
+
+    <!-- ════════════════ DETALLE DE PELÍCULA ════════════════ -->
+
     <div class="movie-hero"
-         style="background-image: url('@Model.PosterImg');">
+         style="background-image: url('@movie.PosterImg');">
 
         <div class="movie-overlay">
 
             <div class="movie-content">
 
-                <img src="@Model.PosterImg"
+                <img src="@movie.PosterImg"
                      class="movie-poster"
-                     alt="@Model.Title" />
+                     alt="@movie.Title" />
+
 
                 <div class="movie-info">
 
-                    <h1>@Model.Title</h1>
+                    <h1>@movie.Title</h1>
+
 
                     <div class="movie-meta">
 
-                        <span>@Model.ReleaseYear</span>
+                        <span>@movie.ReleaseYear</span>
 
-                        <span>@Model.DurationMinutes min</span>
+                        <span>@movie.DurationMinutes min</span>
 
-                        @if (Model.MovieRating.HasValue)
+                        @if (movie.MovieRating.HasValue)
                         {
                             <span>
-                                ⭐ @Model.MovieRating.Value.ToString("0.0")
+                                ⭐ @movie.MovieRating.Value.ToString("0.0")
                             </span>
                         }
 
-                        @if (!string.IsNullOrWhiteSpace(Model.Nationality))
+                        @if (!string.IsNullOrWhiteSpace(movie.Nationality))
                         {
-                            <span>@Model.Nationality</span>
+                            <span>@movie.Nationality</span>
                         }
 
                     </div>
 
+
+                    <!-- BOTONES -->
+
                     <div class="movie-buttons">
 
-                        <button type="button"
-                                class="btn-play">
-                            ▶ Play
-                        </button>
+                        @if (!string.IsNullOrWhiteSpace(movie.VideoUrl))
+                        {
+                            <button type="button"
+                                    class="btn-play"
+                                    id="btnOpenPlayer">
+                                ▶ Play
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button"
+                                    class="btn-play"
+                                    disabled>
+                                ▶ Video unavailable
+                            </button>
+                        }
+
 
                         <form asp-controller="WatchList"
                               asp-action="AddMovie"
-                              method="post"
-                              class="add-list-form">
+                              method="post">
 
                             @Html.AntiForgeryToken()
 
                             <input type="hidden"
                                    name="movieId"
-                                   value="@Model.MovieId" />
+                                   value="@movie.MovieId" />
 
                             <button type="submit"
                                     class="btn-list">
@@ -81,14 +105,18 @@
 
                     </div>
 
-                    @if (!string.IsNullOrWhiteSpace(Model.Synopsis))
+
+                    <!-- SINOPSIS -->
+                    @if (!string.IsNullOrWhiteSpace(movie.Synopsis))
                     {
                         <div class="movie-synopsis">
+
                             <h3>Synopsis</h3>
 
                             <p>
-                                @Model.Synopsis
+                                @movie.Synopsis
                             </p>
+
                         </div>
                     }
 
@@ -101,19 +129,185 @@
     </div>
 
 
+
+    <!-- ════════════════ REPRODUCTOR ════════════════ -->
+    @if (!string.IsNullOrWhiteSpace(movie.VideoUrl))
+    {
+        <section id="playerSection"
+                 class="player-section">
+
+            <div class="player-container">
+
+
+                <div class="player-top">
+
+                    <h2>@movie.Title</h2>
+
+                    <button type="button"
+                            id="btnClosePlayer"
+                            class="btn-close-player">
+                        ✕
+                    </button>
+
+                </div>
+
+
+                <video id="moviePlayer"
+                       class="movie-player"
+                       poster="@movie.PosterImg"
+                       preload="metadata">
+
+                    <source src="@movie.VideoUrl"
+                            type="video/mp4" />
+
+                    Your browser does not support video playback.
+
+                </video>
+
+
+                <!-- BARRA DE PROGRESO -->
+
+                <input type="range"
+                       id="progressBar"
+                       class="progress-bar"
+                       value="0"
+                       min="0"
+                       step="0.1" />
+
+
+                <!-- CONTROLES -->
+
+                <div class="player-controls">
+
+
+                    <!-- PELÍCULA ANTERIOR -->
+                    @if (Model.PreviousMovieId.HasValue)
+                    {
+                        <a asp-controller="Movie"
+                               asp-action="Details"
+                               asp-route-id="@Model.PreviousMovieId.Value"
+                               class="control-btn navigation-btn">
+
+                            ← Previous
+
+                        </a>
+                    }
+                    else
+                    {
+                        <button type="button"
+                                class="control-btn"
+                                disabled>
+
+                            ← Previous
+
+                        </button>
+                    }
+
+
+                    <!-- RETROCEDER -->
+
+                    <button type="button"
+                            id="btnBack"
+                            class="control-btn">
+
+                        ↶ 10s
+
+                    </button>
+
+
+                    <!-- PLAY / PAUSE -->
+
+                    <button type="button"
+                            id="btnPlayPause"
+                            class="control-btn main-control">
+
+                        ▶ Play
+
+                    </button>
+
+
+                    <!-- AVANZAR -->
+
+                    <button type="button"
+                            id="btnForward"
+                            class="control-btn">
+
+                        10s ↷
+
+                    </button>
+
+
+                    <!-- PELÍCULA SIGUIENTE -->
+                    @if (Model.NextMovieId.HasValue)
+                    {
+                        <a asp-controller="Movie"
+                               asp-action="Details"
+                               asp-route-id="@Model.NextMovieId.Value"
+                               class="control-btn navigation-btn">
+
+                            Next →
+
+                        </a>
+                    }
+                    else
+                    {
+                        <button type="button"
+                                class="control-btn"
+                                disabled>
+
+                            Next →
+
+                        </button>
+                    }
+
+
+                    <!-- VOLUMEN -->
+
+                    <div class="volume-control">
+
+                        <span>🔊</span>
+
+                        <input type="range"
+                               id="volumeBar"
+                               min="0"
+                               max="1"
+                               step="0.1"
+                               value="1" />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+    }
+
+
+
+    <!-- ════════════════ INFORMACIÓN INFERIOR ════════════════ -->
+
     <section class="movie-bottom">
+
+
+        <!-- ACTORES -->
 
         <div class="cast-section">
 
             <h2>Cast</h2>
 
-            @if (Model.Cast != null && Model.Cast.Any())
+
+            @if (movie.Cast != null &&
+                 movie.Cast.Any())
             {
                 <div class="cast-row">
 
-                    @foreach (var actor in Model.Cast.Take(4))
+                    @foreach (var actor in movie.Cast.Take(4))
                     {
-                        <div class="cast-card">
+                        <a asp-controller="Actor"
+                               asp-action="Details"
+                               asp-route-id="@actor.ActorId"
+                               class="cast-card">
 
                             @if (!string.IsNullOrWhiteSpace(actor.ActorPictureImg))
                             {
@@ -122,12 +316,16 @@
                             }
                             else
                             {
-                                <div class="cast-placeholder"></div>
+                                <div class="cast-placeholder">
+                                    No image
+                                </div>
                             }
+
 
                             <div class="cast-name">
                                 @actor.ActorFullName
                             </div>
+
 
                             @if (!string.IsNullOrWhiteSpace(actor.CharacterName))
                             {
@@ -136,18 +334,10 @@
                                 </div>
                             }
 
-                        </div>
+                        </a>
                     }
 
                 </div>
-
-                @if (Model.Cast.Count > 4)
-                {
-                    <button type="button"
-                            class="btn-more">
-                        View More
-                    </button>
-                }
             }
             else
             {
@@ -159,33 +349,56 @@
         </div>
 
 
+
+        <!-- INFORMACIÓN EXTRA -->
+
         <div class="movie-extra">
 
-            @if (Model.Categories != null && Model.Categories.Any())
+
+            <!-- GÉNEROS -->
+            @if (movie.Categories != null &&
+                             movie.Categories.Any())
             {
                 <div class="extra-line">
+
                     <span class="extra-label">
                         Genres:
                     </span>
 
                     <span>
-                        @string.Join(", ",
-                            Model.Categories.Select(x => x.Name))
+                        @string.Join(
+                            ", ",
+                            movie.Categories.Select(x => x.Name)
+                        )
                     </span>
+
                 </div>
             }
 
-            @if (Model.Directors != null && Model.Directors.Any())
+
+            <!-- DIRECTORES -->
+            @if (movie.Directors != null &&
+                             movie.Directors.Any())
             {
                 <div class="extra-line">
+
                     <span class="extra-label">
                         Directors:
                     </span>
 
-                    <span>
-                        @string.Join(", ",
-                            Model.Directors.Select(x => x.FullName))
-                    </span>
+
+                    @foreach (var director in movie.Directors)
+                    {
+                        <a asp-controller="Director"
+                               asp-action="Details"
+                               asp-route-id="@director.DirectorId"
+                               class="director-link">
+
+                            @director.FullName
+
+                        </a>
+                    }
+
                 </div>
             }
 
@@ -196,83 +409,92 @@
 </section>
 
 
+
 <style>
+
     :root {
         --red: #e50914;
         --black: #141414;
         --black-soft: #181818;
         --white: #ffffff;
         --gray: #b3b3b3;
-        --gray-dark: #777;
     }
+
 
     .movie-detail {
+        min-height: 100vh;
         background: var(--black);
         color: var(--white);
-        min-height: 100vh;
     }
 
-    /* HERO */
+
+    /* ══════════════════════════════════════════
+           HERO
+           ══════════════════════════════════════════ */
+
     .movie-hero {
         min-height: calc(100vh - 68px);
         background-size: cover;
         background-position: center;
-        position: relative;
     }
+
 
     .movie-overlay {
         min-height: calc(100vh - 68px);
-        background: linear-gradient( 90deg, rgba(20,20,20,.98) 0%, rgba(20,20,20,.92) 35%, rgba(20,20,20,.62) 68%, rgba(20,20,20,.25) 100% );
+        background: linear-gradient( 90deg, rgba(20,20,20,.98), rgba(20,20,20,.85), rgba(20,20,20,.40) );
         padding: 70px 5%;
         display: flex;
         align-items: center;
     }
 
+
     .movie-content {
         display: flex;
         gap: 35px;
-        align-items: flex-start;
         max-width: 1100px;
-        width: 100%;
     }
+
 
     .movie-poster {
         width: 260px;
-        min-width: 260px;
         border-radius: 10px;
         object-fit: cover;
         box-shadow: 0 20px 50px rgba(0,0,0,.8);
-        border: 1px solid rgba(255,255,255,.08);
     }
+
 
     .movie-info {
-        padding-top: 15px;
         max-width: 580px;
+        padding-top: 15px;
     }
 
+
         .movie-info h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin: 0 0 15px;
-            line-height: 1.05;
-            color: var(--white);
+            font-size: 3.5rem;
+            margin-bottom: 15px;
         }
+
 
     .movie-meta {
         display: flex;
         flex-wrap: wrap;
         gap: 18px;
         color: var(--gray);
-        margin-bottom: 20px;
         font-weight: 600;
     }
 
-    /* BUTTONS */
+
+
+    /* ══════════════════════════════════════════
+           BOTONES
+           ══════════════════════════════════════════ */
+
     .movie-buttons {
         display: flex;
         gap: 15px;
         margin: 25px 0;
     }
+
 
     .btn-play,
     .btn-list {
@@ -282,26 +504,32 @@
         font-weight: 700;
         cursor: pointer;
         font-size: 1rem;
-        transition: transform .15s, opacity .2s, background .2s;
     }
+
 
     .btn-play {
         background: var(--white);
         color: #000;
     }
 
+
     .btn-list {
         background: var(--red);
         color: var(--white);
     }
 
-        .btn-play:hover,
-        .btn-list:hover {
-            transform: scale(1.03);
-            opacity: .88;
-        }
 
-    /* SYNOPSIS */
+    .btn-play:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
+
+
+
+    /* ══════════════════════════════════════════
+           SINOPSIS
+           ══════════════════════════════════════════ */
+
     .movie-synopsis {
         max-width: 520px;
         margin-top: 30px;
@@ -309,128 +537,262 @@
         border-left: 4px solid var(--red);
     }
 
-        .movie-synopsis h3 {
-            margin: 0 0 8px;
-            font-size: 1.1rem;
-            color: var(--white);
-            font-weight: 700;
-        }
 
         .movie-synopsis p {
-            margin: 0;
             color: #ddd;
-            font-size: .95rem;
             line-height: 1.6;
         }
 
-    /* LOWER SECTION */
-    .movie-bottom {
-        background: var(--black-soft);
-        color: var(--white);
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 50px;
-        padding: 32px 5% 48px;
+
+
+    /* ══════════════════════════════════════════
+           REPRODUCTOR
+           ══════════════════════════════════════════ */
+
+    .player-section {
+        display: none;
+        padding: 30px 5%;
+        background: #000;
         border-top: 2px solid var(--red);
+        border-bottom: 2px solid var(--red);
     }
 
-    /* CAST */
-    .cast-section h2 {
-        font-size: 1.35rem;
-        margin: 0 0 18px;
-        color: var(--white);
-        font-weight: 700;
+
+        .player-section.active {
+            display: block;
+        }
+
+
+    .player-container {
+        max-width: 1100px;
+        margin: 0 auto;
     }
 
-    .cast-row {
+
+    .player-top {
         display: flex;
-        gap: 18px;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+
+        .player-top h2 {
+            margin: 0;
+        }
+
+
+    .btn-close-player {
+        border: none;
+        background: transparent;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+
+    .movie-player {
+        display: block;
+        width: 100%;
+        max-height: 600px;
+        background: #000;
+    }
+
+
+
+    /* ══════════════════════════════════════════
+           PROGRESO
+           ══════════════════════════════════════════ */
+
+    .progress-bar {
+        width: 100%;
+        margin-top: 15px;
+        cursor: pointer;
+        accent-color: var(--red);
+    }
+
+
+
+    /* ══════════════════════════════════════════
+           CONTROLES
+           ══════════════════════════════════════════ */
+
+    .player-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
         flex-wrap: wrap;
     }
 
+
+    .control-btn {
+        background: #252525;
+        color: var(--white);
+        border: 1px solid #555;
+        border-radius: 6px;
+        padding: 10px 18px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+
+        .control-btn:hover:not(:disabled) {
+            background: var(--red);
+            color: var(--white);
+        }
+
+
+        .control-btn:disabled {
+            opacity: .35;
+            cursor: not-allowed;
+        }
+
+
+    .navigation-btn {
+        text-decoration: none;
+    }
+
+
+    .main-control {
+        min-width: 100px;
+    }
+
+
+    .volume-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 15px;
+    }
+
+
+    #volumeBar {
+        cursor: pointer;
+        accent-color: var(--red);
+    }
+
+
+
+    /* ══════════════════════════════════════════
+           PARTE INFERIOR
+           ══════════════════════════════════════════ */
+
+    .movie-bottom {
+        background: var(--black-soft);
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 50px;
+        padding: 35px 5%;
+    }
+
+
+
+    /* ══════════════════════════════════════════
+           ACTORES
+           ══════════════════════════════════════════ */
+
+    .cast-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+
     .cast-card {
         width: 125px;
+        text-decoration: none;
+        color: var(--white);
         transition: transform .2s;
     }
 
+
         .cast-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
+            color: var(--white);
         }
+
 
         .cast-card img,
         .cast-placeholder {
             width: 125px;
             height: 155px;
-            display: block;
-            object-fit: cover;
             border-radius: 8px;
-            background: #222;
-            border: 1px solid rgba(255,255,255,.12);
+            object-fit: cover;
+            background: #333;
         }
+
+
+    .cast-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .75rem;
+        color: var(--gray);
+    }
+
 
     .cast-name {
         margin-top: 8px;
-        color: var(--white);
-        font-size: .88rem;
         font-weight: 700;
+        font-size: .88rem;
     }
 
+
     .cast-character {
-        margin-top: 2px;
         color: var(--gray);
         font-size: .78rem;
     }
 
-    /* VIEW MORE */
-    .btn-more {
-        margin-top: 20px;
-        padding: 7px 18px;
-        border: 1px solid var(--red);
-        border-radius: 20px;
-        background: transparent;
-        color: var(--white);
-        font-size: .85rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background .2s, color .2s;
-    }
 
-        .btn-more:hover {
-            background: var(--red);
-            color: var(--white);
-        }
 
-    /* EXTRA INFO */
+    /* ══════════════════════════════════════════
+           INFORMACIÓN EXTRA
+           ══════════════════════════════════════════ */
+
     .movie-extra {
         padding-top: 5px;
-        font-size: .93rem;
-        line-height: 1.6;
+        font-size: .95rem;
     }
+
 
     .extra-line {
         margin-bottom: 14px;
     }
 
+
     .extra-label {
         color: var(--red);
-        margin-right: 5px;
         font-weight: 700;
+        margin-right: 5px;
     }
 
-    .extra-line span:not(.extra-label) {
+
+    .director-link {
         color: var(--white);
+        text-decoration: none;
+        margin-right: 8px;
     }
+
+
+        .director-link:hover {
+            color: var(--red);
+            text-decoration: underline;
+        }
+
 
     .empty-info {
         color: var(--gray);
     }
 
-    /* MOBILE */
-    @@media (max-width: 768px) {
 
-        .movie-overlay {
-            padding: 50px 6%;
-        }
+
+    /* ══════════════════════════════════════════
+           RESPONSIVE
+           ══════════════════════════════════════════ */
+
+    @@media (max-width: 768px) {
 
         .movie-content {
             flex-direction: column;
@@ -438,7 +800,6 @@
 
         .movie-poster {
             width: 180px;
-            min-width: 180px;
         }
 
         .movie-info h1 {
@@ -447,21 +808,432 @@
 
         .movie-bottom {
             grid-template-columns: 1fr;
-            gap: 30px;
         }
 
-        .movie-synopsis {
-            max-width: 100%;
+        .player-controls {
+            gap: 8px;
         }
 
-        .cast-card {
-            width: 105px;
+        .volume-control {
+            margin-left: 0;
         }
-
-            .cast-card img,
-            .cast-placeholder {
-                width: 105px;
-                height: 135px;
-            }
     }
+
 </style>
+
+
+
+@if (!string.IsNullOrWhiteSpace(movie.VideoUrl))
+{
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                const player =
+                    document.getElementById(
+                        "moviePlayer"
+                    );
+
+
+                const playerSection =
+                    document.getElementById(
+                        "playerSection"
+                    );
+
+
+                const btnOpen =
+                    document.getElementById(
+                        "btnOpenPlayer"
+                    );
+
+
+                const btnClose =
+                    document.getElementById(
+                        "btnClosePlayer"
+                    );
+
+
+                const btnPlayPause =
+                    document.getElementById(
+                        "btnPlayPause"
+                    );
+
+
+                const btnBack =
+                    document.getElementById(
+                        "btnBack"
+                    );
+
+
+                const btnForward =
+                    document.getElementById(
+                        "btnForward"
+                    );
+
+
+                const progressBar =
+                    document.getElementById(
+                        "progressBar"
+                    );
+
+
+                const volumeBar =
+                    document.getElementById(
+                        "volumeBar"
+                    );
+
+
+
+                /* ── Estado guardado ── */
+
+                const savedUrl =
+                    localStorage.getItem(
+                        "cineVideoUrl"
+                    );
+
+
+                const savedTime =
+                    parseFloat(
+                        localStorage.getItem(
+                            "cineVideoTime"
+                        ) || "0"
+                    );
+
+
+                const savedVolume =
+                    parseFloat(
+                        localStorage.getItem(
+                            "cineVideoVolume"
+                        ) || "1"
+                    );
+
+
+
+                /*
+                    Si el video guardado es el mismo
+                    que esta película, recuperamos
+                    su tiempo y volumen.
+                */
+
+                if (
+                    savedUrl === "@Html.Raw(movie.VideoUrl)"
+                ) {
+
+                    player.volume =
+                        savedVolume;
+
+
+                    volumeBar.value =
+                        savedVolume;
+
+
+                    player.addEventListener(
+                        "loadedmetadata",
+                        function () {
+
+                            if (
+                                savedTime > 0 &&
+                                savedTime < player.duration
+                            ) {
+
+                                player.currentTime =
+                                    savedTime;
+
+                            }
+
+                        });
+
+                }
+
+
+
+                /* ══════════════════════════════════
+                   ABRIR REPRODUCTOR
+                   ══════════════════════════════════ */
+
+                btnOpen.addEventListener(
+                    "click",
+                    function () {
+
+
+                        playerSection.classList.add(
+                            "active"
+                        );
+
+
+                        playerSection.scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+
+                        localStorage.setItem(
+                            "cineVideoUrl",
+                            "@Html.Raw(movie.VideoUrl)"
+                        );
+
+
+                        localStorage.setItem(
+                            "cineVideoTitle",
+                            "@Html.Raw(movie.Title.Replace("\"", "\\\""))"
+                        );
+
+
+                        localStorage.setItem(
+                            "cineVideoPoster",
+                            "@Html.Raw(movie.PosterImg)"
+                        );
+
+
+                        localStorage.setItem(
+                            "cineVideoTime",
+                            player.currentTime.toString()
+                        );
+
+
+                        localStorage.setItem(
+                            "cineVideoVolume",
+                            player.volume.toString()
+                        );
+
+
+                        localStorage.setItem(
+                            "cineVideoPlaying",
+                            "true"
+                        );
+
+
+                        player.play();
+
+                    });
+
+
+
+                /* ══════════════════════════════════
+                   CERRAR
+                   ══════════════════════════════════ */
+
+                btnClose.addEventListener(
+                    "click",
+                    function () {
+
+
+                        player.pause();
+
+
+                        localStorage.setItem(
+                            "cineVideoPlaying",
+                            "false"
+                        );
+
+
+                        playerSection.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+
+                /* ══════════════════════════════════
+                   PLAY / PAUSE
+                   ══════════════════════════════════ */
+
+                btnPlayPause.addEventListener(
+                    "click",
+                    function () {
+
+                        if (player.paused) {
+
+                            player.play();
+
+                        }
+                        else {
+
+                            player.pause();
+
+                        }
+
+                    });
+
+
+
+                player.addEventListener(
+                    "play",
+                    function () {
+
+
+                        btnPlayPause.textContent =
+                            "⏸ Pause";
+
+
+                        localStorage.setItem(
+                            "cineVideoPlaying",
+                            "true"
+                        );
+
+                    });
+
+
+
+                player.addEventListener(
+                    "pause",
+                    function () {
+
+
+                        btnPlayPause.textContent =
+                            "▶ Play";
+
+
+                        localStorage.setItem(
+                            "cineVideoPlaying",
+                            "false"
+                        );
+
+                    });
+
+
+
+                /* ══════════════════════════════════
+                   RETROCEDER
+                   ══════════════════════════════════ */
+
+                btnBack.addEventListener(
+                    "click",
+                    function () {
+
+
+                        player.currentTime =
+                            Math.max(
+                                0,
+                                player.currentTime - 10
+                            );
+
+
+                        localStorage.setItem(
+                            "cineVideoTime",
+                            player.currentTime.toString()
+                        );
+
+                    });
+
+
+
+                /* ══════════════════════════════════
+                   AVANZAR
+                   ══════════════════════════════════ */
+
+                btnForward.addEventListener(
+                    "click",
+                    function () {
+
+
+                        if (!isNaN(player.duration)) {
+
+                            player.currentTime =
+                                Math.min(
+                                    player.duration,
+                                    player.currentTime + 10
+                                );
+
+                        }
+
+
+                        localStorage.setItem(
+                            "cineVideoTime",
+                            player.currentTime.toString()
+                        );
+
+                    });
+
+
+
+                /* ══════════════════════════════════
+                   DURACIÓN
+                   ══════════════════════════════════ */
+
+                player.addEventListener(
+                    "loadedmetadata",
+                    function () {
+
+                        progressBar.max =
+                            player.duration;
+
+                    });
+
+
+
+                /* ══════════════════════════════════
+                   PROGRESO
+                   ══════════════════════════════════ */
+
+                player.addEventListener(
+                    "timeupdate",
+                    function () {
+
+
+                        progressBar.value =
+                            player.currentTime;
+
+
+                        localStorage.setItem(
+                            "cineVideoTime",
+                            player.currentTime.toString()
+                        );
+
+                    });
+
+
+
+                /* ══════════════════════════════════
+                   CAMBIAR POSICIÓN
+                   ══════════════════════════════════ */
+
+                progressBar.addEventListener(
+                    "input",
+                    function () {
+
+
+                        player.currentTime =
+                            parseFloat(
+                                progressBar.value
+                            );
+
+
+                        localStorage.setItem(
+                            "cineVideoTime",
+                            player.currentTime.toString()
+                        );
+
+                    });
+
+
+
+                /* ══════════════════════════════════
+                   VOLUMEN
+                   ══════════════════════════════════ */
+
+                volumeBar.addEventListener(
+                    "input",
+                    function () {
+
+
+                        player.volume =
+                            parseFloat(
+                                volumeBar.value
+                            );
+
+
+                        localStorage.setItem(
+                            "cineVideoVolume",
+                            player.volume.toString()
+                        );
+
+                    });
+
+            });
+
+    </script>
+}
