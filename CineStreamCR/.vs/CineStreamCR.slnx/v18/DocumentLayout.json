@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\wwwroot\\js\\actor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\wwwroot\\js\\actor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\models\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\models\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\models\\moviedetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\models\\moviedetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\models\\actordetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\models\\actordetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\controllers\\actorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\controllers\\actorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.bll\\services\\actor\\movieactorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|solutionrelative:cinestreamcr.bll\\services\\actor\\movieactorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.bll\\services\\actor\\imovieactorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|solutionrelative:cinestreamcr.bll\\services\\actor\\imovieactorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|c:\\users\\xsf\\documents\\u\\vii cuatrimestre\\progra avanzada\\proyecto\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr.bll\\services\\actor\\actorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{288F7F21-CB46-414B-A4A6-5E1DE5DFFE3F}|CineStreamCR.BLL\\CineStreamCR.BLL.csproj|solutionrelative:cinestreamcr.bll\\services\\actor\\actorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -75,14 +103,105 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\appsettings.json",
-              "RelativeDocumentMoniker": "CineStreamCR\\appsettings.json",
-              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\appsettings.json",
-              "RelativeToolTip": "CineStreamCR\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAACBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-08-11T01:48:07.678Z",
+              "Title": "actor.js",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\js\\actor.js",
+              "RelativeDocumentMoniker": "CineStreamCR\\wwwroot\\js\\actor.js",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\js\\actor.js",
+              "RelativeToolTip": "CineStreamCR\\wwwroot\\js\\actor.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-08-11T02:13:52.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\HomeViewModel.cs",
+              "RelativeDocumentMoniker": "CineStreamCR\\Models\\HomeViewModel.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\HomeViewModel.cs",
+              "RelativeToolTip": "CineStreamCR\\Models\\HomeViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:13:34.902Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MovieDetailViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\MovieDetailViewModel.cs",
+              "RelativeDocumentMoniker": "CineStreamCR\\Models\\MovieDetailViewModel.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\MovieDetailViewModel.cs",
+              "RelativeToolTip": "CineStreamCR\\Models\\MovieDetailViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:13:25.218Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ActorDetailViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\ActorDetailViewModel.cs",
+              "RelativeDocumentMoniker": "CineStreamCR\\Models\\ActorDetailViewModel.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\ActorDetailViewModel.cs",
+              "RelativeToolTip": "CineStreamCR\\Models\\ActorDetailViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:13:19.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ActorController.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\ActorController.cs",
+              "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\ActorController.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\ActorController.cs",
+              "RelativeToolTip": "CineStreamCR\\Controllers\\ActorController.cs",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAkwDYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:12:50.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MovieActorService.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Actor\\MovieActorService.cs",
+              "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\Actor\\MovieActorService.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Actor\\MovieActorService.cs",
+              "RelativeToolTip": "CineStreamCR.BLL\\Services\\Actor\\MovieActorService.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:12:22.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IMovieActorService.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Actor\\IMovieActorService.cs",
+              "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\Actor\\IMovieActorService.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Actor\\IMovieActorService.cs",
+              "RelativeToolTip": "CineStreamCR.BLL\\Services\\Actor\\IMovieActorService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:12:19.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ActorService.cs",
+              "DocumentMoniker": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Actor\\ActorService.cs",
+              "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\Actor\\ActorService.cs",
+              "ToolTip": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Actor\\ActorService.cs",
+              "RelativeToolTip": "CineStreamCR.BLL\\Services\\Actor\\ActorService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T02:12:14.784Z",
               "EditorCaption": ""
             }
           ]
