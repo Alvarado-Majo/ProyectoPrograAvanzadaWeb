@@ -95,7 +95,7 @@ namespace CineStreamCR.BLL.Services.Review
             {
                 UserId = reviewDTO.UserId,
                 MovieId = reviewDTO.MovieId,
-                Rating = reviewDTO.Rating,
+                IsLike = reviewDTO.IsLike,
                 Comment = reviewDTO.Comment ?? string.Empty,
                 ReviewDate = DateTime.Now
             };
@@ -135,7 +135,7 @@ namespace CineStreamCR.BLL.Services.Review
                 };
             }
 
-            review.Rating = reviewDTO.Rating;
+            review.IsLike = reviewDTO.IsLike;
             review.Comment = reviewDTO.Comment ?? string.Empty;
 
             bool result = await _reviewRepository.UpdateReview(review);
@@ -196,7 +196,27 @@ namespace CineStreamCR.BLL.Services.Review
             };
         }
 
-        // Recalcula Movies.MovieRating con el promedio de calificaciones
+        public async Task<Answer<ReviewSummaryDTO>> GetReviewSummaryByMovieIdAsync(int movieId)
+        {
+            var answer = new Answer<ReviewSummaryDTO>();
+            var reviews = await _reviewRepository.GetReviewsByMovieId(movieId);
+            var movie = await _movieRepository.GetMovieById(movieId);
+
+            int likes = reviews.Count(r => r.IsLike);
+
+            answer.EsCorrecto = true;
+            answer.Dato = new ReviewSummaryDTO
+            {
+                MovieId = movieId,
+                TotalReviews = reviews.Count,
+                Likes = likes,
+                Dislikes = reviews.Count - likes,
+                MovieRating = movie?.MovieRating
+            };
+            return answer;
+        }
+
+        
         private async Task RecalculateMovieRatingAsync(int movieId)
         {
             var movie = await _movieRepository.GetMovieById(movieId);
@@ -205,19 +225,22 @@ namespace CineStreamCR.BLL.Services.Review
 
             var reviews = await _reviewRepository.GetReviewsByMovieId(movieId);
 
-            movie.MovieRating = reviews.Count > 0
-                ? Math.Round((decimal)reviews.Average(r => r.Rating), 1)
-                : null;
+            if (reviews.Count == 0)
+            {
+                movie.MovieRating = null;
+            }
+            else
+            {
+                int likes = reviews.Count(r => r.IsLike);
+                movie.MovieRating = Math.Round((decimal)likes / reviews.Count * 10, 1);
+            }
 
             await _movieRepository.UpdateMovie(movie);
         }
 
         private List<ReviewDTO?> MapReviews(List<DAL.Entities.Reviews> reviews)
         {
-            // Se arma el nombre completo del usuario a mano porque
-            // ClassMapping ya resuelve UserFullName vía AutoMapper
-            // (ver CreateMap<Reviews, ReviewDTO>), esto queda como respaldo
-            // por si la reseña viene sin el User incluido.
+           
             return reviews.Select(r =>
             {
                 var dto = _mapper.Map<ReviewDTO>(r);

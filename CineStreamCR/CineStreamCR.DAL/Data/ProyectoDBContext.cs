@@ -333,7 +333,7 @@ namespace CineStreamCR.DAL.Data
 
                 entity.HasKey(e => e.ReviewId);
 
-                entity.Property(e => e.Rating)
+                entity.Property(e => e.IsLike)
                     .IsRequired();
 
                 entity.Property(e => e.ReviewDate)

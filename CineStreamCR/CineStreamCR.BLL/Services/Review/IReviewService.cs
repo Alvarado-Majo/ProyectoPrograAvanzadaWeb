@@ -11,5 +11,6 @@ namespace CineStreamCR.BLL.Services.Review
         Task<Answer<ReviewDTO>> GetCreateReviewAsync(CreateReviewDTO reviewDTO);
         Task<Answer<ReviewDTO>> GetUpdateReviewAsync(int id, CreateReviewDTO reviewDTO);
         Task<Answer<ReviewDTO>> GetDeleteReviewAsync(int id);
+        Task<Answer<ReviewSummaryDTO>> GetReviewSummaryByMovieIdAsync(int movieId);
     }
 }
