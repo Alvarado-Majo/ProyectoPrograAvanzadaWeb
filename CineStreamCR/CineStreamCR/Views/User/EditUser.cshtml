@@ -1,0 +1,314 @@
+﻿@model CineStreamCR.BLL.DTO.User.UserDTO
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<style>
+    .edit-profile-container {
+        max-width: 700px;
+        margin: 60px auto;
+        padding: 0 25px;
+        color: white;
+    }
+
+    .edit-profile-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+
+    .edit-profile-card {
+        background: #181818;
+        border-radius: 12px;
+        padding: 35px;
+        box-shadow: 0 8px 30px rgba(0,0,0,.35);
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #ccc;
+        font-weight: 600;
+    }
+
+    .form-control {
+        width: 100%;
+        background: #252525;
+        color: white;
+        border: 1px solid #444;
+        border-radius: 6px;
+        padding: 12px 14px;
+    }
+
+        .form-control:focus {
+            background: #252525;
+            color: white;
+            border-color: #e50914;
+            box-shadow: none;
+            outline: none;
+        }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .btn-save {
+        background: #e50914;
+        color: white;
+        border: none;
+        padding: 11px 22px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+        .btn-save:hover {
+            background: #f6121d;
+        }
+
+    .btn-cancel {
+        background: #333;
+        color: white;
+        padding: 11px 22px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .btn-cancel:hover {
+            background: #444;
+            color: white;
+        }
+
+    .message {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 6px;
+        display: none;
+    }
+
+        .message.success {
+            display: block;
+            background: rgba(46, 160, 67, .2);
+            color: #7ee787;
+        }
+
+        .message.error {
+            display: block;
+            background: rgba(229, 9, 20, .15);
+            color: #ff7b81;
+        }
+</style>
+
+
+<div class="edit-profile-container">
+
+    <h1 class="edit-profile-title">
+        Edit Profile
+    </h1>
+
+    <div class="edit-profile-card">
+
+        <form id="editProfileForm">
+
+            <input type="hidden"
+                   id="UserId"
+                   value="@Model.UserId" />
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    First Name
+                </label>
+
+                <input type="text"
+                       id="FirstName"
+                       name="FirstName"
+                       class="form-control"
+                       value="@Model.FirstName"
+                       required />
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Last Name
+                </label>
+
+                <input type="text"
+                       id="LastName"
+                       name="LastName"
+                       class="form-control"
+                       value="@Model.LastName"
+                       required />
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Email
+                </label>
+
+                <input type="email"
+                       id="Email"
+                       name="Email"
+                       class="form-control"
+                       value="@Model.Email"
+                       required />
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button type="submit"
+                        class="btn-save">
+
+                    Save Changes
+
+                </button>
+
+                <a asp-controller="User"
+                       asp-action="Profile"
+                       class="btn-cancel">
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+        <div id="message"
+             class="message">
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    <script>
+
+        document
+            .getElementById("editProfileForm")
+            .addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+                    const userId =
+                        document.getElementById(
+                            "UserId"
+                        ).value;
+
+                    const formData =
+                        new FormData();
+
+                    formData.append(
+                        "FirstName",
+                        document.getElementById(
+                            "FirstName"
+                        ).value
+                    );
+
+                    formData.append(
+                        "LastName",
+                        document.getElementById(
+                            "LastName"
+                        ).value
+                    );
+
+                    formData.append(
+                        "Email",
+                        document.getElementById(
+                            "Email"
+                        ).value
+                    );
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `/User/EditUser/${userId}`,
+                                {
+                                    method: "POST",
+                                    body: formData
+                                }
+                            );
+
+
+                        if (!response.ok) {
+
+                            document
+                                .getElementById("message")
+                                .className =
+                                    "message error";
+
+                            document
+                                .getElementById("message")
+                                .textContent =
+                                    "Could not update profile.";
+
+                            return;
+                        }
+
+
+                        document
+                            .getElementById("message")
+                            .className =
+                                "message success";
+
+                        document
+                            .getElementById("message")
+                            .textContent =
+                                "Profile updated successfully.";
+
+
+                        setTimeout(
+                            function () {
+
+                                window.location.href =
+                                    "/User/Profile";
+
+                            },
+                            800
+                        );
+
+                    }
+                    catch (error) {
+
+                        document
+                            .getElementById("message")
+                            .className =
+                                "message error";
+
+                        document
+                            .getElementById("message")
+                            .textContent =
+                                "An error occurred.";
+
+                    }
+
+                }
+            );
+
+    </script>
+
+}
