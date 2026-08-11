@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj": {}
+    "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj": {}
   },
   "projects": {
-    "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj": {
+    "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj",
+        "projectUniqueName": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj",
         "projectName": "CineStreamCR.BLL",
-        "projectPath": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj",
-        "packagesPath": "C:\\Users\\keisl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\obj\\",
+        "projectPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj",
+        "packagesPath": "C:\\Users\\XSF\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\keisl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\XSF\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -34,8 +34,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj": {
-                "projectPath": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj"
+              "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj": {
+                "projectPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj"
               }
             }
           }
@@ -50,7 +50,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net10.0": {
@@ -78,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -356,20 +356,20 @@
         }
       }
     },
-    "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj": {
+    "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj",
         "projectName": "CineStreamCR.DAL",
-        "projectPath": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj",
-        "packagesPath": "C:\\Users\\keisl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\obj\\",
+        "projectPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\CineStreamCR.DAL.csproj",
+        "packagesPath": "C:\\Users\\XSF\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\keisl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\XSF\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -398,7 +398,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net10.0": {
@@ -450,7 +450,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -728,20 +728,20 @@
         }
       }
     },
-    "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj": {
+    "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
+        "projectUniqueName": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
         "projectName": "CineStreamCR",
-        "projectPath": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
-        "packagesPath": "C:\\Users\\keisl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\obj\\",
+        "projectPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\CineStreamCR.csproj",
+        "packagesPath": "C:\\Users\\XSF\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\keisl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\XSF\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -758,8 +758,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj": {
-                "projectPath": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj"
+              "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj": {
+                "projectPath": "C:\\Users\\XSF\\Documents\\U\\VII Cuatrimestre\\Progra Avanzada\\Proyecto\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\CineStreamCR.BLL.csproj"
               }
             }
           }
@@ -774,7 +774,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net10.0": {
@@ -799,7 +799,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

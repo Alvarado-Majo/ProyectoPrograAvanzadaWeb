@@ -60,7 +60,7 @@ namespace CineStreamCR.DAL.Repositories.Reviews
             if (existingReview == null)
                 return false;
 
-            existingReview.Rating = review.Rating;
+            existingReview.IsLike = review.IsLike;
             existingReview.Comment = review.Comment;
 
             return await _context.SaveChangesAsync() > 0;
