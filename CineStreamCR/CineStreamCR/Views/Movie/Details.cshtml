@@ -72,7 +72,10 @@
                         {
                             <button type="button"
                                     class="btn-play"
-                                    id="btnOpenPlayer">
+                                    onclick="playGlobalMovie(
+                                '@Html.Raw(movie.VideoUrl)',
+                                '@Html.Raw(movie.Title.Replace("'", "\\'"))'
+                                )">
                                 ▶ Play
                             </button>
                         }
@@ -129,159 +132,6 @@
     </div>
 
 
-
-    <!-- ════════════════ REPRODUCTOR ════════════════ -->
-    @if (!string.IsNullOrWhiteSpace(movie.VideoUrl))
-    {
-        <section id="playerSection"
-                 class="player-section">
-
-            <div class="player-container">
-
-
-                <div class="player-top">
-
-                    <h2>@movie.Title</h2>
-
-                    <button type="button"
-                            id="btnClosePlayer"
-                            class="btn-close-player">
-                        ✕
-                    </button>
-
-                </div>
-
-
-                <video id="moviePlayer"
-                       class="movie-player"
-                       poster="@movie.PosterImg"
-                       preload="metadata">
-
-                    <source src="@movie.VideoUrl"
-                            type="video/mp4" />
-
-                    Your browser does not support video playback.
-
-                </video>
-
-
-                <!-- BARRA DE PROGRESO -->
-
-                <input type="range"
-                       id="progressBar"
-                       class="progress-bar"
-                       value="0"
-                       min="0"
-                       step="0.1" />
-
-
-                <!-- CONTROLES -->
-
-                <div class="player-controls">
-
-
-                    <!-- PELÍCULA ANTERIOR -->
-                    @if (Model.PreviousMovieId.HasValue)
-                    {
-                        <a asp-controller="Movie"
-                               asp-action="Details"
-                               asp-route-id="@Model.PreviousMovieId.Value"
-                               class="control-btn navigation-btn">
-
-                            ← Previous
-
-                        </a>
-                    }
-                    else
-                    {
-                        <button type="button"
-                                class="control-btn"
-                                disabled>
-
-                            ← Previous
-
-                        </button>
-                    }
-
-
-                    <!-- RETROCEDER -->
-
-                    <button type="button"
-                            id="btnBack"
-                            class="control-btn">
-
-                        ↶ 10s
-
-                    </button>
-
-
-                    <!-- PLAY / PAUSE -->
-
-                    <button type="button"
-                            id="btnPlayPause"
-                            class="control-btn main-control">
-
-                        ▶ Play
-
-                    </button>
-
-
-                    <!-- AVANZAR -->
-
-                    <button type="button"
-                            id="btnForward"
-                            class="control-btn">
-
-                        10s ↷
-
-                    </button>
-
-
-                    <!-- PELÍCULA SIGUIENTE -->
-                    @if (Model.NextMovieId.HasValue)
-                    {
-                        <a asp-controller="Movie"
-                               asp-action="Details"
-                               asp-route-id="@Model.NextMovieId.Value"
-                               class="control-btn navigation-btn">
-
-                            Next →
-
-                        </a>
-                    }
-                    else
-                    {
-                        <button type="button"
-                                class="control-btn"
-                                disabled>
-
-                            Next →
-
-                        </button>
-                    }
-
-
-                    <!-- VOLUMEN -->
-
-                    <div class="volume-control">
-
-                        <span>🔊</span>
-
-                        <input type="range"
-                               id="volumeBar"
-                               min="0"
-                               max="1"
-                               step="0.1"
-                               value="1" />
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-    }
 
 
 
@@ -408,8 +258,130 @@
 
 </section>
 
+<div id="moviePlayerModal"
+     class="movie-player-modal">
+
+    <div class="movie-player-container">
+
+        <button type="button"
+                class="movie-player-close"
+                onclick="closeMoviePlayer()">
+            ✕
+        </button>
+
+        <iframe id="moviePlayerIframe"
+                src=""
+                title="@movie.Title"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+
+    </div>
+
+</div>
+<script>
+    function getYouTubeEmbedUrl(url) {
+
+        if (!url)
+            return "";
+
+        try {
+
+            // Already an embed URL
+            if (url.includes("youtube.com/embed/")) {
+                return url;
+            }
+
+            // Normal YouTube URL
+            if (url.includes("youtube.com/watch")) {
+
+                const parsedUrl = new URL(url);
+
+                const videoId =
+                    parsedUrl.searchParams.get("v");
+
+                if (videoId) {
+                    return "https://www.youtube.com/embed/"
+                        + videoId
+                        + "?autoplay=1";
+                }
+            }
+
+            // Short YouTube URL
+            if (url.includes("youtu.be/")) {
+
+                const videoId =
+                    url.split("youtu.be/")[1]
+                       .split("?")[0];
+
+                return "https://www.youtube.com/embed/"
+                    + videoId
+                    + "?autoplay=1";
+            }
+
+            return url;
+
+        }
+        catch {
+            return "";
+        }
+    }
 
 
+    function openMoviePlayer(button) {
+
+        const videoUrl =
+            button.dataset.video;
+
+        const embedUrl =
+            getYouTubeEmbedUrl(videoUrl);
+
+        if (!embedUrl) {
+            alert("Video unavailable.");
+            return;
+        }
+
+        const modal =
+            document.getElementById("moviePlayerModal");
+
+        const iframe =
+            document.getElementById("moviePlayerIframe");
+
+        iframe.src = embedUrl;
+
+        modal.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+    }
+
+
+    function closeMoviePlayer() {
+
+        const modal =
+            document.getElementById("moviePlayerModal");
+
+        const iframe =
+            document.getElementById("moviePlayerIframe");
+
+        iframe.src = "";
+
+        modal.classList.remove("show");
+
+        document.body.style.overflow = "";
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+                closeMoviePlayer();
+            }
+
+        }
+    );
+</script>
 <style>
 
     :root {
@@ -429,8 +401,8 @@
 
 
     /* ══════════════════════════════════════════
-           HERO
-           ══════════════════════════════════════════ */
+                   HERO
+                   ══════════════════════════════════════════ */
 
     .movie-hero {
         min-height: calc(100vh - 68px);
@@ -486,8 +458,8 @@
 
 
     /* ══════════════════════════════════════════
-           BOTONES
-           ══════════════════════════════════════════ */
+                   BOTONES
+                   ══════════════════════════════════════════ */
 
     .movie-buttons {
         display: flex;
@@ -527,8 +499,8 @@
 
 
     /* ══════════════════════════════════════════
-           SINOPSIS
-           ══════════════════════════════════════════ */
+                   SINOPSIS
+                   ══════════════════════════════════════════ */
 
     .movie-synopsis {
         max-width: 520px;
@@ -546,8 +518,8 @@
 
 
     /* ══════════════════════════════════════════
-           REPRODUCTOR
-           ══════════════════════════════════════════ */
+                   REPRODUCTOR
+                   ══════════════════════════════════════════ */
 
     .player-section {
         display: none;
@@ -601,8 +573,8 @@
 
 
     /* ══════════════════════════════════════════
-           PROGRESO
-           ══════════════════════════════════════════ */
+                   PROGRESO
+                   ══════════════════════════════════════════ */
 
     .progress-bar {
         width: 100%;
@@ -614,8 +586,8 @@
 
 
     /* ══════════════════════════════════════════
-           CONTROLES
-           ══════════════════════════════════════════ */
+                   CONTROLES
+                   ══════════════════════════════════════════ */
 
     .player-controls {
         display: flex;
@@ -676,8 +648,8 @@
 
 
     /* ══════════════════════════════════════════
-           PARTE INFERIOR
-           ══════════════════════════════════════════ */
+                   PARTE INFERIOR
+                   ══════════════════════════════════════════ */
 
     .movie-bottom {
         background: var(--black-soft);
@@ -690,8 +662,8 @@
 
 
     /* ══════════════════════════════════════════
-           ACTORES
-           ══════════════════════════════════════════ */
+                   ACTORES
+                   ══════════════════════════════════════════ */
 
     .cast-row {
         display: flex;
@@ -748,8 +720,8 @@
 
 
     /* ══════════════════════════════════════════
-           INFORMACIÓN EXTRA
-           ══════════════════════════════════════════ */
+                   INFORMACIÓN EXTRA
+                   ══════════════════════════════════════════ */
 
     .movie-extra {
         padding-top: 5px;
@@ -789,8 +761,8 @@
 
 
     /* ══════════════════════════════════════════
-           RESPONSIVE
-           ══════════════════════════════════════════ */
+                   RESPONSIVE
+                   ══════════════════════════════════════════ */
 
     @@media (max-width: 768px) {
 
@@ -819,421 +791,64 @@
         }
     }
 
+
+
+    /* ══════════════════════════════════════════
+                   MODAL DE VIDEO YOUTUBE
+                   ══════════════════════════════════════════ */
+
+    .movie-player-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+        background: rgba(0,0,0,.92);
+    }
+
+        .movie-player-modal.show {
+            display: flex;
+        }
+
+    .movie-player-container {
+        position: relative;
+        width: min(1100px, 95vw);
+        aspect-ratio: 16 / 9;
+        background: #000;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 25px 80px rgba(0,0,0,.9);
+        border: 1px solid rgba(255,255,255,.12);
+    }
+
+        .movie-player-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+    .movie-player-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        z-index: 10;
+        width: 44px;
+        height: 44px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(20,20,20,.9);
+        color: #fff;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: background .2s, transform .2s;
+    }
+
+        .movie-player-close:hover {
+            background: var(--red);
+            transform: scale(1.08);
+        }
+
 </style>
-
-
-
-@if (!string.IsNullOrWhiteSpace(movie.VideoUrl))
-{
-    <script>
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-
-                const player =
-                    document.getElementById(
-                        "moviePlayer"
-                    );
-
-
-                const playerSection =
-                    document.getElementById(
-                        "playerSection"
-                    );
-
-
-                const btnOpen =
-                    document.getElementById(
-                        "btnOpenPlayer"
-                    );
-
-
-                const btnClose =
-                    document.getElementById(
-                        "btnClosePlayer"
-                    );
-
-
-                const btnPlayPause =
-                    document.getElementById(
-                        "btnPlayPause"
-                    );
-
-
-                const btnBack =
-                    document.getElementById(
-                        "btnBack"
-                    );
-
-
-                const btnForward =
-                    document.getElementById(
-                        "btnForward"
-                    );
-
-
-                const progressBar =
-                    document.getElementById(
-                        "progressBar"
-                    );
-
-
-                const volumeBar =
-                    document.getElementById(
-                        "volumeBar"
-                    );
-
-
-
-                /* ── Estado guardado ── */
-
-                const savedUrl =
-                    localStorage.getItem(
-                        "cineVideoUrl"
-                    );
-
-
-                const savedTime =
-                    parseFloat(
-                        localStorage.getItem(
-                            "cineVideoTime"
-                        ) || "0"
-                    );
-
-
-                const savedVolume =
-                    parseFloat(
-                        localStorage.getItem(
-                            "cineVideoVolume"
-                        ) || "1"
-                    );
-
-
-
-                /*
-                    Si el video guardado es el mismo
-                    que esta película, recuperamos
-                    su tiempo y volumen.
-                */
-
-                if (
-                    savedUrl === "@Html.Raw(movie.VideoUrl)"
-                ) {
-
-                    player.volume =
-                        savedVolume;
-
-
-                    volumeBar.value =
-                        savedVolume;
-
-
-                    player.addEventListener(
-                        "loadedmetadata",
-                        function () {
-
-                            if (
-                                savedTime > 0 &&
-                                savedTime < player.duration
-                            ) {
-
-                                player.currentTime =
-                                    savedTime;
-
-                            }
-
-                        });
-
-                }
-
-
-
-                /* ══════════════════════════════════
-                   ABRIR REPRODUCTOR
-                   ══════════════════════════════════ */
-
-                btnOpen.addEventListener(
-                    "click",
-                    function () {
-
-
-                        playerSection.classList.add(
-                            "active"
-                        );
-
-
-                        playerSection.scrollIntoView({
-                            behavior: "smooth"
-                        });
-
-
-                        localStorage.setItem(
-                            "cineVideoUrl",
-                            "@Html.Raw(movie.VideoUrl)"
-                        );
-
-
-                        localStorage.setItem(
-                            "cineVideoTitle",
-                            "@Html.Raw(movie.Title.Replace("\"", "\\\""))"
-                        );
-
-
-                        localStorage.setItem(
-                            "cineVideoPoster",
-                            "@Html.Raw(movie.PosterImg)"
-                        );
-
-
-                        localStorage.setItem(
-                            "cineVideoTime",
-                            player.currentTime.toString()
-                        );
-
-
-                        localStorage.setItem(
-                            "cineVideoVolume",
-                            player.volume.toString()
-                        );
-
-
-                        localStorage.setItem(
-                            "cineVideoPlaying",
-                            "true"
-                        );
-
-
-                        player.play();
-
-                    });
-
-
-
-                /* ══════════════════════════════════
-                   CERRAR
-                   ══════════════════════════════════ */
-
-                btnClose.addEventListener(
-                    "click",
-                    function () {
-
-
-                        player.pause();
-
-
-                        localStorage.setItem(
-                            "cineVideoPlaying",
-                            "false"
-                        );
-
-
-                        playerSection.classList.remove(
-                            "active"
-                        );
-
-                    });
-
-
-
-                /* ══════════════════════════════════
-                   PLAY / PAUSE
-                   ══════════════════════════════════ */
-
-                btnPlayPause.addEventListener(
-                    "click",
-                    function () {
-
-                        if (player.paused) {
-
-                            player.play();
-
-                        }
-                        else {
-
-                            player.pause();
-
-                        }
-
-                    });
-
-
-
-                player.addEventListener(
-                    "play",
-                    function () {
-
-
-                        btnPlayPause.textContent =
-                            "⏸ Pause";
-
-
-                        localStorage.setItem(
-                            "cineVideoPlaying",
-                            "true"
-                        );
-
-                    });
-
-
-
-                player.addEventListener(
-                    "pause",
-                    function () {
-
-
-                        btnPlayPause.textContent =
-                            "▶ Play";
-
-
-                        localStorage.setItem(
-                            "cineVideoPlaying",
-                            "false"
-                        );
-
-                    });
-
-
-
-                /* ══════════════════════════════════
-                   RETROCEDER
-                   ══════════════════════════════════ */
-
-                btnBack.addEventListener(
-                    "click",
-                    function () {
-
-
-                        player.currentTime =
-                            Math.max(
-                                0,
-                                player.currentTime - 10
-                            );
-
-
-                        localStorage.setItem(
-                            "cineVideoTime",
-                            player.currentTime.toString()
-                        );
-
-                    });
-
-
-
-                /* ══════════════════════════════════
-                   AVANZAR
-                   ══════════════════════════════════ */
-
-                btnForward.addEventListener(
-                    "click",
-                    function () {
-
-
-                        if (!isNaN(player.duration)) {
-
-                            player.currentTime =
-                                Math.min(
-                                    player.duration,
-                                    player.currentTime + 10
-                                );
-
-                        }
-
-
-                        localStorage.setItem(
-                            "cineVideoTime",
-                            player.currentTime.toString()
-                        );
-
-                    });
-
-
-
-                /* ══════════════════════════════════
-                   DURACIÓN
-                   ══════════════════════════════════ */
-
-                player.addEventListener(
-                    "loadedmetadata",
-                    function () {
-
-                        progressBar.max =
-                            player.duration;
-
-                    });
-
-
-
-                /* ══════════════════════════════════
-                   PROGRESO
-                   ══════════════════════════════════ */
-
-                player.addEventListener(
-                    "timeupdate",
-                    function () {
-
-
-                        progressBar.value =
-                            player.currentTime;
-
-
-                        localStorage.setItem(
-                            "cineVideoTime",
-                            player.currentTime.toString()
-                        );
-
-                    });
-
-
-
-                /* ══════════════════════════════════
-                   CAMBIAR POSICIÓN
-                   ══════════════════════════════════ */
-
-                progressBar.addEventListener(
-                    "input",
-                    function () {
-
-
-                        player.currentTime =
-                            parseFloat(
-                                progressBar.value
-                            );
-
-
-                        localStorage.setItem(
-                            "cineVideoTime",
-                            player.currentTime.toString()
-                        );
-
-                    });
-
-
-
-                /* ══════════════════════════════════
-                   VOLUMEN
-                   ══════════════════════════════════ */
-
-                volumeBar.addEventListener(
-                    "input",
-                    function () {
-
-
-                        player.volume =
-                            parseFloat(
-                                volumeBar.value
-                            );
-
-
-                        localStorage.setItem(
-                            "cineVideoVolume",
-                            player.volume.toString()
-                        );
-
-                    });
-
-            });
-
-    </script>
-}

@@ -279,14 +279,21 @@
                         Remind Me
                     </button>
                 }
+
                 else
                 {
-                    <button class="btn-sf btn-sf--primary">&#9654; &nbsp;Play</button>
+                    <a asp-controller="Movie"
+                           asp-action="Details"
+                           asp-route-id="@f.Id"
+                           asp-route-play="true"
+                           class="btn-sf btn-sf--primary">
+                        &#9654; &nbsp;Play
+                    </a>
                 }
                 <a asp-controller="Movie"
-                   asp-action="Details"
-                   asp-route-id="@f.Id"
-                   class="btn-sf btn-sf--ghost">
+                       asp-action="Details"
+                       asp-route-id="@f.Id"
+                       class="btn-sf btn-sf--ghost">
                     More Info
                 </a>
             </div>
@@ -306,10 +313,10 @@
             @foreach (var item in Model.MyList)
             {
                 <a asp-controller="Movie"
-                   asp-action="Details"
-                   asp-route-id="@item.Id"
-                   class="sf-card"
-                   title="@item.Title">
+                       asp-action="Details"
+                       asp-route-id="@item.Id"
+                       class="sf-card"
+                       title="@item.Title">
 
                     <img class="sf-card__img"
                          src="@item.ThumbnailUrl"
@@ -332,10 +339,10 @@
                 @foreach (var item in row.Items)
                 {
                     <a asp-controller="Movie"
-                       asp-action="Details"
-                       asp-route-id="@item.Id"
-                       class="sf-card"
-                       title="@item.Title">
+                           asp-action="Details"
+                           asp-route-id="@item.Id"
+                           class="sf-card"
+                           title="@item.Title">
                         <img class="sf-card__img" src="@item.ThumbnailUrl" alt="@item.Title" loading="lazy" />
                         <span class="sf-card__label">@item.Title</span>
                     </a>

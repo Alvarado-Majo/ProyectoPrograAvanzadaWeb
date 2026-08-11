@@ -29,8 +29,8 @@
 
 
             /* ══════════════════════════════════════════
-                               NAVBAR
-                       ══════════════════════════════════════════ */
+                                           NAVBAR
+                                   ══════════════════════════════════════════ */
 
             .sf-navbar {
                 position: fixed;
@@ -123,8 +123,8 @@
 
 
             /* ══════════════════════════════════════════
-                               PROFILE DROPDOWN
-                       ══════════════════════════════════════════ */
+                                           PROFILE DROPDOWN
+                                   ══════════════════════════════════════════ */
 
             .sf-profile {
                 position: relative;
@@ -260,8 +260,8 @@
 
 
             /* ══════════════════════════════════════════
-                               MAIN CONTENT
-                       ══════════════════════════════════════════ */
+                                           MAIN CONTENT
+                                   ══════════════════════════════════════════ */
 
             .sf-main {
                 padding-top: 68px;
@@ -269,8 +269,8 @@
 
 
             /* ══════════════════════════════════════════
-                               MINI PLAYER
-                       ══════════════════════════════════════════ */
+                                           MINI PLAYER
+                                   ══════════════════════════════════════════ */
 
             .sf-mini-player {
                 position: fixed;
@@ -361,8 +361,8 @@
 
 
             /* ══════════════════════════════════════════
-                               FOOTER
-                       ══════════════════════════════════════════ */
+                                           FOOTER
+                                   ══════════════════════════════════════════ */
 
             .sf-footer {
                 padding: 28px 4%;
@@ -383,8 +383,8 @@
 
 
             /* ══════════════════════════════════════════
-                               RESPONSIVE
-                       ══════════════════════════════════════════ */
+                                           RESPONSIVE
+                                   ══════════════════════════════════════════ */
 
             @@media (max-width: 768px) {
 
@@ -454,8 +454,8 @@
                 <a asp-controller="Home"
                        asp-action="Index"
                        class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" &&
-                                                                   ViewContext.RouteData.Values["action"]?.ToString() == "Index"
-                                                                   ? "active" : "")">
+                                                                                                              ViewContext.RouteData.Values["action"]?.ToString() == "Index"
+                                                                                                              ? "active" : "")">
 
                     Home
 
@@ -467,7 +467,7 @@
                 <a asp-controller="Movie"
                        asp-action="Movies"
                        class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Movie"
-                                                                   ? "active" : "")">
+                                                                                                              ? "active" : "")">
 
                     Movies
 
@@ -479,7 +479,7 @@
                 <a asp-controller="WatchList"
                        asp-action="Index"
                        class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "WatchList"
-                                                                   ? "active" : "")">
+                                                                                                              ? "active" : "")">
 
                     My List
 
@@ -1255,6 +1255,364 @@
         "Scripts",
         required: false
     )
+    <!-- GLOBAL MOVIE PLAYER -->
+    <div id="globalMoviePlayer"
+         class="global-player">
+
+        <div class="global-player-header">
+
+            <span id="globalPlayerTitle">
+                Now Playing
+            </span>
+
+            <div class="global-player-actions">
+
+                <button type="button"
+                        id="expandPlayer"
+                        title="Expand">
+                    ⛶
+                </button>
+
+                <button type="button"
+                        id="closeGlobalPlayer"
+                        title="Close">
+                    ✕
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="youtubeGlobalPlayer"></div>
+
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        let globalYoutubePlayer = null;
+        let globalSaveTimer = null;
+
+        function getYouTubeVideoId(url) {
+
+        if (!url)
+        return null;
+
+        try {
+
+        if (url.includes("youtu.be/")) {
+        return url
+        .split("youtu.be/")[1]
+        .split("?")[0];
+        }
+
+        if (url.includes("youtube.com/watch")) {
+        const parsedUrl = new URL(url);
+        return parsedUrl.searchParams.get("v");
+        }
+
+        if (url.includes("youtube.com/embed/")) {
+        return url
+        .split("youtube.com/embed/")[1]
+        .split("?")[0];
+        }
+
+        return null;
+        }
+        catch {
+        return null;
+        }
+        }
+
+
+        function onYouTubeIframeAPIReady() {
+
+        const savedVideoId =
+        localStorage.getItem("cineGlobalVideoId");
+
+        if (!savedVideoId)
+        return;
+
+        createGlobalPlayer(savedVideoId);
+        }
+
+
+        function createGlobalPlayer(videoId) {
+
+        const playerBox =
+        document.getElementById("globalMoviePlayer");
+
+        const title =
+        localStorage.getItem("cineGlobalTitle")
+        ?? "Now Playing";
+
+        const savedTime =
+        parseFloat(
+        localStorage.getItem("cineGlobalTime")
+        ?? "0"
+        );
+
+        const shouldPlay =
+        localStorage.getItem("cineGlobalPlaying")
+        === "true";
+
+        document.getElementById(
+        "globalPlayerTitle"
+        ).textContent = title;
+
+        playerBox.classList.add("active");
+
+
+        if (globalYoutubePlayer) {
+
+        globalYoutubePlayer.loadVideoById({
+        videoId: videoId,
+        startSeconds: savedTime
+        });
+
+        return;
+        }
+
+
+        globalYoutubePlayer =
+        new YT.Player(
+        "youtubeGlobalPlayer",
+        {
+        videoId: videoId,
+
+        playerVars: {
+        autoplay: shouldPlay ? 1 : 0,
+        controls: 1,
+        rel: 0,
+        start: Math.floor(savedTime)
+        },
+
+        events: {
+
+        onReady: function (event) {
+
+        if (savedTime > 0) {
+        event.target.seekTo(
+        savedTime,
+        true
+        );
+        }
+
+        if (shouldPlay) {
+        event.target.playVideo();
+        }
+
+        startSavingGlobalTime();
+        },
+
+        onStateChange: function (event) {
+
+        if (
+        event.data ===
+        YT.PlayerState.PLAYING
+        ) {
+        localStorage.setItem(
+        "cineGlobalPlaying",
+        "true"
+        );
+        }
+
+        if (
+        event.data ===
+        YT.PlayerState.PAUSED
+        ) {
+        localStorage.setItem(
+        "cineGlobalPlaying",
+        "false"
+        );
+
+        saveGlobalPlayerTime();
+        }
+
+        if (
+        event.data ===
+        YT.PlayerState.ENDED
+        ) {
+        localStorage.setItem(
+        "cineGlobalPlaying",
+        "false"
+        );
+
+        localStorage.setItem(
+        "cineGlobalTime",
+        "0"
+        );
+        }
+        }
+        }
+        }
+        );
+        }
+
+
+        window.playGlobalMovie =
+        function (videoUrl, movieTitle) {
+
+        const videoId =
+        getYouTubeVideoId(videoUrl);
+
+        if (!videoId) {
+        alert("Video unavailable.");
+        return;
+        }
+
+        localStorage.setItem(
+        "cineGlobalVideoId",
+        videoId
+        );
+
+        localStorage.setItem(
+        "cineGlobalTitle",
+        movieTitle
+        );
+
+        localStorage.setItem(
+        "cineGlobalTime",
+        "0"
+        );
+
+        localStorage.setItem(
+        "cineGlobalPlaying",
+        "true"
+        );
+
+        document.getElementById(
+        "globalPlayerTitle"
+        ).textContent = movieTitle;
+
+        document.getElementById(
+        "globalMoviePlayer"
+        ).classList.add("active");
+
+
+        if (globalYoutubePlayer) {
+
+        globalYoutubePlayer.loadVideoById(
+        videoId
+        );
+
+        globalYoutubePlayer.playVideo();
+        }
+        else {
+
+        createGlobalPlayer(videoId);
+        }
+        };
+
+
+        function saveGlobalPlayerTime() {
+
+        if (
+        !globalYoutubePlayer ||
+        typeof globalYoutubePlayer.getCurrentTime
+        !== "function"
+        ) {
+        return;
+        }
+
+        const currentTime =
+        globalYoutubePlayer.getCurrentTime();
+
+        if (!isNaN(currentTime)) {
+
+        localStorage.setItem(
+        "cineGlobalTime",
+        currentTime.toString()
+        );
+        }
+        }
+
+
+        function startSavingGlobalTime() {
+
+        if (globalSaveTimer)
+        clearInterval(globalSaveTimer);
+
+        globalSaveTimer =
+        setInterval(
+        saveGlobalPlayerTime,
+        1000
+        );
+        }
+
+
+        document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+        const closeButton =
+        document.getElementById(
+        "closeGlobalPlayer"
+        );
+
+        const expandButton =
+        document.getElementById(
+        "expandPlayer"
+        );
+
+        const playerBox =
+        document.getElementById(
+        "globalMoviePlayer"
+        );
+
+
+        closeButton?.addEventListener(
+        "click",
+        function () {
+
+        if (globalYoutubePlayer) {
+        globalYoutubePlayer.stopVideo();
+        }
+
+        localStorage.removeItem(
+        "cineGlobalVideoId"
+        );
+
+        localStorage.removeItem(
+        "cineGlobalTitle"
+        );
+
+        localStorage.removeItem(
+        "cineGlobalTime"
+        );
+
+        localStorage.removeItem(
+        "cineGlobalPlaying"
+        );
+
+        playerBox.classList.remove(
+        "active",
+        "expanded"
+        );
+        }
+        );
+
+
+        expandButton?.addEventListener(
+        "click",
+        function () {
+
+        playerBox.classList.toggle(
+        "expanded"
+        );
+        }
+        );
+        }
+        );
+
+
+        window.addEventListener(
+        "pagehide",
+        function () {
+        saveGlobalPlayerTime();
+        }
+        );
+    </script>
 
 </body>
 </html>

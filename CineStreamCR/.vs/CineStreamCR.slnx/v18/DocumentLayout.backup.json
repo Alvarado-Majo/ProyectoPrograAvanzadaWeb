@@ -7,8 +7,16 @@
       "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\views\\movie\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\keisl\\source\\repos\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\keisl\\source\\repos\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\keisl\\source\\repos\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\keisl\\source\\repos\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\controllers\\moviecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -57,10 +65,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\keisl\\source\\repos\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\views\\watchlist\\mylist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\views\\watchlist\\mylist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\keisl\\source\\repos\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\keisl\\source\\repos\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\controllers\\watchlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -154,10 +158,6 @@
       "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\keisl\\source\\repos\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|c:\\users\\keisl\\source\\repos\\proyectoprograavanzadaweb\\cinestreamcr\\cinestreamcr\\models\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E59BF490-224C-15C7-427C-67D597970A22}|CineStreamCR\\CineStreamCR.csproj|solutionrelative:cinestreamcr\\models\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -243,53 +243,27 @@
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\Movie\\Details.cshtml",
               "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Movie\\Details.cshtml",
               "RelativeToolTip": "CineStreamCR\\Views\\Movie\\Details.cshtml",
-              "ViewState": "AgIAAK8EAAAAAAAAAAAiwNYEAAABAAAAAAAAAA==",
+              "ViewState": "AgIAADcDAAAAAAAAAAAUwFYDAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-08-10T02:03:14.958Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "CineStreamCR\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "CineStreamCR\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAALQEAAAAAAAAAAAUwOsEAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-08-09T23:52:33.592Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "MovieController.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\MovieController.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\MovieController.cs",
               "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\MovieController.cs",
               "RelativeToolTip": "CineStreamCR\\Controllers\\MovieController.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAYwJoAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-10T01:57:07.263Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MovieDetailViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\MovieDetailViewModel.cs",
-              "RelativeDocumentMoniker": "CineStreamCR\\Models\\MovieDetailViewModel.cs",
-              "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\MovieDetailViewModel.cs",
-              "RelativeToolTip": "CineStreamCR\\Models\\MovieDetailViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T21:04:01.712Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Director\\Details.cshtml",
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\Director\\Details.cshtml",
@@ -297,12 +271,11 @@
               "RelativeToolTip": "CineStreamCR\\Views\\Director\\Details.cshtml",
               "ViewState": "AgIAACYBAAAAAAAAAAAUwDsBAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-08-10T20:58:13.958Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-10T20:58:13.958Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "DirectorDetailViewModel.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\DirectorDetailViewModel.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Models\\DirectorDetailViewModel.cs",
@@ -310,12 +283,11 @@
               "RelativeToolTip": "CineStreamCR\\Models\\DirectorDetailViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T20:52:11.002Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-10T20:52:11.002Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "DirectorController.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\DirectorController.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\DirectorController.cs",
@@ -323,12 +295,62 @@
               "RelativeToolTip": "CineStreamCR\\Controllers\\DirectorController.cs",
               "ViewState": "AgIAAFMBAAAAAAAAAAASwGIBAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-09T04:36:04.829Z",
+              "WhenOpened": "2026-08-09T04:36:04.829Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "CineStreamCR\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "CineStreamCR\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAEMBAAAAAAAAAAAuwGEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-09T23:18:24.808Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "CineStreamCR\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "CineStreamCR\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAADMGAAAAAAAAAAAuwFEGAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-09T23:52:33.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "CineStreamCR\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "CineStreamCR\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAANcCAAAAAAAAAAAUwO4CAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-08-10T04:34:31.722Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MovieDetailViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\MovieDetailViewModel.cs",
+              "RelativeDocumentMoniker": "CineStreamCR\\Models\\MovieDetailViewModel.cs",
+              "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\MovieDetailViewModel.cs",
+              "RelativeToolTip": "CineStreamCR\\Models\\MovieDetailViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-10T21:04:01.712Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "ActorDetailViewModel.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\ActorDetailViewModel.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Models\\ActorDetailViewModel.cs",
@@ -336,12 +358,11 @@
               "RelativeToolTip": "CineStreamCR\\Models\\ActorDetailViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T20:14:17.992Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-10T20:14:17.992Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Actor\\Details.cshtml",
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\Actor\\Details.cshtml",
@@ -349,12 +370,11 @@
               "RelativeToolTip": "CineStreamCR\\Views\\Actor\\Details.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-08-10T20:16:49.684Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-10T20:16:49.684Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "ActorController.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\ActorController.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\ActorController.cs",
@@ -362,12 +382,11 @@
               "RelativeToolTip": "CineStreamCR\\Controllers\\ActorController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAiwDcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-09T04:36:24.88Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-09T04:36:24.88Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Program.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Program.cs",
@@ -375,12 +394,11 @@
               "RelativeToolTip": "CineStreamCR\\Program.cs",
               "ViewState": "AgIAAE4AAAAAAAAAAAAAAEEAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-09T22:37:14.967Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-09T22:37:14.967Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\appsettings.json",
               "RelativeDocumentMoniker": "CineStreamCR\\appsettings.json",
@@ -388,12 +406,11 @@
               "RelativeToolTip": "CineStreamCR\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAACEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-08-09T23:50:29.259Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-09T23:50:29.259Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\UserController.cs",
@@ -401,12 +418,11 @@
               "RelativeToolTip": "CineStreamCR\\Controllers\\UserController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-10T19:59:27.195Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-10T19:59:27.195Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "MovieService.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Movie\\MovieService.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\Movie\\MovieService.cs",
@@ -418,7 +434,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "Register.cshtml",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Auth\\Register.cshtml",
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\Auth\\Register.cshtml",
@@ -430,19 +446,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "CineStreamCR\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "CineStreamCR\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAADkCAAAAAAAAAAAkwEsCAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-08-10T04:34:31.722Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "Movies.cshtml",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Movie\\Movies.cshtml",
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\Movie\\Movies.cshtml",
@@ -454,7 +458,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Auth\\Login.cshtml",
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\Auth\\Login.cshtml",
@@ -466,7 +470,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "WatchListController.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\WatchListController.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\WatchListController.cs",
@@ -478,7 +482,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "MyList.cshtml",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\WatchList\\MyList.cshtml",
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\WatchList\\MyList.cshtml",
@@ -490,7 +494,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "MovieRepository.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\Repositories\\Movies\\MovieRepository.cs",
               "RelativeDocumentMoniker": "CineStreamCR.DAL\\Repositories\\Movies\\MovieRepository.cs",
@@ -502,7 +506,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\AuthController.cs",
@@ -514,7 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "RegisterDTO.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\DTO\\Auth\\RegisterDTO.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\DTO\\Auth\\RegisterDTO.cs",
@@ -526,7 +530,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Auth\\IAuthService.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\Auth\\IAuthService.cs",
@@ -538,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Auth\\AuthService.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\Auth\\AuthService.cs",
@@ -550,7 +554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "MovieCategoryService.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Category\\MovieCategoryService.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\Category\\MovieCategoryService.cs",
@@ -562,7 +566,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "MovieCatalogViewModel.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Models\\MovieCatalogViewModel.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Models\\MovieCatalogViewModel.cs",
@@ -574,7 +578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "ClassMapping.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\ClassMapping.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\ClassMapping.cs",
@@ -586,7 +590,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "IMovieService.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\Services\\Movie\\IMovieService.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\Services\\Movie\\IMovieService.cs",
@@ -598,7 +602,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "LoginDTO.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.BLL\\DTO\\Auth\\LoginDTO.cs",
               "RelativeDocumentMoniker": "CineStreamCR.BLL\\DTO\\Auth\\LoginDTO.cs",
@@ -610,7 +614,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\appsettings.Development.json",
               "RelativeDocumentMoniker": "CineStreamCR\\appsettings.Development.json",
@@ -622,7 +626,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\_ViewImports.cshtml",
@@ -634,7 +638,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "CineStreamCR\\Controllers\\HomeController.cs",
@@ -646,7 +650,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "secrets.json",
               "DocumentMoniker": "C:\\Users\\maria\\AppData\\Roaming\\Microsoft\\UserSecrets\\3c832082-74d5-4fd2-ac2c-3befe4975d75\\secrets.json",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\maria\\AppData\\Roaming\\Microsoft\\UserSecrets\\3c832082-74d5-4fd2-ac2c-3befe4975d75\\secrets.json",
@@ -658,7 +662,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "ProyectoDBContext.cs",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR.DAL\\Data\\ProyectoDBContext.cs",
               "RelativeDocumentMoniker": "CineStreamCR.DAL\\Data\\ProyectoDBContext.cs",
@@ -670,7 +674,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\_ViewStart.cshtml",
@@ -682,7 +686,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "CineStreamCR\\Properties\\launchSettings.json",
@@ -694,7 +698,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "Error.cshtml",
               "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Shared\\Error.cshtml",
               "RelativeDocumentMoniker": "CineStreamCR\\Views\\Shared\\Error.cshtml",
@@ -703,18 +707,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-08-09T23:52:32.234Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "CineStreamCR\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\keisl\\source\\repos\\ProyectoPrograAvanzadaWeb\\CineStreamCR\\CineStreamCR\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "CineStreamCR\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAACwBAAAAAAAAAAAAAPcAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-08-09T23:18:24.808Z"
             },
             {
               "$type": "Document",
